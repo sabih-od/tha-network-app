@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 import { SetIsLogin, SetUserInfo } from "../../redux/reducers/AppStateReducer";
 import { showToast } from "../../helpers/toastConfig";
 import Loader from "../../components/Loader";
-import strings from "../../localization/translation";
 
 
 const ResetPassword = (props) => {
@@ -51,13 +50,13 @@ const ResetPassword = (props) => {
     const input02 = useRef();
 
     const password = register('password', {
-        value: 'tabish@123',
+        value: '',
         required: 'Password is required',
         minLength: { value: 8, message: 'Min lenght 8' }
     })
 
     const confirmpass = register('confirmpass', {
-        value: 'tabish@123',
+        value: '',
         required: 'Confirm Password is required',
         minLength: { value: 8, message: 'Min lenght 8' },
         // validate: value => value === password.current || "Password does not match"
@@ -74,8 +73,8 @@ const ResetPassword = (props) => {
                         {/* <ScrollView> */}
                         <View style={globalstyle.authLogoContainer}>
                             {/* <Image source={require('./../../../assets/images/logo.png')} style={globalstyle.authLogo} /> */}
-                            <Text style={globalstyle.authheading}>{strings.ResetPass}</Text>
-                            <Text style={globalstyle.authdescription}>{strings.ResetAccPass}</Text>
+                            <Text style={globalstyle.authheading}>Reset Password</Text>
+                            <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
                         </View>
                         <View>
                             <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
@@ -143,7 +142,7 @@ const ResetPassword = (props) => {
                                 onPress={handleSubmit(onSubmit)}
                                 style={globalstyle.authSubmitButton}
                             >
-                                <Text style={globalstyle.authSubmitButtonText}>{strings.Submit}</Text>
+                                <Text style={globalstyle.authSubmitButtonText}>Submit</Text>
                             </TouchableOpacity>
                         </View>
 

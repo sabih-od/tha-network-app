@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, I18nManager } from "react-native";
 // import { fonts } from "../../theme";
 import { useForm } from 'react-hook-form';
-import { IOS, backgroungImage, colorScheme, colors, fontSize, fonts, invertcolor, isIPad, isRTL } from "../../theme";
+import { IOS, colorScheme, colors, fontSize, fonts, isIPad, } from "../../theme";
 
 import Icon from "react-native-vector-icons/Feather";
 import globalstyle from "../../theme/style";
@@ -13,7 +13,6 @@ import { SetIsLogin, SetUserInfo } from "../../redux/reducers/AppStateReducer";
 import { RegisterApiCall } from "../../redux/reducers/AuthReducer";
 import { bindActionCreators } from "redux";
 import { showToast } from "../../helpers/toastConfig";
-import strings from "../../localization/translation";
 
 
 const Register = (props) => {
@@ -57,15 +56,15 @@ const Register = (props) => {
     return <SafeAreaView style={{ flex: 1 }}>
         <Loader isLoading={loading} />
         <TermsAndConditionsModal visible={showTermsModal} setVisible={setShowTermsModal} />
-        <ImageBackground
+        <View
             style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]}
-            source={backgroungImage}>
+        >
             <KeyboardAvoidingView behavior={IOS ? 'padding' : 'height'} >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <ScrollView style={isIPad && globalstyle.authscreencontainer}>
                         <View>
-                            <Text style={globalstyle.authheading}>{strings.SignUp}</Text>
-                            <Text style={globalstyle.authdescription}>{strings.SignUpDesc}</Text>
+                            <Text style={globalstyle.authheading}>Sign Up</Text>
+                            <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
                         </View>
                         <View>
                             <View style={globalstyle.inputbox}>
@@ -170,6 +169,61 @@ const Register = (props) => {
                             </View>
                             {errors.phone && <Text style={globalstyle.errorField}>{errors.phone.message}</Text>}
 
+
+                            <View style={globalstyle.inputbox}>
+                                <Icon style={globalstyle.authlefticon} name={'shield'} size={18} />
+                                <TextInput
+                                    style={globalstyle.inputfield}
+                                    placeholder="Social Security Numbers"
+                                    placeholderTextColor={colors.placeholdercolor}
+                                    // keyboardType='phone-pad'
+                                    keyboardType='numeric'
+                                    {...register('social_security', {
+                                        // value: '+8134234123123',
+                                        value: '',
+                                        // required: 'Phone number is required',
+                                        pattern: {
+                                            value: /[0-9+]$/i,
+                                            message: "Please provide valid phone number"
+                                        },
+                                    })}
+                                    defaultValue=''
+                                    // defaultValue='+8134234123123'
+                                    onChangeText={(value) => setValue('social_security', value)}
+                                    ref={input03}
+                                    returnKeyType="next"
+                                    onSubmitEditing={() => input04.current.focus()}
+                                />
+                            </View>
+                            {errors.social_security && <Text style={globalstyle.errorField}>{errors.social_security.message}</Text>}
+
+                            <View style={globalstyle.inputbox}>
+                                <Icon style={globalstyle.authlefticon} name={'target'} size={18} />
+                                <TextInput
+                                    style={globalstyle.inputfield}
+                                    placeholder="Set Weekly Goal"
+                                    placeholderTextColor={colors.placeholdercolor}
+                                    // keyboardType='phone-pad'
+                                    keyboardType='numeric'
+                                    {...register('weekly_goal', {
+                                        // value: '+8134234123123',
+                                        value: '',
+                                        // required: 'Phone number is required',
+                                        pattern: {
+                                            value: /[0-9+]$/i,
+                                            message: "Please provide valid phone number"
+                                        },
+                                    })}
+                                    defaultValue=''
+                                    // defaultValue='+8134234123123'
+                                    onChangeText={(value) => setValue('weekly_goal', value)}
+                                    ref={input03}
+                                    returnKeyType="next"
+                                    onSubmitEditing={() => input04.current.focus()}
+                                />
+                            </View>
+                            {errors.weekly_goal && <Text style={globalstyle.errorField}>{errors.weekly_goal.message}</Text>}
+
                             <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                     <Icon style={globalstyle.authlefticon} name={'lock'} size={18} />
@@ -212,32 +266,32 @@ const Register = (props) => {
                                         name={isChecked ? "check-circle" : "circle"}
                                         style={{ fontSize: isIPad ? 20 : fontSize, marginRight: 8, color: colors.orange }}
                                     />
-                                    <Text style={styles.termstext}>{strings.YesIAgree} </Text>
+                                    <Text style={styles.termstext}>Yes, I agree with</Text>
                                     <TouchableOpacity
                                         activeOpacity={0.9}
                                         onPress={() => setShowTermsModal(true)}>
-                                        <Text style={styles.termstextbold}>{' '}{strings.TermsCondition}</Text>
+                                        <Text style={styles.termstextbold}>{' '} Terms and Conditions</Text>
                                     </TouchableOpacity>
                                 </TouchableOpacity>
                             </View>
 
                             <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit(onSubmit)}
                                 style={globalstyle.authSubmitButton}>
-                                <Text style={globalstyle.authSubmitButtonText}>{strings.SignUp}</Text>
+                                <Text style={globalstyle.authSubmitButtonText}>Submit</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={globalstyle.alreadysignin}>
-                            <Text style={globalstyle.alreadyaccount}>{strings.AlreadyHaveAccount} </Text>
+                            <Text style={globalstyle.alreadyaccount}>Already have an account? </Text>
                             <TouchableOpacity activeOpacity={0.8}
                                 onPress={() => { props.navigation.navigate('Login') }}>
-                                <Text style={globalstyle.actionauthtext}> {strings.Login}</Text>
+                                <Text style={globalstyle.actionauthtext}> Login</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ paddingBottom: 30 }} />
                     </ScrollView>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
-        </ImageBackground>
+        </View>
     </SafeAreaView>
 }
 
@@ -257,6 +311,6 @@ export default connect(setStateToProps, mapDispatchToProps)(Register);
 
 
 const styles = StyleSheet.create({
-    termstext: { fontFamily: isRTL ? fonts.arabicMedium : fonts.primary, fontSize: isIPad ? 18 : fontSize, color: colors.black },
-    termstextbold: { fontFamily: isRTL ? fonts.arabicBold : fonts.primarySemiBold, fontSize: isIPad ? 18 : fontSize, color: colors.black }
+    termstext: { fontFamily: fonts.primary, fontSize: isIPad ? 18 : fontSize, color: colors.black },
+    termstextbold: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 18 : fontSize, color: colors.black }
 })

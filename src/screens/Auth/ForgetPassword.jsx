@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Image, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from "react-native";
 
 import { useForm } from 'react-hook-form';
-import { backgroungImage, colors, fonts, isIPad } from "../../theme";
+import { colors, fonts, isIPad } from "../../theme";
 
 import Icon from "react-native-vector-icons/Feather";
 import globalstyle from "../../theme/style";
@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Loader from "../../components/Loader";
 import { showToast } from "../../helpers/toastConfig";
-import strings from "../../localization/translation";
 
 
 const ForgetPassword = (props) => {
@@ -51,7 +50,7 @@ const ForgetPassword = (props) => {
     return <SafeAreaView style={globalstyle.fullview}>
         <Loader isLoading={loading} />
         {/* <ScrollView style={globalstyle.authContainer}> */}
-        <ImageBackground source={backgroungImage}
+        <View
             style={[globalstyle?.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]}>
             {/* <ScrollView> */}
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
@@ -59,8 +58,8 @@ const ForgetPassword = (props) => {
                     <View style={isIPad && globalstyle.authscreencontainer}>
                         <View style={globalstyle.authLogoContainer}>
                             {/* <Image source={require('./../../../assets/images/logo.png')} style={globalstyle.authLogo} /> */}
-                            <Text style={globalstyle.authheading}>{strings.ForgetPasswordTitle}</Text>
-                            <Text style={globalstyle.authdescription}>{strings.ForgetPasswordDesc}</Text>
+                            <Text style={globalstyle.authheading}>Forgot Password</Text>
+                            <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
                         </View>
                         <View>
 
@@ -89,7 +88,7 @@ const ForgetPassword = (props) => {
                                 handleSubmit(onSubmit)
                                 // () => { props.navigation.navigate('SubmitOTP', { email: emailaddress }) }
                             } style={globalstyle.authSubmitButton} >
-                                <Text style={globalstyle.authSubmitButtonText}>{strings.Submit}</Text>
+                                <Text style={globalstyle.authSubmitButtonText}>Submit</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ paddingBottom: 30 }} />
@@ -97,7 +96,7 @@ const ForgetPassword = (props) => {
                     </View>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
-        </ImageBackground>
+        </View>
         {/* </ScrollView> */}
     </SafeAreaView>
 }

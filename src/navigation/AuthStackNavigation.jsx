@@ -15,11 +15,14 @@ import { store } from "../redux/store";
 
 import Login from "./../screens/Auth/Login";
 import Welcome from "../screens/Welcome";
-// import Register from "../screens/Auth/Register";
-// import ForgetPassword from "../screens/Auth/ForgetPassword";
-// import SubmitOTP from "../screens/Auth/SubmitOTP";
-// import ResetPassword from "../screens/Auth/ResetPassword";
-// import GoBackIcon from "../components/header/GoBackIcon";
+import Register from "../screens/Auth/Register";
+import InvitationCode from "../screens/Auth/InvitationCode";
+
+import SubmitOTP from "../screens/Auth/SubmitOTP";
+import ResetPassword from "../screens/Auth/ResetPassword";
+import ForgetPassword from "../screens/Auth/ForgetPassword";
+import GoBackIcon from "../components/header/GoBackIcon";
+import Home from "../screens/Home";
 
 const Stack = createStackNavigator();
 
@@ -44,6 +47,19 @@ const AuthStackNavigation = (props) => {
     // });
 
     return <Stack.Navigator>
+        <Stack.Screen
+            name="Home"
+            component={Home}
+            options={({ navigation }) => {
+                return {
+                    // headerTransparent: true, headerTitle: '',
+                    headerShown: false,
+                    swipeEnabled: false,
+                    gestureEnabled: false,
+                    // headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                }
+            }}
+        />
         <Stack.Screen
             name="Welcome"
             component={Welcome}
@@ -70,9 +86,20 @@ const AuthStackNavigation = (props) => {
                 }
             }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
             name="Register"
             component={Register}
+            options={({ navigation }) => {
+                return {
+                    headerTransparent: true,
+                    headerTitle: '',
+                    headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                }
+            }}
+        />
+        <Stack.Screen
+            name="InvitationCode"
+            component={InvitationCode}
             options={({ navigation }) => {
                 return {
                     headerTransparent: true,
@@ -110,7 +137,7 @@ const AuthStackNavigation = (props) => {
                     // headerLeft: (props) => <GoBackIcon navigation={navigation} />,
                 }
             }}
-        /> */}
+        />
     </Stack.Navigator>
 }
 

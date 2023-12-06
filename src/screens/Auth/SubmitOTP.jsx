@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { SetIsLogin, SetUserInfo } from "../../redux/reducers/AppStateReducer";
 import { showToast } from "../../helpers/toastConfig";
 import Loader from "../../components/Loader";
-import strings from "../../localization/translation";
+
 
 
 const SubmitOTP = (props) => {
@@ -91,7 +91,7 @@ const SubmitOTP = (props) => {
     return <SafeAreaView style={globalstyle.fullview}>
         <Loader isLoading={loading} />
         {/* <ScrollView style={globalstyle.authContainer}> */}
-        <ImageBackground source={backgroungImage}
+        <View
             style={[globalstyle?.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]}>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -99,8 +99,8 @@ const SubmitOTP = (props) => {
                         {/* <ScrollView> */}
                         <View style={globalstyle.authLogoContainer}>
                             {/* <Image source={require('./../../../assets/images/logo.png')} style={globalstyle.authLogo} /> */}
-                            <Text style={globalstyle.authheading}>{strings.SubmitOTP}</Text>
-                            <Text style={[globalstyle.authdescription, { textAlign: 'center', lineHeight: 22 }]}>{strings.OtpDesc} <Text style={{ fontSize: 14, color: isDarkMode ? colors.white : colors.black }}>{props?.route?.params?.email}</Text></Text>
+                            <Text style={globalstyle.authheading}>Submit OTP</Text>
+                            <Text style={[globalstyle.authdescription, { textAlign: 'center', lineHeight: 22 }]}>Provide the OTP sent on your email <Text style={{ fontSize: 14, color: isDarkMode ? colors.white : colors.black }}>{props?.route?.params?.email}</Text></Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={[globalstyle.inputbox, styles.inputboxotp]}>
@@ -268,7 +268,7 @@ const SubmitOTP = (props) => {
                             // onPress={() => props.navigation.navigate('ResetPassword')}
                             style={globalstyle.authSubmitButton}
                         >
-                            <Text style={globalstyle.authSubmitButtonText}>{strings.Submit}</Text>
+                            <Text style={globalstyle.authSubmitButtonText}>Submit</Text>
                         </TouchableOpacity>
 
                         {/* <View style={globalstyle.alreadysignin}>
@@ -280,10 +280,10 @@ const SubmitOTP = (props) => {
                         </View> */}
 
                         <View style={globalstyle.alreadysignin}>
-                            <Text style={globalstyle.alreadyaccount}>{`Didn't received OTP ?`} </Text>
+                            <Text style={globalstyle.alreadyaccount}>Didn't received OTP ? </Text>
                             <TouchableOpacity activeOpacity={0.8}
                                 onPress={() => onResendCode()}>
-                                <Text style={globalstyle.actionauthtext}> {'Resend'}</Text>
+                                <Text style={globalstyle.actionauthtext}>Resend</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -292,7 +292,7 @@ const SubmitOTP = (props) => {
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
             {/* </ScrollView> */}
-        </ImageBackground>
+        </View>
         {/* </ScrollView> */}
     </SafeAreaView>
 }

@@ -19,7 +19,7 @@ import axios from "axios";
 import SplashScreen from "react-native-splash-screen";
 // import RNRestart from 'react-native-restart';
 
-const Login = (props) => {
+const InvitationCode = (props) => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [loading, isLoading] = useState(false);
@@ -101,7 +101,7 @@ const Login = (props) => {
                                 <Image source={require('./../../../assets/images/logo.png')} style={{ width: 150, height: 150, resizeMode: 'contain' }} />
                             </View> */}
                             <View>
-                                <Text style={globalstyle.authheading}>Login</Text>
+                                <Text style={globalstyle.authheading}>Invitation Code</Text>
                                 <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
                             </View>
                             <View>
@@ -109,98 +109,41 @@ const Login = (props) => {
                                     <Icon color={colors.blue} name={'mail'} size={18} />
                                     <TextInput
                                         style={globalstyle.inputfield}
-                                        placeholder="Username or Email Address"
-                                        {...register('email', {
+                                        placeholder="Enter Your Invitation Code..."
+                                        {...register('invitation_code', {
                                             value: '',
                                             // value: 'johnmartin@mailinator.com',
-                                            required: 'Email Address is required',
-                                            pattern: {
-                                                value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                                message: "Please provide valid email"
-                                            },
+                                            required: 'Invitation code is required',
+                                            // pattern: {
+                                            //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
+                                            //     message: "Please provide valid email"
+                                            // },
                                         })}
                                         defaultValue={''}
                                         // defaultValue={'johnmartin@mailinator.com'}
                                         placeholderTextColor={colors.placeholdercolor}
                                         autoCapitalize='none'
-                                        onChangeText={(value) => setValue('email', value)}
+                                        onChangeText={(value) => setValue('invitation_code', value)}
                                         ref={input01}
                                         returnKeyType="next"
                                         onSubmitEditing={() => input02.current.focus()}
                                     />
                                 </View>
-                                {errors.email && <Text style={globalstyle.errorField}>{errors.email.message}</Text>}
-                                <TouchableOpacity
-                                    activeOpacity={0.8}
-                                    onPress={() => props.navigation.navigate('ForgetPassword')}
-                                    style={styles.forgetpasslink}>
-                                    <Text style={styles.forgetpasstext}>Forgot Password ?</Text>
-                                </TouchableOpacity>
-                                <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        {/* <View style={{ width: 50, height: 50, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#ddd', borderRadius: 50 }}><Icon color={colors.blue} name={'lock'} size={18} /></View> */}
-                                        <Icon color={colors.blue} name={'lock'} size={18} />
-                                        <TextInput
-                                            style={[globalstyle.inputfield, { flex: 0.8 }]}
-                                            placeholder="Password"
-                                            placeholderTextColor={colors.placeholdercolor}
-                                            {...register('password', {
-                                                value: '',
-                                                // value: '12345678',
-                                                required: 'Password is required',
-                                                minLength: { value: 8, message: 'Password length must be greater then 8' }
-                                            })}
-                                            defaultValue={''}
-                                            // defaultValue={'12345678'}
-                                            // inputRef={password.ref}
-                                            onChangeText={(value) => setValue('password', value)}
-                                            secureTextEntry={!showPassword ? true : false}
-                                            autoCapitalize='none'
-                                            ref={input02}
-                                        // returnKeyType="next"
-                                        // onSubmitEditing={() => input05.current.focus()}
-                                        />
-                                    </View>
-                                    <TouchableOpacity activeOpacity={0.8} style={globalstyle.showhideicontouch} onPress={() => { setShowPassword(!showPassword) }}>
-                                        <Icon name={!showPassword ? 'eye' : 'eye-off'} size={18} style={globalstyle.showhideicon} />
-                                    </TouchableOpacity>
-                                </View>
-                                {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
+                                {errors.invitation_code && <Text style={globalstyle.errorField}>{errors.invitation_code.message}</Text>}
 
 
-                                <View style={{ marginTop: 10 }}>
-                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
-                                        {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
-                                        <Text style={styles.notes}>If you are not a member you will need an invitation code to enter the app.</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
-                                        {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
-                                        <Text style={styles.notes}>If you are visiting the app for the first time and interested in learning more about the app you will need to <TouchableOpacity style={{ marginBottom: -9 }}><Text style={[styles.notes, { color: colors.black, fontFamily: fonts.primaryMedium }]}>Click Here</Text></TouchableOpacity> to receive an invitation code.</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
-                                        {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
-                                        <Text style={styles.notes}>If a member referred you and gave you an invitation code, use that code to enter the app.</Text>
-                                    </View>
-                                </View>
 
                                 <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit(onSubmit)} style={globalstyle.authSubmitButton}>
-                                    <Text style={globalstyle.authSubmitButtonText}>{'Login'}</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.navigate('InvitationCode')} style={[globalstyle.authSubmitButton, { backgroundColor: colors.blue }]}>
-                                    <Text style={globalstyle.authSubmitButtonText}>{'Invitation Code'}</Text>
+                                    <Text style={globalstyle.authSubmitButtonText}>Submit</Text>
                                 </TouchableOpacity>
 
                             </View>
-                            {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 40, marginBottom: 10 }}>
-                    <View style={{ width: '30%', height: 1, backgroundColor: '#000' }} />
-                    <Text style={{ fontFamily: fonts.primary }}>Or Sign In With</Text>
-                    <View style={{ width: '30%', height: 1, backgroundColor: '#000' }} />
-                </View> */}
+
                             <View style={globalstyle.alreadysignin}>
-                                <Text style={globalstyle.alreadyaccount}>Don't have account? </Text>
+                                <Text style={globalstyle.alreadyaccount}>Already have an account? </Text>
                                 <TouchableOpacity activeOpacity={0.8}
-                                    onPress={() => { props.navigation.navigate('Register') }}>
-                                    <Text style={globalstyle.actionauthtext}>Sign Up</Text>
+                                    onPress={() => { props.navigation.navigate('Login') }}>
+                                    <Text style={globalstyle.actionauthtext}>Login</Text>
                                 </TouchableOpacity>
                             </View>
                         </ScrollView>
@@ -226,7 +169,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(setStateToProps, mapDispatchToProps)(Login);
+export default connect(setStateToProps, mapDispatchToProps)(InvitationCode);
 // export default Login;
 
 
