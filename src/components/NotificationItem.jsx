@@ -17,7 +17,7 @@ const NotificationItem = ({ item, navigation }) => {
             if (item?.topic == 'sermon') { navigation.navigate('SermonsDetail', { id: item?.topic_id, refresh: true }) } // Sermons // SermonsDetail
             if (item?.topic == 'announcement') { navigation.navigate('AnnouncementDetail', { id: item?.topic_id, refresh: true }) } // Announcements // AnnouncementDetail
             if (item?.topic == 'group-request') { navigation.navigate('ChatGroups') } // Group Chat
-            
+
         }}
         style={[styles.notificationitem, {
             borderLeftColor: item.isRead ? colors.green : '#ddd',
@@ -27,28 +27,29 @@ const NotificationItem = ({ item, navigation }) => {
             {/* <View style={{flexDirection: 'row', alignItems: 'center'}}> */}
             <Image
                 source={item.icon ? { uri: item.icon } : require('./../../assets/images/dummy-profile-image.png')} style={styles.image}
-                defaultSource={require('./../../assets/images/speaker-placeholder.png')}
+                defaultSource={require('./../../assets/images/dummy-profile-image.png')}
             />
             <View style={styles.notirowmsg}>
                 <Text style={[styles.notititle]} numberOfLines={1}>{item?.title}</Text>
                 <Text style={[styles.notimessage]} numberOfLines={2}>{item?.content}</Text>
+                <Text style={styles.datetime}>{moment(parseInt(item?.created_at)).format("DD MMM, YYYY hh:mm")}</Text>
             </View>
             {/* </View> */}
             {/* <Text style={styles.datetime}>{moment(parseInt(item?.created_at)).format("DD MMM, YYYY hh:mm")}</Text> */}
         </View>
-        <Text style={styles.notiTime}>{moment(parseInt(item?.created_at)).format("DD MMMM, hh:mm A")}</Text>
+        {/* <Text style={styles.notiTime}>{moment(parseInt(item?.created_at)).format("DD MMMM, hh:mm A")}</Text> */}
     </TouchableOpacity>)
 }
 
 export default NotificationItem;
 
 const styles = StyleSheet.create({
-    notificationitem: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', borderLeftWidth: 3, paddingHorizontal: isIPad ? 15 : 12, paddingVertical: isIPad ? 15 : 12, backgroundColor: colors.white, borderRadius: 4, marginBottom: 15 },
+    notificationitem: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', borderLeftWidth: 0, paddingHorizontal: isIPad ? 15 : 12, paddingVertical: isIPad ? 15 : 10, backgroundColor: colors.white, borderRadius: 4, marginBottom: 15 },
     notiInnerRow: { flexDirection: 'row', alignItems: 'center', flex: 0.78 },
     image: { width: 45, height: 45, resizeMode: 'cover', borderRadius: 40, marginRight: 10 },
-    notiTime: { fontFamily: fonts.latoBold, fontSize: isIPad ? 14 : 10, color: colors.orange },
-    notititle: { fontFamily: fonts.latoBold, fontSize: isIPad ? 19 : 15, color: colors.black, marginBottom: 3, width: width - 120, textTransform: 'capitalize' },
-    notimessage: { fontFamily: fonts.latoRegular, fontSize: isIPad ? 16 : 13, color: colors.grey, width: width - 220 },
+    notiTime: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 14 : 10, color: colors.orange },
+    notititle: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 19 : 15, color: colors.black, marginBottom: 3, width: width - 120, textTransform: 'capitalize' },
+    notimessage: { fontFamily: fonts.primary, fontSize: isIPad ? 16 : 13, color: colors.grey, marginTop: -3 }, //width: width - 220
     notirowmsg: {},
-    datetime: { fontFamily: fonts.latoRegular, color: colors.orange, fontSize: 10 }
+    datetime: { fontFamily: fonts.primary, color: colors.orange, fontSize: 10 }
 })

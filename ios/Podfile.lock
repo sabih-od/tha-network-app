@@ -188,8 +188,15 @@ PODS:
     - nanopb/encode (= 2.30909.1)
   - nanopb/decode (2.30909.1)
   - nanopb/encode (2.30909.1)
+  - NWWebSocket (0.5.3)
   - OpenSSL-Universal (1.1.1100)
   - PromisesObjC (2.3.1)
+  - pusher-websocket-react-native (1.3.0):
+    - PusherSwift (~> 10.1.1)
+    - React
+  - PusherSwift (10.1.4):
+    - NWWebSocket (~> 0.5.3)
+    - TweetNacl (~> 1.0.0)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -644,6 +651,7 @@ PODS:
   - RNSVG (14.0.0):
     - React-Core
   - SocketRocket (0.6.1)
+  - TweetNacl (1.0.2)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -682,6 +690,7 @@ DEPENDENCIES:
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
   - OpenSSL-Universal (= 1.1.1100)
+  - "pusher-websocket-react-native (from `../node_modules/@pusher/pusher-websocket-react-native`)"
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -758,9 +767,12 @@ SPEC REPOS:
     - GoogleUtilities
     - libevent
     - nanopb
+    - NWWebSocket
     - OpenSSL-Universal
     - PromisesObjC
+    - PusherSwift
     - SocketRocket
+    - TweetNacl
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -779,6 +791,8 @@ EXTERNAL SOURCES:
   hermes-engine:
     :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
     :tag: hermes-2023-08-07-RNv0.72.4-813b2def12bc9df02654b3e3653ae4a68d0572e0
+  pusher-websocket-react-native:
+    :path: "../node_modules/@pusher/pusher-websocket-react-native"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -908,8 +922,11 @@ SPEC CHECKSUMS:
   hermes-engine: 9180d43df05c1ed658a87cc733dc3044cf90c00a
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
+  NWWebSocket: 05fc4419102f33934f87157d70228837e327064f
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
+  pusher-websocket-react-native: ea675c5978ef1c30964c885f4a341fc33be84841
+  PusherSwift: 671c49e9c5441e30960d2e0282a879b2f8c80bcb
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: 83bca1c184feb4d2e51c72c8369b83d641443f95
   RCTTypeSafety: 13c4a87a16d7db6cd66006ce9759f073402ef85b
@@ -959,9 +976,10 @@ SPEC CHECKSUMS:
   RNScreens: 3c2d122f5e08c192e254c510b212306da97d2581
   RNSVG: 255767813dac22db1ec2062c8b7e7b856d4e5ae6
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
   Yoga: 4c3aa327e4a6a23eeacd71f61c81df1bcdf677d5
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 5d48cedfcda5d78e7c2f0110a81a6b506c1e779f
+PODFILE CHECKSUM: 8b48d206291ef91263f040a5c212ea2624428d19
 
 COCOAPODS: 1.14.3

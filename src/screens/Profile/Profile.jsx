@@ -19,7 +19,7 @@ import { LogOut, SetUserInfo } from '../../redux/reducers/AppStateReducer';
 import { showToast } from '../../helpers/toastConfig';
 import Loader from "../../components/Loader";
 import DeleteProfileConfirmationModal from '../../components/modal/DeleteProfileConfirmationModal';
-import strings from '../../localization/translation';
+// import strings from '../../localization/translation';
 // import BlockedUsers from '../../components/bottom-sheet/BlockedUsers';
 // import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 // import BlockedUsersListModal from '../../components/modal/BlockedUsersListModal';

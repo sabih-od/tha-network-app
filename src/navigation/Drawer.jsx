@@ -24,7 +24,7 @@ import draweritems from './draweritems';
 // import strings, { changeLang } from '../localization/translation';
 import SplashScreen from 'react-native-splash-screen';
 // import RNRestart from 'react-native-restart';
-import { GetDrawerMenu } from '../redux/reducers/ListingApiStateReducer';
+// import { GetDrawerMenu } from '../redux/reducers/ListingApiStateReducer';
 import { TextInput } from 'react-native-gesture-handler';
 import axios from 'axios';
 
@@ -36,6 +36,8 @@ const DrawerContent = (props) => {
 
   // useEffect(() => {
 
+  //   console.log('Drawer Pop')
+
   //   fcmService.register(onRegister, onNotification, onOpenNotification);
   //   localNotificationService.configure(onOpenNotification);
 
@@ -43,19 +45,19 @@ const DrawerContent = (props) => {
   //     console.log('onRegister => ', token);
   //     if (props.fcmToken == '' || props.fcmToken != token) {
   //       props.UpdateFcmToken(token);
-  //       props.EditProfileApiCall(user.id, { fcm_token: token });
+  //       // props.EditProfileApiCall(user.id, { fcm_token: token });
   //     }
   //   }
 
-  //   const testtopic = 'test';
-  //   messaging().subscribeToTopic(testtopic).then(() => console.log("Subscribed to topic:", testtopic)).catch((e) => {
-  //     console.log(e);
-  //   });
+  //   // const testtopic = 'test';
+  //   // messaging().subscribeToTopic(testtopic).then(() => console.log("Subscribed to topic:", testtopic)).catch((e) => {
+  //   //   console.log(e);
+  //   // });
 
-  //   const newtopic = 'newFirebaseNotification';
-  //   messaging().subscribeToTopic(newtopic).then(() => console.log("Subscribed to topic:", newtopic)).catch((e) => {
-  //     console.log(e);
-  //   });
+  //   // const newtopic = 'newFirebaseNotification';
+  //   // messaging().subscribeToTopic(newtopic).then(() => console.log("Subscribed to topic:", newtopic)).catch((e) => {
+  //   //   console.log(e);
+  //   // });
 
   //   function onNotification(notify) {
   //     console.log('onNotification => ', notify);
@@ -91,21 +93,21 @@ const DrawerContent = (props) => {
 
   // }, []);
 
-  useEffect(() => {
-    // connectSocket();
-    if (!IOS) {
-      // axios.defaults.headers.common['Authorization'] = `Bearer 1656|35uwDzTjVDwexmX0Om94BtA9VPUKPHo2etdpGSUV`
-      axios.request({ url: 'https://hunterssocial.com/api/settings', method: 'GET' })
-        .then(function (response) {
-          console.log('response hunter => ', response);
-          props.GetDrawerMenu();
-        })
-        .catch(function (error) { console.log(error); });
-    } else {
-      props.GetDrawerMenu();
-    }
+  // useEffect(() => {
+  //   // connectSocket();
+  //   if (!IOS) {
+  //     // axios.defaults.headers.common['Authorization'] = `Bearer 1656|35uwDzTjVDwexmX0Om94BtA9VPUKPHo2etdpGSUV`
+  //     axios.request({ url: 'https://hunterssocial.com/api/settings', method: 'GET' })
+  //       .then(function (response) {
+  //         console.log('response hunter => ', response);
+  //         props.GetDrawerMenu();
+  //       })
+  //       .catch(function (error) { console.log(error); });
+  //   } else {
+  //     props.GetDrawerMenu();
+  //   }
 
-  }, []);
+  // }, []);
 
   const [user, setUser] = useState(props.userInfo);
   const [drawerMenu, setDrawerMenu] = useState([]);
@@ -118,7 +120,7 @@ const DrawerContent = (props) => {
 
   useEffect(() => {
     if (props.isLogin) {
-      props.GetProfileApiCall();
+      // props.GetProfileApiCall();
     }
   }, [])
 
@@ -130,23 +132,23 @@ const DrawerContent = (props) => {
     }
   }, [props.drawerMenu])
 
-  const prevUserProfileResRef = useRef(props.getUserProfileResponse?.data);
+  // const prevUserProfileResRef = useRef(props.getUserProfileResponse?.data);
 
-  useEffect(() => {
-    if (props.isLogin && props.getUserProfileResponse !== prevUserProfileResRef.current && props.getUserProfileResponse?.success && props.getUserProfileResponse?.data) {
-      prevUserProfileResRef.current = props.getUserProfileResponse?.data;
-      // console.log('props.getUserProfileResponse => ', props.getUserProfileResponse);
-      let userdata = props.getUserProfileResponse?.data;
-      props.SetUserInfo({
-        ...props.userInfo,
-        email: userdata?.email,
-        first_name: userdata?.first_name,
-        last_name: userdata?.last_name,
-        phone: userdata?.phone,
-        profile_picture: userdata?.profile_picture
-      });
-    }
-  }, [props.getUserProfileResponse])
+  // useEffect(() => {
+  //   if (props.isLogin && props.getUserProfileResponse !== prevUserProfileResRef.current && props.getUserProfileResponse?.success && props.getUserProfileResponse?.data) {
+  //     prevUserProfileResRef.current = props.getUserProfileResponse?.data;
+  //     // console.log('props.getUserProfileResponse => ', props.getUserProfileResponse);
+  //     let userdata = props.getUserProfileResponse?.data;
+  //     props.SetUserInfo({
+  //       ...props.userInfo,
+  //       email: userdata?.email,
+  //       first_name: userdata?.first_name,
+  //       last_name: userdata?.last_name,
+  //       phone: userdata?.phone,
+  //       profile_picture: userdata?.profile_picture
+  //     });
+  //   }
+  // }, [props.getUserProfileResponse])
 
   // const [activeAccordion, setActiveAccordion] = useState(null);
   // const _handleAccordionToggle = (id) => {
@@ -180,7 +182,7 @@ const DrawerContent = (props) => {
       <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <TextInput
           ref={textInput}
-          placeholder={strings.SearchHere}
+          placeholder='Search Here...'
           placeholderTextColor={'#777'}
           onChangeText={value => textInput.current.value = value}
           style={{
@@ -202,63 +204,28 @@ const DrawerContent = (props) => {
           <Icon name="search" style={{ fontSize: 16, color: colors.white }} />
         </TouchableOpacity>
       </View>
-      <View style={{ backgroundColor: colors.deepblue, paddingVertical: 13, paddingHorizontal: 15, justifyContent: 'space-between', flexDirection: 'row' }}>
-        <Text style={globalstyle.draweritemtext}>{strings.Language}</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => {
-              // props.SetLanguage('en')
-              // changeLang('en')
-              // I18nManager.allowRTL(true);
-              // I18nManager.forceRTL(false);
-              // setTimeout(() => {
-              //   RNRestart.restart();
-              // }, 500)
-              // SplashScreen.show();
-            }}
-          >
-            <Text style={[globalstyle.draweritemtext, !isRTL && { color: colors.orange }]}>English</Text>
-          </TouchableOpacity>
-          <View style={{ height: 15, width: 1, backgroundColor: colors.deepblue, marginHorizontal: 10 }} />
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => {
-              // props.SetLanguage('ar')
-              // changeLang('ar')
-              // I18nManager.allowRTL(true);
-              // I18nManager.forceRTL(true);
-              // setTimeout(() => {
-              //   RNRestart.restart();
-              // }, 500)
-              // SplashScreen.show();
-            }}
-          >
-            <Text style={[globalstyle.draweritemtext, { fontFamily: fonts.arabicMedium }, isRTL && { color: colors.orange }]}>عربي</Text>
-            {/* <Text style={globalstyle.draweritemtext}>Arabic</Text> */}
-          </TouchableOpacity>
-        </View>
-      </View>
+
       <DrawerContentScrollView {...props} style={[styles.sidebar,]} contentContainerStyle={{ paddingTop: 0 }}>
         {/* {draweritems.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)} */}
-        <DrawerItem key={0} item={{ title: strings.home, nav: 'Home' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        {drawerMenu.length > 0 && drawerMenu.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)}
+        <DrawerItem key={0} item={{ title: 'Home', nav: 'Home' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={0} item={{ title: 'Edit Profile', nav: 'EditProfile' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        {/* {drawerMenu.length > 0 && drawerMenu.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)}
         <DrawerItem key={100} item={{ title: strings.questionanswer, nav: 'QuestionAnswer' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={101} item={{ title: strings.contactus, nav: 'Contact' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={101} item={{ title: strings.contactus, nav: 'Contact' }} navigation={props.navigation} activescreen={props.currentScreen} /> */}
         <View style={{ height: 10 }} />
       </DrawerContentScrollView>
       {user && <View style={{ backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor }}>
         <TouchableOpacity activeOpacity={0.8} onPress={() => {
           // logout(props.navigation) 
           props.navigation.closeDrawer();
-          props.EditProfileApiCall(user.id, { fcm_token: '' });
+          // props.EditProfileApiCall(user.id, { fcm_token: '' });
           props.LogOut();
           // props.navigation.navigate('Login');
           // props.navigation.reset({ index: 0, routes: [{ name: 'AuthScreens' }] })
         }}
           style={styles.logoutitem}>
           <Icon name="log-out" style={{ color: colors.white, marginRight: 15 }} size={16} />
-          <Text style={[globalstyle.draweritemtext, { color: colors.white }]}>{strings.logout}</Text>
+          <Text style={[globalstyle.draweritemtext, { color: colors.white }]}>Logout</Text>
         </TouchableOpacity>
       </View>}
     </>
@@ -281,7 +248,7 @@ const setStateToProps = (state) => ({
   isLogin: state.appstate.isLogin,
   getUserProfileResponse: state.authstate.getUserProfileResponse,
   language: state.appstate.language,
-  drawerMenu: state.listingstate.drawerMenu,
+  // drawerMenu: state.listingstate.drawerMenu,
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -289,11 +256,11 @@ const mapDispatchToProps = (dispatch) => {
     LogOut: bindActionCreators(LogOut, dispatch),
     UpdateFcmToken: bindActionCreators(UpdateFcmToken, dispatch),
     UpdateNotificationBadge: bindActionCreators(UpdateNotificationBadge, dispatch),
-    GetProfileApiCall: bindActionCreators(GetProfileApiCall, dispatch),
-    SetUserInfo: bindActionCreators(SetUserInfo, dispatch),
-    EditProfileApiCall: bindActionCreators(EditProfileApiCall, dispatch),
-    GetDrawerMenu: bindActionCreators(GetDrawerMenu, dispatch),
-    SetLanguage: bindActionCreators(SetLanguage, dispatch)
+    // GetProfileApiCall: bindActionCreators(GetProfileApiCall, dispatch),
+    // SetUserInfo: bindActionCreators(SetUserInfo, dispatch),
+    // EditProfileApiCall: bindActionCreators(EditProfileApiCall, dispatch),
+    // GetDrawerMenu: bindActionCreators(GetDrawerMenu, dispatch),
+    // SetLanguage: bindActionCreators(SetLanguage, dispatch)
   }
 }
 

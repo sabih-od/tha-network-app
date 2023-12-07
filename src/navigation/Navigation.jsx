@@ -115,7 +115,8 @@ const Navigation = (props) => {
     // }}
     >
         {/* {props.isLogin ? <DrawerStackNavigation /> : <AuthStackNavigation />} */}
-        <AuthStackNavigation />
+        {/* <AuthStackNavigation /> */}
+        <DrawerStackNavigation />
     </NavigationContainer>
 }
 

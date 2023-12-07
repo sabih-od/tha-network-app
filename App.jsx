@@ -16,11 +16,19 @@ import { persistor, store } from './src/redux/store';
 import Navigation from './src/navigation/Navigation';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from './src/helpers/toastConfig';
+import NativeDevSettings from 'react-native/Libraries/NativeModules/specs/NativeDevSettings';
+
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
+
+  const connectToRemoteDebugger = () => {
+    NativeDevSettings.setIsDebuggingRemotely(true);
+  };
   useEffect(() => {
+
+    // connectToRemoteDebugger();
     setTimeout(() => {
       SplashScreen.hide();
     }, 2000);

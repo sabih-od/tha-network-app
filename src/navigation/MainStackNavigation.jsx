@@ -10,21 +10,21 @@ import { isDarkMode, colors, fontcolor, fonts, height, width } from "../theme";
 import { createDrawerNavigator, useDrawerProgress, useDrawerStatus } from "@react-navigation/drawer";
 
 /* Screens */
-// import Home from "../screens/Home";
+import Home from "../screens/Home";
 // import Contact from "../screens/Contact";
 // import About from "../screens/About";
-// import Notifications from "../screens/Notifications";
+import Notifications from "../screens/Notifications";
 // import PrayList from "../screens/PrayList";
 // import GoalList from "../screens/GoalsList";
 // import StartFreeWeek from "../screens/FreeWeek";
 // import Profile from "../screens/Profile/Profile";
-// import EditProfile from "../screens/Profile/EditProfile";
+import EditProfile from "../screens/Profile/EditProfile";
 
-// import DrawerIcon from "../components/header/DrawerIcon";
-// import NotificationIcon from "../components/header/NotificationIcon";
-// import GoBackIcon from "../components/header/GoBackIcon";
+import DrawerIcon from "../components/header/DrawerIcon";
+import NotificationIcon from "../components/header/NotificationIcon";
+import GoBackIcon from "../components/header/GoBackIcon";
 
-// import globalstyle from "../theme/style";
+import globalstyle from "../theme/style";
 // import QuestionAnswer from "../screens/QuestionAnswer";
 // import Audio from "../screens/Audio";
 // import Social from "../screens/Lectures/Social";
@@ -74,7 +74,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
 
     return <Animated.View style={[styles.stack, animatedStyle]}>
         <Stack.Navigator initialRouteName="Home">
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="Home"
                 component={Home}
                 options={{
@@ -104,7 +104,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 name="Notifications"
                 component={Notifications}
                 options={{
-                    headerTitle: strings.Notifications,
+                    headerTitle: 'Notifications',
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
@@ -117,7 +117,42 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
+            {/* <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    headerTitle: '',
+                    headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            /> */}
             <Stack.Screen
+                name="EditProfile"
+                component={EditProfile}
+                options={{
+                    headerTitle: '',
+                    headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,                    
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            {/* <Stack.Screen
                 name="VideoDetail"
                 component={VideoDetail}
                 options={{
@@ -170,41 +205,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
-            <Stack.Screen
-                name="Profile"
-                component={Profile}
-                options={{
-                    headerTitle: '',
-                    headerTransparent: true,
-                    headerTitleAlign: 'center',
-                    headerTitleStyle: globalstyle.headerTitleStyle,
-                    headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
-                        elevation: 0,
-                        shadowOpacity: 0,
-                    },
-                    headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerRight: () => <NotificationIcon navigation={navigation} />
-                }}
-            />
-            <Stack.Screen
-                name="EditProfile"
-                component={EditProfile}
-                options={{
-                    headerTitle: '',
-                    headerTransparent: true,
-                    headerTitleAlign: 'center',
-                    headerTitleStyle: globalstyle.headerTitleStyle,
-                    headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
-                        elevation: 0,
-                        shadowOpacity: 0,
-                    },
-                    // headerLeft: () => <DrawerIcon navigation={navigation} />,                    
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
-                    headerRight: () => <NotificationIcon navigation={navigation} />
-                }}
-            />
+            
             <Stack.Screen
                 name="PrayList"
                 component={PrayList}

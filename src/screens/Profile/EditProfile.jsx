@@ -30,7 +30,7 @@ import { EditProfileApiCall, UpdateProfilePicApiCall } from '../../redux/reducer
 import { SetUserInfo } from '../../redux/reducers/AppStateReducer';
 import { showToast } from '../../helpers/toastConfig';
 import Loader from "../../components/Loader";
-import strings from '../../localization/translation';
+// import strings from '../../localization/translation';
 
 const EditProfile = props => {
   const [showModal, setShowModal] = useState(false);
@@ -221,7 +221,7 @@ const EditProfile = props => {
                     // { uri: user?.profilepic }
                     // require('./../../assets/images/profile-image.jpg')
                   }
-                  defaultSource={require('./../../../assets/images/speaker-placeholder.png')}
+                  defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
                   style={{ width: '100%', height: '100%', borderRadius: 120, resizeMode: 'cover', }}
                 />
                 {isEditable && (
@@ -454,7 +454,7 @@ const EditProfile = props => {
                   activeOpacity={0.8}
                   onPress={handleSubmit(onSubmit)}
                   style={globalstyle.authSubmitButton}>
-                  <Text style={globalstyle.authSubmitButtonText}>{strings.updateProfile}</Text>
+                  <Text style={globalstyle.authSubmitButtonText}>Update</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -469,7 +469,7 @@ const styles = StyleSheet.create({
   fullview: { flex: 1 },
   container: { flex: 1 },
   checkboxtick: { flexDirection: 'row', alignItems: 'center', marginRight: 20 },
-  labelinput: { fontFamily: fonts.latoRegular, fontSize: 13, color: '#000' },
+  labelinput: { fontFamily: fonts.primary, fontSize: 13, color: '#000' },
 });
 
 const setStateToProps = state => ({
