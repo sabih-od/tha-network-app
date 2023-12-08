@@ -78,8 +78,40 @@ const Login = (props) => {
 
     const onSubmit = (data) => {
         console.log('onSubmit data => ', data)
-        props.LoginApiCall(data);
-        isLoading(true);
+        props.SetIsLogin(true);
+        props.SetUserInfo({
+            "name": 'John Smith',
+            "email": "johnsmith@mailinator.com",
+            "created_at": "2023-12-01T22:15:10.000000Z",
+            "pwh": "John@123123",
+            "username": "@johnsmith",
+            "role_id": 2,
+            "id": "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
+            "user_id": "13df6929-86bd-4c2f-9217-e8ae9a18197e",
+            "first_name": "John",
+            "last_name": "Smith",
+            "phone": "81236734762",
+            "social_security_number": null,
+            "bio": null,
+            "address": null,
+            "country": null,
+            "city": null,
+            "postal_code": null,
+            "updated_at": "2023-12-01T22:15:10.000000Z",
+            "marital_status": null,
+            "gender": "Male",
+            "profile_image": "https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png",
+            "profile_cover": null,
+            "has_made_monthly_payment": true,
+            "stripe_account_id": "acct_1OIf1t4Dh1B210rz",
+            "paypal_account_details": null,
+            "stripe_checkout_session_id": "sub_1OIevyKWX6MBBv9PI25Psvyu",
+            "has_provided_stripe_payout_information": false,
+            "preferred_payout_method": "stripe",
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9zZXJ2aWNlLmRlbW93ZWJzaXRlbGlua3MuY29tOjMwNDVcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE3MDE5NzgzODcsImV4cCI6MTcwMTk4MTk4NywibmJmIjoxNzAxOTc4Mzg3LCJqdGkiOiJPenBwZDRCT21IT0sxSlh4Iiwic3ViIjoiMTNkZjY5MjktODZiZC00YzJmLTkyMTctZThhZTlhMTgxOTdlIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.SeYCOSWKiEMhHx7vr7KQJzifn5o97XwkWS4lvIU8Dlo"
+        });
+        // props.LoginApiCall(data);
+        // isLoading(true);
     }
 
     const input01 = useRef();
@@ -91,6 +123,10 @@ const Login = (props) => {
     }, [])
 
     return <SafeAreaView style={globalstyle.fullview}>
+        <StatusBar
+            barStyle={'dark-content'}
+            backgroundColor={colors.white}
+        />
         <Loader isLoading={loading} />
         <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]} >
             <KeyboardAvoidingView behavior={IOS ? 'padding' : 'padding'} >
@@ -111,16 +147,16 @@ const Login = (props) => {
                                         style={globalstyle.inputfield}
                                         placeholder="Username or Email Address"
                                         {...register('email', {
-                                            value: '',
-                                            // value: 'johnmartin@mailinator.com',
+                                            // value: '',
+                                            value: 'johnsmith@mailinator.com',
                                             required: 'Email Address is required',
                                             pattern: {
                                                 value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
                                                 message: "Please provide valid email"
                                             },
                                         })}
-                                        defaultValue={''}
-                                        // defaultValue={'johnmartin@mailinator.com'}
+                                        // defaultValue={''}
+                                        defaultValue={'johnsmith@mailinator.com'}
                                         placeholderTextColor={colors.placeholdercolor}
                                         autoCapitalize='none'
                                         onChangeText={(value) => setValue('email', value)}
@@ -145,13 +181,13 @@ const Login = (props) => {
                                             placeholder="Password"
                                             placeholderTextColor={colors.placeholdercolor}
                                             {...register('password', {
-                                                value: '',
-                                                // value: '12345678',
+                                                // value: '',
+                                                value: 'John@123123',
                                                 required: 'Password is required',
                                                 minLength: { value: 8, message: 'Password length must be greater then 8' }
                                             })}
-                                            defaultValue={''}
-                                            // defaultValue={'12345678'}
+                                            // defaultValue={''}
+                                            defaultValue={'John@123123'}
                                             // inputRef={password.ref}
                                             onChangeText={(value) => setValue('password', value)}
                                             secureTextEntry={!showPassword ? true : false}

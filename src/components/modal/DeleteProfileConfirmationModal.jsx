@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { colors, fonts } from '../../theme';
 import Icon from 'react-native-vector-icons/Feather';
 import globalstyle from '../../theme/style';
-import strings from '../../localization/translation';
+// import strings from '../../localization/translation';
 
 const DeleteProfileConfirmationModal = ({ visible, handleDeleteConfirmValue, setShowConfirmationModal }) => {
     let [visibility, setVisiblity] = useState(visible ? visible : false)
@@ -23,20 +23,20 @@ const DeleteProfileConfirmationModal = ({ visible, handleDeleteConfirmValue, set
             <View style={{ ...StyleSheet.absoluteFillObject, zIndex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity onPress={() => { handleDeleteConfirmValue(false) }} activeOpacity={1} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.7)' }}></TouchableOpacity>
                 <View style={{ backgroundColor: '#fff', borderRadius: 7, width: '90%', }}>
-                    <Text style={globalstyle.modaltitle}>{strings.deleteAccountTitle}</Text>
-                    <Text style={globalstyle.modaldesc}>{strings.deleteAccountDesc}</Text>
+                    <Text style={globalstyle.modaltitle}>Delete Account</Text>
+                    <Text style={globalstyle.modaldesc}>Are you sure you want to delete your account?</Text>
                     <View style={globalstyle.modalbtnsrow}>
                         <TouchableOpacity onPress={() => {
                             handleDeleteConfirmValue(false)
                         }} activeOpacity={0.6} style={[globalstyle.modalbtn, { borderRightColor: '#ddd', borderRightWidth: 1, }]}>
                             <Icon name="x" size={17} color={colors.orange} style={{ marginRight: 10 }} />
-                            <Text style={globalstyle.modalbtntext}>{strings.cancel}</Text>
+                            <Text style={globalstyle.modalbtntext}>Cancel</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
                             handleDeleteConfirmValue(true)
                         }} activeOpacity={0.6} style={globalstyle.modalbtn}>
                             <Icon name="check" size={17} color={colors.orange} style={{ marginRight: 10 }} />
-                            <Text style={globalstyle.modalbtntext}>{strings.confirm}</Text>
+                            <Text style={globalstyle.modalbtntext}>Confirm</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

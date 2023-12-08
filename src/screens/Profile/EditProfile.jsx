@@ -22,7 +22,7 @@ import CameraModal from './../../components/modal/CameraModal';
 
 import { useForm } from 'react-hook-form';
 import globalstyle from '../../theme/style';
-import { backgroungImage, colors, fonts, isIPad } from '../../theme';
+import { colors, fonts, height, isIPad } from '../../theme';
 import { useRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -107,7 +107,9 @@ const EditProfile = props => {
     setUser(props.userInfo);
   }, [props.userInfo])
 
+  const [loading, isLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
   // const [showConfPassword, setShowConfPassword] = useState(false);
 
   const input01 = useRef();
@@ -194,7 +196,21 @@ const EditProfile = props => {
   };
 
   // console.log('errors => ', errors);
-  const [loading, isLoading] = useState(false);
+
+
+  const password = register('password', {
+    value: '',
+    required: 'Password is required',
+    minLength: { value: 8, message: 'Min lenght 8' }
+  })
+
+  const confirmpass = register('confirmpass', {
+    value: '',
+    required: 'Confirm Password is required',
+    minLength: { value: 8, message: 'Min lenght 8' },
+    // validate: value => value === password.current || "Password does not match"
+  })
+
 
   return (
     <>
@@ -205,12 +221,11 @@ const EditProfile = props => {
       />
       <Loader isLoading={loading} />
       <SafeAreaView style={globalstyle.fullview}>
-        <ImageBackground style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]}
-          source={backgroungImage}>
-          <ScrollView style={styles.container}>
+        <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15, height: height - 130 }]}>
+          <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             {/* <View style={{ backgroundColor: colors.black, height: 400, width: '100%', top: 0, position: 'absolute', }}></View> */}
-            <View style={[{ paddingVertical: 20, paddingHorizontal: 15 }, isIPad && globalstyle.authscreencontainer]}>
-              <View style={{ width: 140, height: 140, borderRadius: 140, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2, marginTop: 100 }}>
+            <View style={[{ paddingVertical: 20 }, isIPad && globalstyle.authscreencontainer]}>
+              <View style={{ width: 140, height: 140, borderRadius: 140, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
                 <Image
                   source={
                     filePath?.uri
@@ -231,7 +246,7 @@ const EditProfile = props => {
                     onPress={() => {
                       setShowModal(true);
                     }}>
-                    <Icon name="camera" size={isIPad ? 20 : 18} color={colors.black} />
+                    <Icon name="camera" size={isIPad ? 20 : 18} color={colors.blue} />
                   </TouchableOpacity>
                 )}
               </View>
@@ -244,8 +259,87 @@ const EditProfile = props => {
               <Icon name={!isEditable ? 'edit-3' : 'x'} size={20} color={colors.white} />
             </TouchableOpacity> */}
 
+              <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 18, marginBottom: 5 }}>Referral Payment Options</Text>
+              <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: colors.grey }}>In order to receive Referral Payments you must include your Stripe Account information. If you do not have a Stripe Account create one and provide the information below. If this information is not provided, you will not be able to receive your referral payments</Text>
+
+              <View style={[globalstyle.inputbox, { justifyContent: 'space-between', borderRadius: 25 }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+                  <Icon color={colors.blue} name={'message-square'} size={18} style={{ marginTop: 18 }} />
+                  <TextInput
+                    style={[globalstyle.inputfield, { flex: 1, textAlignVertical: 'top', paddingTop: 17 }]}
+                    placeholder={'Enter Bio'}
+                    placeholderTextColor={colors.placeholdercolor}
+                    {...register('bio', {
+                      value: '',
+                      required: 'bio is required',
+                      // minLength: { value: 20, message: 'message length must be greater then 20 characters' }
+                    })}
+                    multiline={true}
+                    numberOfLines={Platform.OS === 'ios' ? null : 8}
+                    minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null}
+                    // defaultValue={'tabish@123'}
+                    // inputRef={message.ref}
+                    onChangeText={(value) => setValue('bio', value)}
+                    ref={input04}
+                  // returnKeyType="next"
+                  // onSubmitEditing={() => input05.current.focus()}
+                  />
+                </View>
+              </View>
+              {errors.bio && <Text style={globalstyle.errorField}>{errors.bio.message}</Text>}
+
               <View style={globalstyle.inputbox}>
-                <Icon color={colors.black} name={'user'} size={18} />
+                <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
+                <TextInput
+                  style={globalstyle.inputfield}
+                  placeholder="Maritial Status"
+                  placeholderTextColor={colors.placeholdercolor}
+                  {...register('maritial_status', {
+                    // value: 'John',
+                    value: '',
+                    required: 'First name is required',
+                    pattern: {
+                      value: /^[A-Za-z\s]+$/i,
+                      message: "Please provide a valid name"
+                    },
+                  })}
+                  defaultValue=''
+                  // defaultValue='John'
+                  onChangeText={(value) => setValue('maritial_status', value)}
+                  ref={input01}
+                  returnKeyType="next"
+                  onSubmitEditing={() => input02.current.focus()}
+                />
+              </View>
+              {errors.maritial_status && <Text style={globalstyle.errorField}>{errors.maritial_status.message}</Text>}
+
+              <View style={globalstyle.inputbox}>
+                <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
+                <TextInput
+                  style={globalstyle.inputfield}
+                  placeholder="Gender"
+                  placeholderTextColor={colors.placeholdercolor}
+                  {...register('gender', {
+                    // value: 'John',
+                    value: '',
+                    required: 'First name is required',
+                    pattern: {
+                      value: /^[A-Za-z\s]+$/i,
+                      message: "Please provide a valid name"
+                    },
+                  })}
+                  defaultValue=''
+                  // defaultValue='John'
+                  onChangeText={(value) => setValue('gender', value)}
+                  ref={input01}
+                  returnKeyType="next"
+                  onSubmitEditing={() => input02.current.focus()}
+                />
+              </View>
+              {errors.gender && <Text style={globalstyle.errorField}>{errors.gender.message}</Text>}
+
+              <View style={globalstyle.inputbox}>
+                <Icon color={colors.blue} name={'user'} size={18} />
                 <TextInput
                   style={globalstyle.inputfield}
                   placeholder="First Name"
@@ -268,8 +362,9 @@ const EditProfile = props => {
               </View>
               {errors.first_name && (<Text style={globalstyle.errorField}> {errors.first_name.message} </Text>)}
 
+
               <View style={globalstyle.inputbox}>
-                <Icon color={colors.black} name={'user'} size={18} />
+                <Icon color={colors.blue} name={'user'} size={18} />
                 <TextInput
                   style={globalstyle.inputfield}
                   placeholder="Last Name"
@@ -293,7 +388,7 @@ const EditProfile = props => {
               {errors.last_name && (<Text style={globalstyle.errorField}> {errors.last_name.message} </Text>)}
 
               <View style={globalstyle.inputbox}>
-                <Icon color={colors.black} name={'mail'} size={18} />
+                <Icon color={colors.blue} name={'mail'} size={18} />
                 <TextInput
                   style={[globalstyle.inputfield, { opacity: 0.6 }]}
                   defaultValue={user?.email}
@@ -320,7 +415,7 @@ const EditProfile = props => {
                 <Text style={globalstyle.errorField}>{errors.email.message}</Text>
               )}
               <View style={globalstyle.inputbox}>
-                <Icon color={colors.black} name={'phone'} size={18} />
+                <Icon color={colors.blue} name={'phone'} size={18} />
                 <TextInput
                   style={globalstyle.inputfield}
                   placeholder="Phone Number (Optional)"
@@ -345,61 +440,104 @@ const EditProfile = props => {
               </View>
               {errors.phone && (<Text style={globalstyle.errorField}>{errors.phone.message}</Text>)}
 
-              {isEditable && (
-                <View
-                  style={[
-                    globalstyle.inputbox,
-                    { justifyContent: 'space-between' },
-                  ]}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon color={colors.black} name={'lock'} size={18} />
-                    <TextInput
-                      style={[globalstyle.inputfield, { flex: 0.8 }]}
-                      placeholder="Password"
-                      // value="password123"
-                      placeholderTextColor={colors.placeholdercolor}
-                      {...register('password', {
-                        // value: 'password123',
-                        // required: 'Password is required',
-                        minLength: {
-                          value: 8,
-                          message: 'Password length must be greater then 8',
-                        },
-                      })}
-                      // defaultValue={'tabish@123'}
-                      // inputRef={password.ref}
-                      onChangeText={value => setValue('password', value)}
-                      secureTextEntry={!showPassword ? true : false}
-                      autoCapitalize="none"
-                      ref={input04}
-                    // returnKeyType="next"
-                    // onSubmitEditing={() => input05.current.focus()}
-                    />
-                  </View>
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    style={globalstyle.showhideicontouch}
-                    onPress={() => {
-                      setShowPassword(!showPassword);
-                    }}>
-                    <Icon
-                      name={!showPassword ? 'eye' : 'eye-off'}
-                      size={18}
-                      style={globalstyle.showhideicon}
-                    />
-                  </TouchableOpacity>
+
+              <View style={[globalstyle.inputbox, { justifyContent: 'space-between', borderRadius: 25 }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+                  <Icon color={colors.blue} name={'message-square'} size={18} style={{ marginTop: 18 }} />
+                  <TextInput
+                    style={[globalstyle.inputfield, { flex: 1, textAlignVertical: 'top', paddingTop: 17 }]}
+                    placeholder={'Enter Address...'}
+                    placeholderTextColor={colors.placeholdercolor}
+                    {...register('address', {
+                      value: '',
+                      required: 'Address is required',
+                      // minLength: { value: 20, message: 'address length must be greater then 20 characters' }
+                    })}
+                    multiline={true}
+                    numberOfLines={Platform.OS === 'ios' ? null : 8}
+                    minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null}
+                    // defaultValue={'tabish@123'}
+                    // inputRef={address.ref}
+                    onChangeText={(value) => setValue('address', value)}
+                    ref={input04}
+                  // returnKeyType="next"
+                  // onSubmitEditing={() => input05.current.focus()}
+                  />
                 </View>
-              )}
+              </View>
+              {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+
+              <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon color={colors.blue} name={'lock'} size={18} />
+                  <TextInput
+                    style={[globalstyle.inputfield, { flex: 0.8 }]}
+                    placeholder="Password"
+                    name={password.name}
+                    inputRef={password.ref}
+                    // value="password123"
+                    placeholderTextColor={colors.placeholdercolor}
+                    // {...register('password', {
+                    //     value: 'password123',
+                    //     required: 'Password is required',
+                    //     minLength: { value: 8, message: 'Password length must be greater then 8' }
+                    // })}
+                    // defaultValue={'tabish@123'}
+                    // inputRef={password.ref}
+                    onChangeText={(value) => setValue('password', value)}
+                    secureTextEntry={!showPassword ? true : false}
+                    autoCapitalize='none'
+                    ref={input01}
+                    returnKeyType="next"
+                    onSubmitEditing={() => input02.current.focus()}
+                  />
+                </View>
+              </View>
+              {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
+
+              <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon color={colors.blue} name={'lock'} size={18} />
+                  <TextInput
+                    style={[globalstyle.inputfield, { flex: 0.8 }]}
+                    placeholder="Confirm Password"
+                    name={confirmpass.name}
+                    inputRef={confirmpass.ref}
+                    // value="password123"
+                    placeholderTextColor={colors.placeholdercolor}
+                    // {...register('password', {
+                    //     value: 'password123',
+                    //     required: 'Password is required',
+                    //     minLength: { value: 8, message: 'Password length must be greater then 8' }
+                    // })}
+                    // defaultValue={'tabish@123'}
+                    // inputRef={password.ref}
+                    onChangeText={(value) => setValue('password', value)}
+                    secureTextEntry={!showConfPassword ? true : false}
+                    autoCapitalize='none'
+                    ref={input02}
+                  // returnKeyType="next"
+                  // onSubmitEditing={() => input05.current.focus()}
+                  />
+                </View>
+                <TouchableOpacity activeOpacity={0.8} style={globalstyle.showhideicontouch} onPress={() => { setShowConfPassword(!showConfPassword) }}>
+                  <Icon name={!showConfPassword ? 'eye' : 'eye-off'} size={18} style={globalstyle.showhideicon} />
+                </TouchableOpacity>
+              </View>
+              {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
+
+
+
               {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15, marginTop: 5 }}>
                             <Text style={[styles.labelinput, { marginRight: 55 }]}>Gender</Text>
                             <View style={{ flexDirection: 'row' }}><TouchableOpacity activeOpacity={0.6} style={[styles.checkboxtick]}
                                 onPress={() => { setGender(1) }}>
-                                <Icon name={gender == 1 ? 'check-circle' : 'circle'} size={18} color={colors.black} />
+                                <Icon name={gender == 1 ? 'check-circle' : 'circle'} size={18} color={colors.blue} />
                                 <Text style={[styles.labelinput, { marginLeft: 6, }]}>Male</Text>
                             </TouchableOpacity>
                                 <TouchableOpacity activeOpacity={0.6} style={[styles.checkboxtick, { marginRight: 0 }]}
                                     onPress={() => { setGender(2) }}>
-                                    <Icon name={gender == 2 ? 'check-circle' : 'circle'} size={18} color={colors.black} />
+                                    <Icon name={gender == 2 ? 'check-circle' : 'circle'} size={18} color={colors.blue} />
                                     <Text style={[styles.labelinput, { marginLeft: 6, }]}>Female</Text>
                                 </TouchableOpacity>
                             </View>
@@ -459,7 +597,7 @@ const EditProfile = props => {
               )}
             </View>
           </ScrollView>
-        </ImageBackground>
+        </View>
       </SafeAreaView>
     </>
   );

@@ -114,9 +114,9 @@ const Navigation = (props) => {
     //   // console.log("previousRouteName", previousRouteName);
     // }}
     >
-        {/* {props.isLogin ? <DrawerStackNavigation /> : <AuthStackNavigation />} */}
+        {props.isLogin ? <DrawerStackNavigation /> : <AuthStackNavigation />}
         {/* <AuthStackNavigation /> */}
-        <DrawerStackNavigation />
+        {/* <DrawerStackNavigation /> */}
     </NavigationContainer>
 }
 

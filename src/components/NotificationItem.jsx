@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { Icon } from "react-native-vector-icons/Feather"
+import Icon from "react-native-vector-icons/Feather"
 import { colors, fonts, isIPad, width } from "../theme";
 import moment from "moment";
 
@@ -36,6 +36,7 @@ const NotificationItem = ({ item, navigation }) => {
             </View>
             {/* </View> */}
             {/* <Text style={styles.datetime}>{moment(parseInt(item?.created_at)).format("DD MMM, YYYY hh:mm")}</Text> */}
+            <TouchableOpacity activeOpacity={0.8}><Icon name="trash" style={{ color: '#f00' }} /></TouchableOpacity>
         </View>
         {/* <Text style={styles.notiTime}>{moment(parseInt(item?.created_at)).format("DD MMMM, hh:mm A")}</Text> */}
     </TouchableOpacity>)
@@ -44,12 +45,12 @@ const NotificationItem = ({ item, navigation }) => {
 export default NotificationItem;
 
 const styles = StyleSheet.create({
-    notificationitem: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', borderLeftWidth: 0, paddingHorizontal: isIPad ? 15 : 12, paddingVertical: isIPad ? 15 : 10, backgroundColor: colors.white, borderRadius: 4, marginBottom: 15 },
+    notificationitem: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', borderLeftWidth: 0, paddingHorizontal: isIPad ? 15 : 12, paddingVertical: isIPad ? 15 : 10, backgroundColor: colors.white, borderRadius: 4, marginBottom: 10 },
     notiInnerRow: { flexDirection: 'row', alignItems: 'center', flex: 0.78 },
     image: { width: 45, height: 45, resizeMode: 'cover', borderRadius: 40, marginRight: 10 },
     notiTime: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 14 : 10, color: colors.orange },
-    notititle: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 19 : 15, color: colors.black, marginBottom: 3, width: width - 120, textTransform: 'capitalize' },
-    notimessage: { fontFamily: fonts.primary, fontSize: isIPad ? 16 : 13, color: colors.grey, marginTop: -3 }, //width: width - 220
+    notititle: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 19 : 14, color: colors.black, marginBottom: 3, width: width - 120, textTransform: 'capitalize' },
+    notimessage: { fontFamily: fonts.primary, fontSize: isIPad ? 16 : 12, color: colors.grey, marginTop: -3, marginBottom: 2 }, //width: width - 220
     notirowmsg: {},
     datetime: { fontFamily: fonts.primary, color: colors.orange, fontSize: 10 }
 })

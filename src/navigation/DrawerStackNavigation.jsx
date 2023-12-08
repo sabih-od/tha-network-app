@@ -31,7 +31,7 @@ function DrawerStackNavigation() {
                 overlayColor: "transparent",
                 keyboardDismissMode: "on-drag",
                 // sceneContainerStyle: { backgroundColor: 'transparent' },
-                sceneContainerStyle: { backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor },
+                sceneContainerStyle: { backgroundColor: '#f1f1f1' },
             }}>
             {/* <Drawer.Screen name="AuthScreens" options={{
                 headerShown: false,

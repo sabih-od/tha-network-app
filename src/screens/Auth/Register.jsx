@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, I18nManager } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, I18nManager, StatusBar } from "react-native";
 // import { fonts } from "../../theme";
 import { useForm } from 'react-hook-form';
 import { IOS, colorScheme, colors, fontSize, fonts, isIPad, } from "../../theme";
@@ -54,6 +54,10 @@ const Register = (props) => {
     const [showTermsModal, setShowTermsModal] = useState(false);
 
     return <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar
+            barStyle={'dark-content'}
+            backgroundColor={colors.white}
+        />
         <Loader isLoading={loading} />
         <TermsAndConditionsModal visible={showTermsModal} setVisible={setShowTermsModal} />
         <View

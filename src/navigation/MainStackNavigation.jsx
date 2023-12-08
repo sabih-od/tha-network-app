@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, useColorScheme, StyleSheet, Keyboard, StatusBar } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, useColorScheme, StyleSheet, Keyboard, StatusBar, Image } from "react-native";
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useNavigationContainerRef, DefaultTheme, DarkTheme, DrawerActions } from '@react-navigation/native';
@@ -17,7 +17,7 @@ import Notifications from "../screens/Notifications";
 // import PrayList from "../screens/PrayList";
 // import GoalList from "../screens/GoalsList";
 // import StartFreeWeek from "../screens/FreeWeek";
-// import Profile from "../screens/Profile/Profile";
+import Profile from "../screens/Profile/Profile";
 import EditProfile from "../screens/Profile/EditProfile";
 
 import DrawerIcon from "../components/header/DrawerIcon";
@@ -25,6 +25,8 @@ import NotificationIcon from "../components/header/NotificationIcon";
 import GoBackIcon from "../components/header/GoBackIcon";
 
 import globalstyle from "../theme/style";
+import PeopleInNetwork from "../screens/PeopleInNetwork";
+import WeeklyGoals from "../screens/WeeklyGoals";
 // import QuestionAnswer from "../screens/QuestionAnswer";
 // import Audio from "../screens/Audio";
 // import Social from "../screens/Lectures/Social";
@@ -79,16 +81,22 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 component={Home}
                 options={{
                     // headerTransparent: true,
-                    headerTitle: '',
+                    headerTitle: 'Home',
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerRight: () => <NotificationIcon navigation={navigation} />
+                    headerRight: () => <NotificationIcon navigation={navigation} />,
+                    // headerRight: () => <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                    //     <NotificationIcon navigation={navigation} />
+                    //     <View style={{ width: 30, height: 30, borderRadius: 30, marginRight: 12 }}>
+                    //         <Image source={require('./../../assets/images/dummy-profile-image.png')} style={{ resizeMode: 'cover', width: 30, height: 30 }} />
+                    //     </View>
+                    // </View>
                     // headerTransparent: true,
                     // headerStyle: { height: 120 },
                     // headerTitle: () => <SearchHeader />,
@@ -108,7 +116,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -117,33 +125,67 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
-            {/* <Stack.Screen
-                name="Profile"
-                component={Profile}
+            <Stack.Screen
+                name="PeopleInNetwork"
+                component={PeopleInNetwork}
                 options={{
-                    headerTitle: '',
-                    headerTransparent: true,
+                    headerTitle: 'People In My Network',
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            <Stack.Screen
+                name="WeeklyGoals"
+                component={WeeklyGoals}
+                options={{
+                    headerTitle: 'Weekly Goals',
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    headerTitle: 'Settings',
+                    // headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
-            /> */}
+            />
             <Stack.Screen
                 name="EditProfile"
                 component={EditProfile}
                 options={{
                     headerTitle: '',
-                    headerTransparent: true,
+                    // headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -160,7 +202,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -179,7 +221,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     // headerTransparent: true,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -196,7 +238,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -226,7 +268,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -243,7 +285,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -260,7 +302,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -276,7 +318,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -293,7 +335,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -311,7 +353,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     // headerTransparent: true,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -328,7 +370,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -354,7 +396,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     // headerTitle: 'Contact Us',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -372,7 +414,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -389,7 +431,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -406,7 +448,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -423,7 +465,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: [globalstyle.headerTitleStyle, { textTransform: 'none' }],
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -441,7 +483,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleStyle: [globalstyle.headerTitleStyle, { textTransform: 'none' }],
                     // headerTransparent: true,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
@@ -459,7 +501,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleStyle: [globalstyle.headerTitleStyle, { textTransform: 'none' }],
                     // headerTransparent: true,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+                        backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },

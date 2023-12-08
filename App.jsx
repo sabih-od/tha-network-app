@@ -20,7 +20,7 @@ import NativeDevSettings from 'react-native/Libraries/NativeModules/specs/Native
 
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'light';
 
 
   const connectToRemoteDebugger = () => {
@@ -33,10 +33,6 @@ function App() {
       SplashScreen.hide();
     }, 2000);
   }, [])
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
     <Provider store={store}>

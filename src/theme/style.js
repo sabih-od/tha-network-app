@@ -49,7 +49,7 @@ const globalstyle = StyleSheet.create({
   notibadge: { position: 'relative', width: 36, height: 36, marginRight: 10, alignItems: 'center', justifyContent: 'center', borderRadius: 40, overflow: 'hidden', },
   badge: { backgroundColor: colors.orange, color: colors.white, position: 'absolute', width: 11, height: 11, top: 5, right: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', borderRadius: 10, zIndex: 1, fontSize: 12, fontFamily: fonts.primary, },
 
-  headerTitleStyle: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 22 : 18, textTransform: 'capitalize', color: isDarkMode ? colors.white : colors.black },
+  headerTitleStyle: { fontFamily: fonts.primaryMedium, fontSize: isIPad ? 22 : 18, textTransform: 'capitalize', color: colors.white },
 
   speakerboximage: { height: isIPad ? 100 : 75, borderRadius: 7, overflow: 'hidden', width: isIPad ? 100 : 75, marginRight: isIPad ? 15 : 10 },
   speakerboxtitle: { fontFamily: fonts.primarySemiBold, color: colors.orange, fontSize: isIPad ? 18 : fontSize },

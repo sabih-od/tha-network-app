@@ -96,8 +96,8 @@ const Profile = props => {
       <DeleteProfileConfirmationModal handleDeleteConfirmValue={_handleDeleteConfirmValue} visible={showConfirmationModal} setVisible={setShowConfirmationModal} />
 
       <Loader isLoading={loading} />
-      <SafeAreaView style={[globalstyle.fullview, { backgroundColor: isDarkMode ? colors.darkblue : colors.headerbgcolor, height: height }]}>
-        {!isDarkMode && <Image style={[{ width: width, height: height, position: 'absolute', zIndex: 0 }]} resizeMode="cover" source={backgroungImage} />}
+      <SafeAreaView style={[globalstyle.fullview]}>
+        {/* {!isDarkMode && <Image style={[{ width: width, height: height, position: 'absolute', zIndex: 0 }]} resizeMode="cover" source={backgroungImage} />} */}
         <View style={styles.container}>
 
           {/* <BlockedUsers passReferenceToParent={handleChildReference} /> */}
@@ -115,7 +115,7 @@ const Profile = props => {
                   // { uri: user?.profilepic }
                   // require('./../../assets/images/profile-image.jpg')
                 }
-                defaultSource={require('./../../../assets/images/speaker-placeholder.png')}
+                defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
                 style={{ width: '100%', height: '100%', borderRadius: 120, resizeMode: 'cover', }}
               />
             </View>
@@ -133,35 +133,35 @@ const Profile = props => {
                 onPress={() => props.navigation.navigate('EditProfile')}
                 style={styles.edititem}>
                 <Icon name="edit-3" style={styles.editicon} />
-                <Text style={styles.edititemstext}>{strings.editProfile}</Text>
+                <Text style={styles.edititemstext}>Edit Profile</Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => props.navigation.navigate('HistoryList')}
                 style={styles.edititem}>
                 <Icon name="clock" style={styles.editicon} />
-                <Text style={styles.edititemstext}>{strings.History}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+                <Text style={styles.edititemstext}>History</Text>
+              </TouchableOpacity> */}
+              {/* <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => props.navigation.navigate('FavouriteList')}
                 style={styles.edititem}>
                 <Icon name="star" style={styles.editicon} />
                 <Text style={styles.edititemstext}>{strings.Favourites}</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => props.navigation.navigate('Downloads')}
+                onPress={() => props.navigation.navigate('BlockList')}
                 style={styles.edititem}>
                 <Icon name="download-cloud" style={styles.editicon} />
-                <Text style={styles.edititemstext}>{strings.Downloads}</Text>
+                <Text style={styles.edititemstext}>Block List</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => setShowConfirmationModal(true)}
                 style={[styles.edititem, { borderBottomColor: 'transparent' }]}>
                 <Icon name="trash" style={styles.editicon} />
-                <Text style={styles.edititemstext}>{strings.deleteAccountTitle}</Text>
+                <Text style={styles.edititemstext}>Delete Account</Text>
               </TouchableOpacity>
             </View>
 
@@ -214,8 +214,8 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   checkboxtick: { flexDirection: 'row', alignItems: 'center', marginRight: 20 },
   labelinput: { fontFamily: fonts.latoRegular, fontSize: 13, color: '#000' },
-  edititem: { flexDirection: 'row', alignItems: 'center', paddingVertical: 18, paddingHorizontal: 20, backgroundColor: isDarkMode ? colors.darkblue : colors.headerbgcolor, borderBottomColor: colors.deepblue, borderBottomWidth: 1 },
-  editicon: { color: isDarkMode ? colors.orange : colors.deepblue, fontSize: 18, marginRight: 25 },
+  edititem: { flexDirection: 'row', alignItems: 'center', paddingVertical: 18, paddingHorizontal: 20, backgroundColor: colors.white, borderBottomColor: colors.deepblue, borderBottomWidth: 1 },
+  editicon: { color: colors.orange, fontSize: 18, marginRight: 25 },
   edititemstext: { fontFamily: isRTL ? fonts.arabicMedium : fonts.primary, color: isDarkMode ? colors.white : colors.black },
 });
 

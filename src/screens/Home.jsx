@@ -14,17 +14,19 @@ import Icon from "react-native-vector-icons/Feather";
 import { useForm } from "react-hook-form";
 import { connectPusher, getPusher } from "../helpers/pusher-manager";
 import PostItem from "../components/PostItem";
+import postslist from "../data/posts";
 
 
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 // import { GetDailiesList, GetFeaturedList, GetHomeAudioData, GetHomeNewsList, GetHomeSpiritualData, GetHomeBiblicalData } from "../redux/reducers/ListingApiStateReducer";
-// import { bindActionCreators } from "redux";
+import { bindActionCreators } from "redux";
 // import strings from "../localization/translation";
 // import LinearGradient from "react-native-linear-gradient";
 // import TryPlus from "../components/TryPlus";
 
 
 const Home = (props) => {
+    console.log('props.userinfo => ', props.userInfo);
 
     useEffect(() => {
         connectPusher();
@@ -169,22 +171,6 @@ const Home = (props) => {
     const input05 = useRef();
 
 
-    const password = register('password', {
-        value: '',
-        required: 'Password is required',
-        minLength: { value: 8, message: 'Min lenght 8' }
-    })
-
-    const confirmpass = register('confirmpass', {
-        value: '',
-        required: 'Confirm Password is required',
-        minLength: { value: 8, message: 'Min lenght 8' },
-        // validate: value => value === password.current || "Password does not match"
-    })
-
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfPassword, setShowConfPassword] = useState(false);
-
 
     return <SafeAreaView style={globalstyle.fullview}>
         <ScrollView
@@ -195,311 +181,43 @@ const Home = (props) => {
         // }
         >
 
-            <PostItem />
-
-            <View style={{ padding: 13 }}>
-                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 18, marginBottom: 5 }}>Referral Payment Options</Text>
-                <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: colors.grey }}>In order to receive Referral Payments you must include your Stripe Account information. If you do not have a Stripe Account create one and provide the information below. If this information is not provided, you will not be able to receive your referral payments</Text>
-
-                <View style={{ marginTop: 15 }}>
-
-                    <View style={[globalstyle.inputbox, { justifyContent: 'space-between', borderRadius: 25 }]}>
-                        <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-                            <Icon color={colors.blue} name={'message-square'} size={18} style={{ marginTop: 18 }} />
-                            <TextInput
-                                style={[globalstyle.inputfield, { flex: 1, textAlignVertical: 'top', paddingTop: 17 }]}
-                                placeholder={'Enter Bio'}
-                                placeholderTextColor={colors.placeholdercolor}
-                                {...register('message', {
-                                    value: '',
-                                    required: 'Message is required',
-                                    // minLength: { value: 20, message: 'message length must be greater then 20 characters' }
-                                })}
-                                multiline={true}
-                                numberOfLines={Platform.OS === 'ios' ? null : 8}
-                                minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null}
-                                // defaultValue={'tabish@123'}
-                                // inputRef={message.ref}
-                                onChangeText={(value) => setValue('message', value)}
-                                ref={input04}
-                            // returnKeyType="next"
-                            // onSubmitEditing={() => input05.current.focus()}
-                            />
+            <View>
+                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 20, marginLeft: 10, marginBottom: 10 }}>Create Post</Text>
+                <View style={{ backgroundColor: '#fff', marginBottom: 15 }}>
+                    {/* margin: 10, borderRadius: 10 */}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', padding: 13, }}>
+                        <View style={{ width: 40, height: 40, borderRadius: 40, marginRight: 12 }}>
+                            <Image source={{ uri: props?.userInfo?.profile_image }} style={{ resizeMode: 'cover', width: 40, height: 40 }} />
+                        </View>
+                        <View style={{ width: '82%' }}>
+                            <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>{props?.userInfo.name}</Text>
+                            <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: '#333', marginTop: -2 }}>{props?.userInfo.username}</Text>
                         </View>
                     </View>
-                    {errors.message && <Text style={globalstyle.errorField}>{errors.message.message}</Text>}
-
-                    <View style={globalstyle.inputbox}>
-                        <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
-                        <TextInput
-                            style={globalstyle.inputfield}
-                            placeholder="Maritial Status"
-                            placeholderTextColor={colors.placeholdercolor}
-                            {...register('first_name', {
-                                // value: 'John',
-                                value: '',
-                                required: 'First name is required',
-                                pattern: {
-                                    value: /^[A-Za-z\s]+$/i,
-                                    message: "Please provide a valid name"
-                                },
-                            })}
-                            defaultValue=''
-                            // defaultValue='John'
-                            onChangeText={(value) => setValue('first_name', value)}
-                            ref={input01}
-                            returnKeyType="next"
-                            onSubmitEditing={() => input02.current.focus()}
-                        />
-                    </View>
-                    <View style={globalstyle.inputbox}>
-                        <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
-                        <TextInput
-                            style={globalstyle.inputfield}
-                            placeholder="Gender"
-                            placeholderTextColor={colors.placeholdercolor}
-                            {...register('first_name', {
-                                // value: 'John',
-                                value: '',
-                                required: 'First name is required',
-                                pattern: {
-                                    value: /^[A-Za-z\s]+$/i,
-                                    message: "Please provide a valid name"
-                                },
-                            })}
-                            defaultValue=''
-                            // defaultValue='John'
-                            onChangeText={(value) => setValue('first_name', value)}
-                            ref={input01}
-                            returnKeyType="next"
-                            onSubmitEditing={() => input02.current.focus()}
-                        />
-                    </View>
-                </View>
-
-
-                <View style={globalstyle.inputbox}>
-                    <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
                     <TextInput
-                        style={globalstyle.inputfield}
-                        placeholder="First Name"
-                        placeholderTextColor={colors.placeholdercolor}
-                        {...register('first_name', {
-                            // value: 'John',
-                            value: '',
-                            required: 'First name is required',
-                            pattern: {
-                                value: /^[A-Za-z\s]+$/i,
-                                message: "Please provide a valid name"
-                            },
-                        })}
-                        defaultValue=''
-                        // defaultValue='John'
-                        onChangeText={(value) => setValue('first_name', value)}
-                        ref={input01}
-                        returnKeyType="next"
-                        onSubmitEditing={() => input02.current.focus()}
+                        placeholder="Want to share a memory?"
+                        placeholderTextColor={'#999'}
+                        numberOfLines={50}
+                        multiline={true}
+                        // value="It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old"
+                        style={{ fontFamily: fonts.primary, backgroundColor: '#fff', paddingHorizontal: 15, paddingVertical: 12, width: '100%', borderRadius: 10, height: 100 }}
                     />
+                    {/* <View>
+                        <TouchableOpacity style={{ backgroundColor: colors.orange, padding: 10, width: 120, borderRadius: 10 }}>
+                            <Text style={{ color: colors.white, fontFamily: fonts.primarySemiBold, textTransform: 'uppercase', textAlign: 'center' }}>Post Now</Text>
+                        </TouchableOpacity>
+                    </View> */}
                 </View>
-                {errors.first_name && <Text style={globalstyle.errorField}>{errors.first_name.message}</Text>}
-                <View style={globalstyle.inputbox}>
-                    <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
-                    <TextInput
-                        style={globalstyle.inputfield}
-                        placeholder="Last Name"
-                        placeholderTextColor={colors.placeholdercolor}
-                        {...register('last_name', {
-                            // value: 'Martin',
-                            value: '',
-                            required: 'Last name is required',
-                            pattern: {
-                                value: /^[A-Za-z\s]+$/i,
-                                message: "Please provide a valid name"
-                            },
-                        })}
-                        defaultValue=''
-                        // defaultValue='Martin'
-                        onChangeText={(value) => setValue('last_name', value)}
-                        ref={input01}
-                        returnKeyType="next"
-                        onSubmitEditing={() => input02.current.focus()}
-                    />
-                </View>
-                {errors.last_name && <Text style={globalstyle.errorField}>{errors.last_name.message}</Text>}
-
-                <View style={globalstyle.inputbox}>
-                    <Icon style={globalstyle.authlefticon} name={'mail'} size={18} />
-                    <TextInput
-                        style={globalstyle.inputfield}
-                        placeholder="Email Address"
-                        placeholderTextColor={colors.placeholdercolor}
-                        {...register('email', {
-                            // value: 'johnmartin@mailinator.com',
-                            value: '',
-                            required: 'Email Address is required',
-                            pattern: {
-                                value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                message: "Please provide valid email"
-                            },
-                        })}
-                        defaultValue={''}
-                        // defaultValue={'johnmartin@mailinator.com'}
-                        onChangeText={(value) => setValue('email', value)}
-                        autoCapitalize='none'
-                        ref={input02}
-                        returnKeyType="next"
-                        onSubmitEditing={() => input03.current.focus()}
-                    />
-                </View>
-                {errors.email && <Text style={globalstyle.errorField}>{errors.email.message}</Text>}
-
-                <View style={globalstyle.inputbox}>
-                    <Icon style={globalstyle.authlefticon} name={'phone'} size={18} />
-                    <TextInput
-                        style={globalstyle.inputfield}
-                        placeholder="Phone Number (Optional)"
-                        placeholderTextColor={colors.placeholdercolor}
-                        // keyboardType='phone-pad'
-                        keyboardType='numeric'
-                        {...register('phone', {
-                            // value: '+8134234123123',
-                            value: '',
-                            // required: 'Phone number is required',
-                            pattern: {
-                                value: /[0-9+]$/i,
-                                message: "Please provide valid phone number"
-                            },
-                        })}
-                        defaultValue=''
-                        // defaultValue='+8134234123123'
-                        onChangeText={(value) => setValue('phone', value)}
-                        ref={input03}
-                        returnKeyType="next"
-                        onSubmitEditing={() => input04.current.focus()}
-                    />
-                </View>
-                {errors.phone && <Text style={globalstyle.errorField}>{errors.phone.message}</Text>}
-
-                <View style={[globalstyle.inputbox, { justifyContent: 'space-between', borderRadius: 25 }]}>
-                    <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-                        <Icon color={colors.blue} name={'message-square'} size={18} style={{ marginTop: 18 }} />
-                        <TextInput
-                            style={[globalstyle.inputfield, { flex: 1, textAlignVertical: 'top', paddingTop: 17 }]}
-                            placeholder={'Enter Address...'}
-                            placeholderTextColor={colors.placeholdercolor}
-                            {...register('message', {
-                                value: '',
-                                required: 'Message is required',
-                                // minLength: { value: 20, message: 'message length must be greater then 20 characters' }
-                            })}
-                            multiline={true}
-                            numberOfLines={Platform.OS === 'ios' ? null : 8}
-                            minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null}
-                            // defaultValue={'tabish@123'}
-                            // inputRef={message.ref}
-                            onChangeText={(value) => setValue('message', value)}
-                            ref={input04}
-                        // returnKeyType="next"
-                        // onSubmitEditing={() => input05.current.focus()}
-                        />
-                    </View>
-                </View>
-                {errors.message && <Text style={globalstyle.errorField}>{errors.message.message}</Text>}
-
-                <View style={globalstyle.inputbox}>
-                    <Icon style={globalstyle.authlefticon} name={'phone'} size={18} />
-                    <TextInput
-                        style={globalstyle.inputfield}
-                        placeholder="Postel / Zip Code"
-                        placeholderTextColor={colors.placeholdercolor}
-                        // keyboardType='phone-pad'
-                        keyboardType='numeric'
-                        {...register('phone', {
-                            // value: '+8134234123123',
-                            value: '',
-                            // required: 'Phone number is required',
-                            pattern: {
-                                value: /[0-9+]$/i,
-                                message: "Please provide valid phone number"
-                            },
-                        })}
-                        defaultValue=''
-                        // defaultValue='+8134234123123'
-                        onChangeText={(value) => setValue('phone', value)}
-                        ref={input03}
-                        returnKeyType="next"
-                        onSubmitEditing={() => input04.current.focus()}
-                    />
-                </View>
-                {errors.phone && <Text style={globalstyle.errorField}>{errors.phone.message}</Text>}
-
-                <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Icon color={colors.blue} name={'lock'} size={18} />
-                        <TextInput
-                            style={[globalstyle.inputfield, { flex: 0.8 }]}
-                            placeholder="Password"
-                            name={password.name}
-                            inputRef={password.ref}
-                            // value="password123"
-                            placeholderTextColor={colors.placeholdercolor}
-                            // {...register('password', {
-                            //     value: 'password123',
-                            //     required: 'Password is required',
-                            //     minLength: { value: 8, message: 'Password length must be greater then 8' }
-                            // })}
-                            // defaultValue={'tabish@123'}
-                            // inputRef={password.ref}
-                            onChangeText={(value) => setValue('password', value)}
-                            secureTextEntry={!showPassword ? true : false}
-                            autoCapitalize='none'
-                            ref={input01}
-                            returnKeyType="next"
-                            onSubmitEditing={() => input02.current.focus()}
-                        />
-                    </View>
-                </View>
-                {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
-
-                <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Icon color={colors.blue} name={'lock'} size={18} />
-                        <TextInput
-                            style={[globalstyle.inputfield, { flex: 0.8 }]}
-                            placeholder="Confirm Password"
-                            name={confirmpass.name}
-                            inputRef={confirmpass.ref}
-                            // value="password123"
-                            placeholderTextColor={colors.placeholdercolor}
-                            // {...register('password', {
-                            //     value: 'password123',
-                            //     required: 'Password is required',
-                            //     minLength: { value: 8, message: 'Password length must be greater then 8' }
-                            // })}
-                            // defaultValue={'tabish@123'}
-                            // inputRef={password.ref}
-                            onChangeText={(value) => setValue('password', value)}
-                            secureTextEntry={!showConfPassword ? true : false}
-                            autoCapitalize='none'
-                            ref={input02}
-                        // returnKeyType="next"
-                        // onSubmitEditing={() => input05.current.focus()}
-                        />
-                    </View>
-                    <TouchableOpacity activeOpacity={0.8} style={globalstyle.showhideicontouch} onPress={() => { setShowConfPassword(!showConfPassword) }}>
-                        <Icon name={!showConfPassword ? 'eye' : 'eye-off'} size={18} style={globalstyle.showhideicon} />
-                    </TouchableOpacity>
-                </View>
-                {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
-
             </View>
 
+            {postslist.map((item, index) => {
+                return (
+                    <PostItem key={index} item={item} />
+                )
+            })}
 
 
-
-
-
-            <View style={{ backgroundColor: colors.white, padding: 13, marginBottom: 15 }}>
+            {/* <View style={{ backgroundColor: colors.white, padding: 13, marginBottom: 15 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 13, marginBottom: 10, }}>
                     <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16, textTransform: 'capitalize' }}>People in my network</Text>
                     <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 14, color: colors.orange }}>See All</Text>
@@ -534,113 +252,43 @@ const Home = (props) => {
                     </View>
                 </View>
                 <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#333', textAlign: 'center', marginTop: 20, marginBottom: 10 }}>No user in my network</Text>
-            </View>
-
-            <View style={{ backgroundColor: colors.white, padding: 13 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 13, marginBottom: 10, borderBottomWidth: 1, borderBottomColor: '#ddd' }}>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>Weekly Goals</Text>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>25</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Referrals Made</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>0</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16, color: colors.black }}>Weekly List</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Monday</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Tuesday</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Wednesday</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Thursday</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Friday</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Saturday</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3 }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>Sunday</Text>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#666' }}>-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 3, paddingTop: 13, marginTop: 10, borderTopWidth: 1, borderTopColor: '#ddd' }}>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 15, color: '#333' }}>Remaining Goals</Text>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 15, color: '#333' }}>1239</Text>
-                </View>
-            </View>
+            </View> */}
 
 
-            <View>
-                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 20, marginLeft: 10, marginVertical: 10 }}>Create Post</Text>
-                <View style={{ backgroundColor: '#fff', marginBottom: 15 }}>
-                    {/* margin: 10, borderRadius: 10 */}
-                    <View style={{ flexDirection: 'row', alignItems: 'center', padding: 13, }}>
-                        <View style={{ width: 40, height: 40, borderRadius: 40, marginRight: 12 }}>
-                            <Image source={require('./../../assets/images/dummy-profile-image.png')} style={{ resizeMode: 'cover', width: 40, height: 40 }} />
-                        </View>
-                        <View style={{ width: '82%' }}>
-                            <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>Mechelle Morgan</Text>
-                            <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: '#333', marginTop: -2 }}>@zynwigodor</Text>
-                        </View>
-                    </View>
-                    <TextInput
-                        placeholder="Want to share a memory?"
-                        placeholderTextColor={'#999'}
-                        numberOfLines={50}
-                        multiline={true}
-                        // value="It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old"
-                        style={{ fontFamily: fonts.primary, backgroundColor: '#fff', paddingHorizontal: 15, paddingVertical: 12, width: '100%', borderRadius: 10, height: 100 }}
-                    />
-                    {/* <View>
-                        <TouchableOpacity style={{ backgroundColor: colors.orange, padding: 10, width: 120, borderRadius: 10 }}>
-                            <Text style={{ color: colors.white, fontFamily: fonts.primarySemiBold, textTransform: 'uppercase', textAlign: 'center' }}>Post Now</Text>
-                        </TouchableOpacity>
-                    </View> */}
-                </View>
-            </View>
+
+
+
 
         </ScrollView>
     </SafeAreaView>
 }
 
 
-// const setStateToProps = state => ({
-//     getHomeBiblicalDataResponse: state.listingstate.getHomeBiblicalDataResponse,
-//     getHomeSpiritualDataResponse: state.listingstate.getHomeSpiritualDataResponse,
-//     getHomeAudioNoDataResponse: state.listingstate.getHomeAudioNoDataResponse,
+const setStateToProps = state => ({
+    // getHomeBiblicalDataResponse: state.listingstate.getHomeBiblicalDataResponse,
+    // getHomeSpiritualDataResponse: state.listingstate.getHomeSpiritualDataResponse,
+    // getHomeAudioNoDataResponse: state.listingstate.getHomeAudioNoDataResponse,
 
-//     getToFeaturedListResponse: state.listingstate.getToFeaturedListResponse,
-//     getDailiesListResponse: state.listingstate.getDailiesListResponse,
-//     getHomeNewsListResponse: state.listingstate.getHomeNewsListResponse,
-//     drawerMenu: state.listingstate.drawerMenu,
-// })
+    // getToFeaturedListResponse: state.listingstate.getToFeaturedListResponse,
+    // getDailiesListResponse: state.listingstate.getDailiesListResponse,
+    // getHomeNewsListResponse: state.listingstate.getHomeNewsListResponse,
+    // drawerMenu: state.listingstate.drawerMenu,
+    userInfo: state.appstate.userInfo
+})
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         GetFeaturedList: bindActionCreators(GetFeaturedList, dispatch),
-//         GetDailiesList: bindActionCreators(GetDailiesList, dispatch),
-//         GetHomeNewsList: bindActionCreators(GetHomeNewsList, dispatch),
-//         GetHomeBiblicalData: bindActionCreators(GetHomeBiblicalData, dispatch),
-//         GetHomeSpiritualData: bindActionCreators(GetHomeSpiritualData, dispatch),
-//         GetHomeAudioData: bindActionCreators(GetHomeAudioData, dispatch),
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        // GetFeaturedList: bindActionCreators(GetFeaturedList, dispatch),
+        // GetDailiesList: bindActionCreators(GetDailiesList, dispatch),
+        // GetHomeNewsList: bindActionCreators(GetHomeNewsList, dispatch),
+        // GetHomeBiblicalData: bindActionCreators(GetHomeBiblicalData, dispatch),
+        // GetHomeSpiritualData: bindActionCreators(GetHomeSpiritualData, dispatch),
+        // GetHomeAudioData: bindActionCreators(GetHomeAudioData, dispatch),
+    }
+}
 
-// export default connect(setStateToProps, mapDispatchToProps)(Home);
-export default Home;
+export default connect(setStateToProps, mapDispatchToProps)(Home);
+// export default Home;
 
 const styles = StyleSheet.create({
     homebgimage: {

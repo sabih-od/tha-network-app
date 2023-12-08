@@ -145,7 +145,7 @@ const DrawerContent = (props) => {
   //       first_name: userdata?.first_name,
   //       last_name: userdata?.last_name,
   //       phone: userdata?.phone,
-  //       profile_picture: userdata?.profile_picture
+  //       profile_image: userdata?.profile_image
   //     });
   //   }
   // }, [props.getUserProfileResponse])
@@ -159,7 +159,7 @@ const DrawerContent = (props) => {
   return (
     <>
       {user &&
-        <View style={{ backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor, paddingBottom: isIPad ? 60 : 30, paddingTop: IOS ? 80 : 30, }}>
+        <View style={{ backgroundColor: '#f1f1f1', paddingBottom: isIPad ? 60 : 30, paddingTop: IOS ? 80 : 30, }}>
           {/* <TouchableOpacity onPress={() => { props.navigation.closeDrawer() }} activeOpacity={0.8}>
           <Icon name={'x'} color={colors.white} size={16} />
         </TouchableOpacity> */}
@@ -169,7 +169,7 @@ const DrawerContent = (props) => {
             width: isIPad ? 120 : 90, height: isIPad ? 120 : 90, borderRadius: isIPad ? 120 : 90, overflow: 'hidden', marginLeft: 'auto', marginRight: 'auto', marginBottom: 10,
             // borderColor: colors.white, borderWidth: 1, 
           }}>
-            <Image source={user?.profile_picture ? { uri: user?.profile_picture } : require('./../../assets/images/dummy-profile-image.png')} style={{ width: isIPad ? 120 : 90, height: isIPad ? 120 : 90, resizeMode: 'cover', }} />
+            <Image source={user?.profile_image ? { uri: user?.profile_image } : require('./../../assets/images/dummy-profile-image.png')} style={{ width: isIPad ? 120 : 90, height: isIPad ? 120 : 90, resizeMode: 'cover', }} />
           </TouchableOpacity>
           <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, textAlign: 'center', fontSize: isIPad ? 26 : 20, marginBottom: 0 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -208,7 +208,10 @@ const DrawerContent = (props) => {
       <DrawerContentScrollView {...props} style={[styles.sidebar,]} contentContainerStyle={{ paddingTop: 0 }}>
         {/* {draweritems.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)} */}
         <DrawerItem key={0} item={{ title: 'Home', nav: 'Home' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={0} item={{ title: 'Edit Profile', nav: 'EditProfile' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={0} item={{ title: 'People In My Network', nav: 'PeopleInNetwork' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={0} item={{ title: 'Friends', nav: 'PeopleInNetwork' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={0} item={{ title: 'Weekly Goals', nav: 'WeeklyGoals' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={0} item={{ title: 'Settings', nav: 'Profile' }} navigation={props.navigation} activescreen={props.currentScreen} />
         {/* {drawerMenu.length > 0 && drawerMenu.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)}
         <DrawerItem key={100} item={{ title: strings.questionanswer, nav: 'QuestionAnswer' }} navigation={props.navigation} activescreen={props.currentScreen} />
         <DrawerItem key={101} item={{ title: strings.contactus, nav: 'Contact' }} navigation={props.navigation} activescreen={props.currentScreen} /> */}
@@ -234,7 +237,7 @@ const DrawerContent = (props) => {
 
 const styles = StyleSheet.create({
   sidebar: {
-    backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor,
+    backgroundColor: '#f1f1f1',
     //flex: 1 
   },
   logoutitem: { flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 13, borderBottomWidth: 1, borderBottomColor: '#ffffff09', backgroundColor: colors.orange, borderTopRightRadius: 30 }
