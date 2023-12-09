@@ -10,13 +10,13 @@ const NotificationItem = ({ item, navigation }) => {
         onPress={() => {
             // console.log('asdasd')
             // navigation.navigate('AnnouncementDetail', { id: 21, refresh: true })
-            if (item?.topic == 'prayer-request') { navigation.navigate('RequestedPrayers') } // RequestedPrayers
-            if (item?.topic == 'book') { navigation.navigate('Books') } // Books // PdfView
-            if (item?.topic == 'event') { navigation.navigate('EventDetail', { id: item?.topic_id, refresh: true }) } // Events // EventDetail
-            if (item?.topic == 'post') { navigation.navigate('PostDetail', { id: item?.topic_id, refresh: true }) } // Posts // PostDetail
-            if (item?.topic == 'sermon') { navigation.navigate('SermonsDetail', { id: item?.topic_id, refresh: true }) } // Sermons // SermonsDetail
-            if (item?.topic == 'announcement') { navigation.navigate('AnnouncementDetail', { id: item?.topic_id, refresh: true }) } // Announcements // AnnouncementDetail
-            if (item?.topic == 'group-request') { navigation.navigate('ChatGroups') } // Group Chat
+            // if (item?.topic == 'prayer-request') { navigation.navigate('RequestedPrayers') } // RequestedPrayers
+            // if (item?.topic == 'book') { navigation.navigate('Books') } // Books // PdfView
+            // if (item?.topic == 'event') { navigation.navigate('EventDetail', { id: item?.topic_id, refresh: true }) } // Events // EventDetail
+            // if (item?.topic == 'post') { navigation.navigate('PostDetail', { id: item?.topic_id, refresh: true }) } // Posts // PostDetail
+            // if (item?.topic == 'sermon') { navigation.navigate('SermonsDetail', { id: item?.topic_id, refresh: true }) } // Sermons // SermonsDetail
+            // if (item?.topic == 'announcement') { navigation.navigate('AnnouncementDetail', { id: item?.topic_id, refresh: true }) } // Announcements // AnnouncementDetail
+            // if (item?.topic == 'chat-request') { navigation.navigate('ChatChannels') } // Group Chat
 
         }}
         style={[styles.notificationitem, {

@@ -10,77 +10,77 @@ const messageslist = [
     // { id: 9, user: '636584797bb5410ba49936fb', sender: '636586805eb2445eea62a5c1', message: 'Contrary to popular belief', image: require('./../../assets/images/profile-image.png'), isDeleted: false, createdAt: '2023-06-17T80:30:00' },
     // { id: 10, user: '636586805eb2445eea62a5c1', sender: '636584797bb5410ba49936fb', message: 'Latin professor at Hampden-Sydney College in Virginia', image: require('./../../assets/images/profile-image.png'), isDeleted: false, createdAt: '2023-06-17T80:30:00' },
 
-    
+
     {
-        "id": 118,
-        "group_id": 1,
-        "message": "Hey everyone! My day is going pretty good.",
-        "created_at": "1689032586230",
-        "user": {
-            "id": 17,
-            "first_name": "Bob",
-            "last_name": "jean",
-            "profile_picture": null
+        id: 118,
+        group_id: 1,
+        message: "Hey everyone! My day is going pretty good.",
+        created_at: "1702073528941",
+        user: {
+            id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
+            first_name: "John",
+            last_name: "Smith",
+            profile_image: require('./../../assets/images/user-08.jpeg')
         }
     },
     {
-        "id": 114,
-        "group_id": 1,
-        "message": "Hi Sam! I'm enjoying my day off today, catching up on some reading. Any good book recommendations?",
-        "created_at": "1689031199027",
-        "user": {
-            "id": 15,
-            "first_name": "Sam",
-            "last_name": "Garcia",
-            "profile_picture": "http://service.demowebsitelinks.com:3023/uploads/users/Iepg6TZu3G3wEhGTNsXe.jpg"
+        id: 114,
+        group_id: 1,
+        message: "Hi Sam! I'm enjoying my day off today, catching up on some reading. Any good book recommendations?",
+        created_at: "1702073571138",
+        user: {
+            id: 15,
+            first_name: "Flavia",
+            last_name: "Anderson",
+            profile_image: require('./../../assets/images/user-07.jpeg') //"http://service.demowebsitelinks.com:3023/uploads/users/Iepg6TZu3G3wEhGTNsXe.jpg"
         }
     },
     {
-        "id": 113,
-        "group_id": 1,
-        "message": "Hey guys! I'm having a busy day at work, but hanging in there. Looking forward to the weekend already!",
-        "created_at": "1689031195429",
-        "user": {
-            "id": 16,
-            "first_name": "Kalen",
-            "last_name": "Parker",
-            "profile_picture": "https://texaschristianashram.org:3023/uploads/users/f6pP3Bk6z9YxeH0rjuTL.jpg"
+        id: 113,
+        group_id: 1,
+        message: "Hey guys! I'm having a busy day at work, but hanging in there. Looking forward to the weekend already!",
+        created_at: "1702073609224",
+        user: {
+            id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
+            first_name: "John",
+            last_name: "Smith",
+            profile_image: require('./../../assets/images/user-08.jpeg')
         }
     },
     {
-        "id": 112,
-        "group_id": 1,
-        "message": "Hi Kalen! My day is going well so far. Just finished a great workout at the gym. How about you?",
-        "created_at": "1689031186515",
-        "user": {
-            "id": 15,
-            "first_name": "John",
-            "last_name": "Canady",
-            "profile_picture": "http://service.demowebsitelinks.com:3023/uploads/users/Iepg6TZu3G3wEhGTNsXe.jpg"
+        id: 112,
+        group_id: 1,
+        message: "Hi Kalen! My day is going well so far. Just finished a great workout at the gym. How about you?",
+        created_at: "1702073560351",
+        user: {
+            id: 15,
+            first_name: "Flavia",
+            last_name: "Anderson",
+            profile_image: require('./../../assets/images/user-07.jpeg') //"http://service.demowebsitelinks.com:3023/uploads/users/Iepg6TZu3G3wEhGTNsXe.jpg"
         }
     },
     {
-        "id": 99,
-        "group_id": 1,
-        "message": "Hey everyone! How's your day going?",
-        "created_at": "1689025711771",
-        "user": {
-            "id": 16,
-            "first_name": "Kalen",
-            "last_name": "Parker",
-            "profile_picture": "https://texaschristianashram.org:3023/uploads/users/f6pP3Bk6z9YxeH0rjuTL.jpg"
+        id: 99,
+        group_id: 1,
+        message: "Hey everyone! How's your day going?",
+        created_at: "1702073636113",
+        user: {
+            id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
+            first_name: "John",
+            last_name: "Smith",
+            profile_image: require('./../../assets/images/user-08.jpeg')
         }
     },
     {
-        "id": 96,
-        "group_id": 1,
-        "message": "Hi, This is Kalen Parker here..",
-        "created_at": "1689025642886",
-        "user": {
-            "id": 16,
-            "first_name": "Kalen",
-            "last_name": "Parker",
-            "profile_picture": "https://texaschristianashram.org:3023/uploads/users/f6pP3Bk6z9YxeH0rjuTL.jpg"
+        id: 96,
+        group_id: 1,
+        message: "Hi, This is John Smith here..",
+        created_at: "1702073435612",
+        user: {
+            id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
+            first_name: "John",
+            last_name: "Smith",
+            profile_image: require('./../../assets/images/user-08.jpeg')
         }
     }
 

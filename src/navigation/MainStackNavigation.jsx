@@ -17,7 +17,7 @@ import Notifications from "../screens/Notifications";
 // import PrayList from "../screens/PrayList";
 // import GoalList from "../screens/GoalsList";
 // import StartFreeWeek from "../screens/FreeWeek";
-import Profile from "../screens/Profile/Profile";
+import Profile from "../screens/Profile/Settings";
 import EditProfile from "../screens/Profile/EditProfile";
 
 import DrawerIcon from "../components/header/DrawerIcon";
@@ -27,6 +27,10 @@ import GoBackIcon from "../components/header/GoBackIcon";
 import globalstyle from "../theme/style";
 import PeopleInNetwork from "../screens/PeopleInNetwork";
 import WeeklyGoals from "../screens/WeeklyGoals";
+import Friends from "../screens/Friends";
+import Settings from "../screens/Profile/Settings";
+import ChatMessages from "../screens/ChatMessages/ChatMessages";
+import ChatChannels from "../screens/ChatMessages/ChatChannels";
 // import QuestionAnswer from "../screens/QuestionAnswer";
 // import Audio from "../screens/Audio";
 // import Social from "../screens/Lectures/Social";
@@ -101,10 +105,10 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     // headerStyle: { height: 120 },
                     // headerTitle: () => <SearchHeader />,
                     // headerLeft: () => <TouchableOpacity style={{ backgroundColor: '#ddd', padding: 10 }} onPress={() => { navigation.dispatch(DrawerActions.openDrawer()); }} activeOpacity={0.8}>
-                    //     <Icon name={'align-right'} size={22} color={colors.black} />
+                    //     <Icon name={'align-right'} size={22} color={colors.white} />
                     // </TouchableOpacity>,
                     // headerRight: () => (<TouchableOpacity>
-                    //     <Icon name={'bell'} size={18} color={colors.black} />
+                    //     <Icon name={'bell'} size={18} color={colors.white} />
                     // </TouchableOpacity>)
                 }}
             />
@@ -120,7 +124,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -137,7 +141,24 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            <Stack.Screen
+                name="Friends"
+                component={Friends}
+                options={{
+                    headerTitle: 'Friends',
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -154,15 +175,16 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
             <Stack.Screen
-                name="Profile"
-                component={Profile}
+                name="Settings"
+                component={Settings}
                 options={{
+                    cardStyle: { backgroundColor: '#fff' },
                     headerTitle: 'Settings',
                     // headerTransparent: true,
                     headerTitleAlign: 'center',
@@ -180,7 +202,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 name="EditProfile"
                 component={EditProfile}
                 options={{
-                    headerTitle: '',
+                    headerTitle: 'Update Profile',
                     // headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
@@ -190,10 +212,65 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         shadowOpacity: 0,
                     },
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,                    
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    headerTitle: 'Update Profile',
+                    // headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,                    
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            <Stack.Screen
+                name="ChatChannels"
+                component={ChatChannels}
+                options={{
+                    headerTitle: 'Tha Network',
+                    // headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,                    
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            <Stack.Screen
+                name="ChatMessages"
+                component={ChatMessages}
+                options={{
+                    headerTitle: 'Messages',
+                    // headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,                    
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+
             {/* <Stack.Screen
                 name="VideoDetail"
                 component={VideoDetail}
@@ -206,7 +283,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -225,7 +302,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -242,7 +319,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -256,7 +333,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleAlign: 'center',
                     headerTitleStyle: { fontFamily: fonts.headingFont, textTransform: 'capitalize' },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} screen={'Books'} />,
+                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} screen={'Books'} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -273,7 +350,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         shadowOpacity: 0,
                     },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -290,7 +367,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         shadowOpacity: 0,
                     },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -340,7 +417,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         shadowOpacity: 0,
                     },
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -358,7 +435,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         shadowOpacity: 0,
                     },
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} screen={'ChatGroups'} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} screen={'ChatChannels'} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -375,7 +452,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         shadowOpacity: 0,
                     },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} screen={'ChatGroups'} />,
+                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} screen={'ChatChannels'} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -418,7 +495,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -435,7 +512,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -452,7 +529,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -469,7 +546,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -487,7 +564,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -505,7 +582,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
@@ -523,7 +600,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     // headerRight: () => <NotificationIcon navigation={navigation} />
                 }}

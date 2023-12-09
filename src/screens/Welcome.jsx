@@ -1,5 +1,8 @@
 import { colors, fonts, width } from "../theme";
 import globalstyle from "../theme/style";
+// import Logo from './../../assets/images/logo.png';
+// import { Svg, Circle } from 'react-native-svg';
+import { SvgUri } from 'react-native-svg';
 
 const { ImageBackground, SafeAreaView, TouchableOpacity, View, Text, Image } = require("react-native")
 
@@ -11,7 +14,14 @@ const Welcome = (props) => {
                 {/* <View style={[globalstyle.authContainer, { justifyContent: 'center', alignItems: 'center', paddingHorizontal: 25 }]}> */}
 
                 <Image source={require('./../../assets/images/network-image.png')} style={{ width: width, height: 400, resizeMode: 'contain', marginTop: -200 }} />
-                <Image source={require('./../../assets/images/logo.png')} style={{ width: 180, height: 150, resizeMode: 'contain' }} />
+                <Image source={require('./../../assets/images/logo.png')} style={{ width: 200, height: 150, resizeMode: 'contain', marginTop: 40, marginBottom: 20 }} />
+                {/* <SvgUri
+                    width="180"
+                    height="150"
+                    uri="https://service.demowebsitelinks.com/tha-network/public/images/logo.svg"
+                // svgXmlData={Logo}
+                /> */}
+                {/* <Logo width={120} height={40} /> */}
                 <View style={{ marginTop: 30 }}>
                     <Text style={{ textAlign: 'center', color: colors.black, fontFamily: fonts.primarySemiBold, fontSize: 18 }}>Have fun, keep the invites coming, build your network!!!</Text>
                     <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', marginTop: 10, }}>

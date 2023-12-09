@@ -133,13 +133,13 @@ const Login = (props) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <>
                         <ScrollView style={isIPad && globalstyle.authscreencontainer}>
-                            {/* <View style={{ alignItems: 'center', }}>
-                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 150, height: 150, resizeMode: 'contain' }} />
-                            </View> */}
-                            <View>
+                            <View style={{ alignItems: 'center', }}>
+                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 170, height: 150, resizeMode: 'contain' }} />
+                            </View>
+                            {/* <View>
                                 <Text style={globalstyle.authheading}>Login</Text>
                                 <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
-                            </View>
+                            </View> */}
                             <View>
                                 <View style={globalstyle.inputbox}>
                                     <Icon color={colors.blue} name={'mail'} size={18} />

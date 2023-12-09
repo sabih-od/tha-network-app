@@ -25,147 +25,154 @@ import DeleteProfileConfirmationModal from '../../components/modal/DeleteProfile
 // import BlockedUsersListModal from '../../components/modal/BlockedUsersListModal';
 
 const Profile = props => {
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [filePath, setFilePath] = useState(null);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [filePath, setFilePath] = useState(null);
 
-  const [user, setUser] = useState(props.userInfo);
+    const [user, setUser] = useState(props.userInfo);
 
-  useEffect(() => {
-    console.log('Profile props.userInfo => ', props.userInfo);
-    setUser(props.userInfo);
-  }, [props.userInfo])
+    useEffect(() => {
+        console.log('Profile props.userInfo => ', props.userInfo);
+        setUser(props.userInfo);
+    }, [props.userInfo])
 
 
-  const prevFilePathRef = useRef(filePath);
-  const prevDeleteUserResRef = useRef(props.deleteUserResponse);
+    const prevFilePathRef = useRef(filePath);
+    const prevDeleteUserResRef = useRef(props.deleteUserResponse);
 
-  useEffect(() => {
-    console.log('filePath => ', filePath);
-    if (filePath != null && filePath != prevFilePathRef.current) {
-      const formData = new FormData();
-      formData.append('profile_picture', {
-        name: filePath.fileName,
-        type: filePath.type,
-        uri: Platform.OS === 'android' ? filePath.uri : filePath.uri.replace('file://', '')
-      });
-      props.UpdateProfilePicApiCall(formData);
-      isLoading(true);
+    useEffect(() => {
+        console.log('filePath => ', filePath);
+        if (filePath != null && filePath != prevFilePathRef.current) {
+            const formData = new FormData();
+            formData.append('profile_picture', {
+                name: filePath.fileName,
+                type: filePath.type,
+                uri: Platform.OS === 'android' ? filePath.uri : filePath.uri.replace('file://', '')
+            });
+            props.UpdateProfilePicApiCall(formData);
+            isLoading(true);
+        }
+    }, [filePath]);
+
+    useEffect(() => {
+        console.log('user => ', user);
+    }, [user]);
+
+    useEffect(() => {
+        if (props.deleteUserResponse !== prevDeleteUserResRef.current && props.deleteUserResponse?.success && props.deleteUserResponse?.data) {
+            prevDeleteUserResRef.current = props.deleteUserResponse;
+            console.log('deleteUserResponse => ', props.deleteUserResponse);
+            props.LogOut();
+            showToast('success', 'User deleted successfully');
+        }
+        isLoading(false);
+    }, [props.deleteUserResponse]);
+
+
+    // console.log('errors => ', errors);
+    const [loading, isLoading] = useState(false);
+
+    function _handleDeleteConfirmValue(value) {
+        console.log('value => ', value);
+        if (value) {
+            isLoading(true);
+            props.DeleteUserApiCall({ userid: props?.userInfo?.id })
+        }
+        setShowConfirmationModal(false)
     }
-  }, [filePath]);
 
-  useEffect(() => {
-    console.log('user => ', user);
-  }, [user]);
-
-  useEffect(() => {
-    if (props.deleteUserResponse !== prevDeleteUserResRef.current && props.deleteUserResponse?.success && props.deleteUserResponse?.data) {
-      prevDeleteUserResRef.current = props.deleteUserResponse;
-      console.log('deleteUserResponse => ', props.deleteUserResponse);
-      props.LogOut();
-      showToast('success', 'User deleted successfully');
-    }
-    isLoading(false);
-  }, [props.deleteUserResponse]);
-
-
-  // console.log('errors => ', errors);
-  const [loading, isLoading] = useState(false);
-
-  function _handleDeleteConfirmValue(value) {
-    console.log('value => ', value);
-    if (value) {
-      isLoading(true);
-      props.DeleteUserApiCall({ userid: props?.userInfo?.id })
-    }
-    setShowConfirmationModal(false)
-  }
-
-  const PROFILE_SQUARE = isIPad ? 170 : 140;
+    const PROFILE_SQUARE = isIPad ? 170 : 140;
 
 
 
-  // const bottomSheetModalRef = useRef(null);
-  // const handleChildReference = (ref) => {
-  //   bottomSheetModalRef.current = ref;
-  // };
+    // const bottomSheetModalRef = useRef(null);
+    // const handleChildReference = (ref) => {
+    //   bottomSheetModalRef.current = ref;
+    // };
 
-  const [showBlockedUsers, setShowBlockedUsers] = useState(false)
+    const [showBlockedUsers, setShowBlockedUsers] = useState(false)
 
-  return (
-    <>
-      <DeleteProfileConfirmationModal handleDeleteConfirmValue={_handleDeleteConfirmValue} visible={showConfirmationModal} setVisible={setShowConfirmationModal} />
+    return (
+        <>
+            <DeleteProfileConfirmationModal handleDeleteConfirmValue={_handleDeleteConfirmValue} visible={showConfirmationModal} setVisible={setShowConfirmationModal} />
 
-      <Loader isLoading={loading} />
-      <SafeAreaView style={[globalstyle.fullview]}>
-        {/* {!isDarkMode && <Image style={[{ width: width, height: height, position: 'absolute', zIndex: 0 }]} resizeMode="cover" source={backgroungImage} />} */}
-        <View style={styles.container}>
+            <Loader isLoading={loading} />
+            <SafeAreaView style={[globalstyle.fullview]}>
+                {/* {!isDarkMode && <Image style={[{ width: width, height: height, position: 'absolute', zIndex: 0 }]} resizeMode="cover" source={backgroungImage} />} */}
+                <View style={styles.container}>
 
-          {/* <BlockedUsers passReferenceToParent={handleChildReference} /> */}
-          {/* <BlockedUsersListModal visible={showBlockedUsers} setVisible={setShowBlockedUsers} /> */}
-          {/* <View style={{ backgroundColor: colors.black, height: 400, width: '100%', top: 0, position: 'absolute', }}></View> */}
-          <View style={[{ paddingVertical: 20, }, isIPad && globalstyle.authscreencontainer, { marginTop: 'auto', marginBottom: 'auto' }]}>
-            <View style={{ width: PROFILE_SQUARE, height: PROFILE_SQUARE, borderRadius: PROFILE_SQUARE, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
-              <Image
-                source={
-                  filePath?.uri
-                    ? { uri: filePath?.uri }
-                    : user?.profile_picture
-                      ? { uri: user?.profile_picture }
-                      : require('./../../../assets/images/dummy-profile-image.png')
-                  // { uri: user?.profilepic }
-                  // require('./../../assets/images/profile-image.jpg')
-                }
-                defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
-                style={{ width: '100%', height: '100%', borderRadius: 120, resizeMode: 'cover', }}
-              />
-            </View>
-            <View style={{ alignItems: 'center' }}>
-              <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                {/* <Icon name="mail" style={{ color: colors.orange, fontSize: 18, marginRight: 8 }} /> */}
-                <Text style={[styles.edititemstext, { fontFamily: fonts.primary }]}>{`${user?.email}`}</Text>
-              </View>
-            </View>
+                    {/* <BlockedUsers passReferenceToParent={handleChildReference} /> */}
+                    {/* <BlockedUsersListModal visible={showBlockedUsers} setVisible={setShowBlockedUsers} /> */}
+                    {/* <View style={{ backgroundColor: colors.black, height: 400, width: '100%', top: 0, position: 'absolute', }}></View> */}
+                    <View style={[{ paddingVertical: 20, }, isIPad && globalstyle.authscreencontainer, { marginTop: 'auto', marginBottom: 'auto' }]}>
+                        <View style={{ width: PROFILE_SQUARE, height: PROFILE_SQUARE, borderRadius: PROFILE_SQUARE, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
+                            <Image
+                                source={
+                                    filePath?.uri
+                                        ? { uri: filePath?.uri }
+                                        : user?.profile_image
+                                            ? { uri: user?.profile_image }
+                                            : require('./../../../assets/images/dummy-profile-image.png')
+                                    // { uri: user?.profilepic }
+                                    // require('./../../assets/images/profile-image.jpg')
+                                }
+                                defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
+                                style={{ width: '100%', height: '100%', borderRadius: 120, resizeMode: 'cover', }}
+                            />
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                {/* <Icon name="mail" style={{ color: colors.orange, fontSize: 18, marginRight: 8 }} /> */}
+                                <Text style={[styles.edititemstext, { fontFamily: fonts.primary }]}>{`${user?.email}`}</Text>
+                            </View>
+                        </View>
 
-            <View style={{ marginTop: 50 }}>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => props.navigation.navigate('EditProfile')}
-                style={styles.edititem}>
-                <Icon name="edit-3" style={styles.editicon} />
-                <Text style={styles.edititemstext}>Edit Profile</Text>
-              </TouchableOpacity>
-              {/* <TouchableOpacity
+                        <View style={{ marginTop: 50 }}>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={() => props.navigation.navigate('Profile')}
+                                style={styles.edititem}>
+                                <Icon name="user" style={styles.editicon} />
+                                <Text style={styles.edititemstext}>Profile</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={() => props.navigation.navigate('EditProfile')}
+                                style={styles.edititem}>
+                                <Icon name="edit-3" style={styles.editicon} />
+                                <Text style={styles.edititemstext}>Edit Profile</Text>
+                            </TouchableOpacity>
+                            {/* <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => props.navigation.navigate('HistoryList')}
                 style={styles.edititem}>
                 <Icon name="clock" style={styles.editicon} />
                 <Text style={styles.edititemstext}>History</Text>
               </TouchableOpacity> */}
-              {/* <TouchableOpacity
+                            {/* <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => props.navigation.navigate('FavouriteList')}
                 style={styles.edititem}>
                 <Icon name="star" style={styles.editicon} />
                 <Text style={styles.edititemstext}>{strings.Favourites}</Text>
               </TouchableOpacity> */}
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => props.navigation.navigate('BlockList')}
-                style={styles.edititem}>
-                <Icon name="download-cloud" style={styles.editicon} />
-                <Text style={styles.edititemstext}>Block List</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => setShowConfirmationModal(true)}
-                style={[styles.edititem, { borderBottomColor: 'transparent' }]}>
-                <Icon name="trash" style={styles.editicon} />
-                <Text style={styles.edititemstext}>Delete Account</Text>
-              </TouchableOpacity>
-            </View>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={() => props.navigation.navigate('BlockList')}
+                                style={styles.edititem}>
+                                <Icon name="slash" style={styles.editicon} />
+                                <Text style={styles.edititemstext}>Block List</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={() => setShowConfirmationModal(true)}
+                                style={[styles.edititem, { borderBottomColor: 'transparent' }]}>
+                                <Icon name="trash" style={styles.editicon} />
+                                <Text style={styles.edititemstext}>Delete Account</Text>
+                            </TouchableOpacity>
+                        </View>
 
-            {/* <View style={globalstyle.inputbox}>
+                        {/* <View style={globalstyle.inputbox}>
                 <Icon color={colors.black} name={'user'} size={18} />
                 <Text style={globalstyle.inputfield}>{`${user?.first_name} ${user?.last_name}`}</Text>
               </View>
@@ -180,7 +187,7 @@ const Profile = props => {
                 <Text style={globalstyle.inputfield}>{`${user?.phone}`}</Text>
               </View>} */}
 
-            {/* <View style={{
+                        {/* <View style={{
                 flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20,
                 //marginTop: 'auto' 
               }}>
@@ -202,34 +209,34 @@ const Profile = props => {
                   <Text style={[globalstyle.authSubmitButtonText, { fontSize: isIPad ? 16 : 13 }]}>Delete Account</Text>
                 </TouchableOpacity>
               </View> */}
-          </View>
-        </View>
-      </SafeAreaView >
-    </>
-  );
+                    </View>
+                </View>
+            </SafeAreaView >
+        </>
+    );
 };
 
 const styles = StyleSheet.create({
-  fullview: { flex: 1 },
-  container: { flex: 1 },
-  checkboxtick: { flexDirection: 'row', alignItems: 'center', marginRight: 20 },
-  labelinput: { fontFamily: fonts.latoRegular, fontSize: 13, color: '#000' },
-  edititem: { flexDirection: 'row', alignItems: 'center', paddingVertical: 18, paddingHorizontal: 20, backgroundColor: colors.white, borderBottomColor: colors.deepblue, borderBottomWidth: 1 },
-  editicon: { color: colors.orange, fontSize: 18, marginRight: 25 },
-  edititemstext: { fontFamily: isRTL ? fonts.arabicMedium : fonts.primary, color: isDarkMode ? colors.white : colors.black },
+    fullview: { flex: 1 },
+    container: { flex: 1 },
+    checkboxtick: { flexDirection: 'row', alignItems: 'center', marginRight: 20 },
+    labelinput: { fontFamily: fonts.latoRegular, fontSize: 13, color: '#000' },
+    edititem: { flexDirection: 'row', alignItems: 'center', paddingVertical: 18, paddingHorizontal: 20, backgroundColor: colors.white, borderBottomColor: '#eee', borderBottomWidth: 1 },
+    editicon: { color: colors.orange, fontSize: 18, marginRight: 25 },
+    edititemstext: { fontFamily: isRTL ? fonts.arabicMedium : fonts.primary, color: isDarkMode ? colors.white : colors.black },
 });
 
 const setStateToProps = state => ({
-  userInfo: state.appstate.userInfo,
-  deleteUserResponse: state.userstate.deleteUserResponse,
+    userInfo: state.appstate.userInfo,
+    deleteUserResponse: state.userstate.deleteUserResponse,
 });
 
 const mapDispatchToProps = dispatch => {
-  return {
-    SetUserInfo: bindActionCreators(SetUserInfo, dispatch),
-    DeleteUserApiCall: bindActionCreators(DeleteUserApiCall, dispatch),
-    LogOut: bindActionCreators(LogOut, dispatch),
-  };
+    return {
+        SetUserInfo: bindActionCreators(SetUserInfo, dispatch),
+        DeleteUserApiCall: bindActionCreators(DeleteUserApiCall, dispatch),
+        LogOut: bindActionCreators(LogOut, dispatch),
+    };
 };
 
 export default connect(setStateToProps, mapDispatchToProps)(Profile);

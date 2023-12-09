@@ -78,8 +78,9 @@ const InvitationCode = (props) => {
 
     const onSubmit = (data) => {
         console.log('onSubmit data => ', data)
-        props.LoginApiCall(data);
-        isLoading(true);
+        props.navigation.navigate('PaymentCard');
+        // props.LoginApiCall(data);
+        // isLoading(true);
     }
 
     const input01 = useRef();

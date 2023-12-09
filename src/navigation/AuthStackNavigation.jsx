@@ -22,6 +22,7 @@ import SubmitOTP from "../screens/Auth/SubmitOTP";
 import ResetPassword from "../screens/Auth/ResetPassword";
 import ForgetPassword from "../screens/Auth/ForgetPassword";
 import GoBackIcon from "../components/header/GoBackIcon";
+import PaymentCard from "../screens/PaymentCard";
 
 const Stack = createStackNavigator();
 
@@ -46,7 +47,6 @@ const AuthStackNavigation = (props) => {
     // });
 
     return <Stack.Navigator>
-
         <Stack.Screen
             name="Welcome"
             component={Welcome}
@@ -56,7 +56,7 @@ const AuthStackNavigation = (props) => {
                     headerShown: false,
                     swipeEnabled: false,
                     gestureEnabled: false,
-                    // headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                    // headerLeft: (props) => <GoBackIcon navigation={navigation}  color={colors.black} />,
                 }
             }}
         />
@@ -69,7 +69,8 @@ const AuthStackNavigation = (props) => {
                     headerShown: false,
                     swipeEnabled: false,
                     gestureEnabled: false,
-                    // headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                    // cardStyle: { backgroundColor: '#f7f7f7' }
+                    // headerLeft: (props) => <GoBackIcon navigation={navigation}  color={colors.black} />,
                 }
             }}
         />
@@ -80,7 +81,7 @@ const AuthStackNavigation = (props) => {
                 return {
                     headerTransparent: true,
                     headerTitle: '',
-                    headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                    headerLeft: (props) => <GoBackIcon navigation={navigation} color={colors.black} />,
                 }
             }}
         />
@@ -91,7 +92,18 @@ const AuthStackNavigation = (props) => {
                 return {
                     headerTransparent: true,
                     headerTitle: '',
-                    headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                    headerLeft: (props) => <GoBackIcon navigation={navigation} color={colors.black} />,
+                }
+            }}
+        />
+        <Stack.Screen
+            name="PaymentCard"
+            component={PaymentCard}
+            options={({ navigation }) => {
+                return {
+                    headerTransparent: true,
+                    headerTitle: '',
+                    headerLeft: (props) => <GoBackIcon navigation={navigation} color={colors.black} />,
                 }
             }}
         />
@@ -101,7 +113,7 @@ const AuthStackNavigation = (props) => {
             options={({ navigation }) => {
                 return {
                     headerTransparent: true, headerTitle: '',
-                    headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                    headerLeft: (props) => <GoBackIcon navigation={navigation} color={colors.black} />,
                 }
             }}
         />
@@ -111,7 +123,7 @@ const AuthStackNavigation = (props) => {
             options={({ navigation }) => {
                 return {
                     headerTransparent: true, headerTitle: '',
-                    headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                    headerLeft: (props) => <GoBackIcon navigation={navigation} color={colors.black} />,
                 }
             }}
         />
@@ -121,7 +133,7 @@ const AuthStackNavigation = (props) => {
             options={({ navigation }) => {
                 return {
                     headerTransparent: true, headerTitle: '',
-                    // headerLeft: (props) => <GoBackIcon navigation={navigation} />,
+                    // headerLeft: (props) => <GoBackIcon navigation={navigation}  color={colors.black} />,
                 }
             }}
         />

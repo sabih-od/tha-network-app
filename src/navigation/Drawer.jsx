@@ -209,9 +209,9 @@ const DrawerContent = (props) => {
         {/* {draweritems.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)} */}
         <DrawerItem key={0} item={{ title: 'Home', nav: 'Home' }} navigation={props.navigation} activescreen={props.currentScreen} />
         <DrawerItem key={0} item={{ title: 'People In My Network', nav: 'PeopleInNetwork' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={0} item={{ title: 'Friends', nav: 'PeopleInNetwork' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={0} item={{ title: 'Friends', nav: 'Friends' }} navigation={props.navigation} activescreen={props.currentScreen} />
         <DrawerItem key={0} item={{ title: 'Weekly Goals', nav: 'WeeklyGoals' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={0} item={{ title: 'Settings', nav: 'Profile' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem key={0} item={{ title: 'Settings', nav: 'Settings' }} navigation={props.navigation} activescreen={props.currentScreen} />
         {/* {drawerMenu.length > 0 && drawerMenu.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)}
         <DrawerItem key={100} item={{ title: strings.questionanswer, nav: 'QuestionAnswer' }} navigation={props.navigation} activescreen={props.currentScreen} />
         <DrawerItem key={101} item={{ title: strings.contactus, nav: 'Contact' }} navigation={props.navigation} activescreen={props.currentScreen} /> */}

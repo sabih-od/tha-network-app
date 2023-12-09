@@ -20,6 +20,8 @@ import postslist from "../data/posts";
 import { connect } from "react-redux";
 // import { GetDailiesList, GetFeaturedList, GetHomeAudioData, GetHomeNewsList, GetHomeSpiritualData, GetHomeBiblicalData } from "../redux/reducers/ListingApiStateReducer";
 import { bindActionCreators } from "redux";
+import CreatePost from "../components/CreatePost";
+import ChatIcon from "../components/ChatIcon";
 // import strings from "../localization/translation";
 // import LinearGradient from "react-native-linear-gradient";
 // import TryPlus from "../components/TryPlus";
@@ -173,48 +175,63 @@ const Home = (props) => {
 
 
     return <SafeAreaView style={globalstyle.fullview}>
+
+        <ChatIcon navigation={props.navigation} />
         <ScrollView
-            style={styles.homescollview}
+            style={[styles.homescollview, { paddingTop: 0, }]}
         // showsVerticalScrollIndicator={false}
         // refreshControl={
         //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         // }
         >
 
-            <View>
-                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 20, marginLeft: 10, marginBottom: 10 }}>Create Post</Text>
-                <View style={{ backgroundColor: '#fff', marginBottom: 15 }}>
-                    {/* margin: 10, borderRadius: 10 */}
-                    <View style={{ flexDirection: 'row', alignItems: 'center', padding: 13, }}>
-                        <View style={{ width: 40, height: 40, borderRadius: 40, marginRight: 12 }}>
-                            <Image source={{ uri: props?.userInfo?.profile_image }} style={{ resizeMode: 'cover', width: 40, height: 40 }} />
-                        </View>
-                        <View style={{ width: '82%' }}>
-                            <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>{props?.userInfo.name}</Text>
-                            <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: '#333', marginTop: -2 }}>{props?.userInfo.username}</Text>
-                        </View>
-                    </View>
-                    <TextInput
-                        placeholder="Want to share a memory?"
-                        placeholderTextColor={'#999'}
-                        numberOfLines={50}
-                        multiline={true}
-                        // value="It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old"
-                        style={{ fontFamily: fonts.primary, backgroundColor: '#fff', paddingHorizontal: 15, paddingVertical: 12, width: '100%', borderRadius: 10, height: 100 }}
-                    />
-                    {/* <View>
-                        <TouchableOpacity style={{ backgroundColor: colors.orange, padding: 10, width: 120, borderRadius: 10 }}>
-                            <Text style={{ color: colors.white, fontFamily: fonts.primarySemiBold, textTransform: 'uppercase', textAlign: 'center' }}>Post Now</Text>
-                        </TouchableOpacity>
-                    </View> */}
+            <View style={{ backgroundColor: colors.orange, padding: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <View>
+                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12 }}>My Balance</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 20, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>160.00</Text>
+                </View>
+                <View style={{ width: 1, height: 14, backgroundColor: colors.white }} />
+                <View>
+                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12 }}>Total Income</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 20, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>200.00</Text>
+                </View>
+                <View style={{ width: 1, height: 14, backgroundColor: colors.white }} />
+                <View>
+                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12 }}>Total Withdrawl</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 20, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>40.00</Text>
                 </View>
             </View>
 
-            {postslist.map((item, index) => {
-                return (
-                    <PostItem key={index} item={item} />
-                )
-            })}
+            <View>
+                <View style={{ width: width, height: 100, backgroundColor: colors.orange, position: 'absolute', top: 0 }} />
+                <View style={{ backgroundColor: colors.white, flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 10, margin: 10, marginBottom: 0, }}>
+                    <View style={{ justifyContent: 'center' }}>
+                        <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, fontSize: 18, lineHeight: 22, marginBottom: -20 }}>{`Earn `}
+                            <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.orange, fontSize: 18, lineHeight: 22 }}>{`$10 \n`}</Text>
+                        </Text>
+                        <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, fontSize: 18, lineHeight: 22 }}>{`For Every Friends \nYou Refer`}</Text>
+                        <TouchableOpacity onPress={() => { }} style={{ backgroundColor: colors.blue, width: 100, padding: 7, marginTop: 3 }}
+                        >
+                            <Text style={{ fontFamily: fonts.primaryMedium, color: colors.white, textTransform: 'uppercase', fontSize: 12, textAlign: 'center' }}>Refer Now</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <Image source={require('./../../assets/images/logo-without-text.png')} style={{ width: 120, height: 120 }} />
+                </View>
+            </View>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingVertical: 10, margin: 10, backgroundColor: colors.white, marginBottom: 0 }}>
+                <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, fontSize: 18, }}>Total Referal</Text>
+                <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.orange, fontSize: 24, }}>50</Text>
+            </View>
+
+            <View style={{ padding: 10, marginBottom: 30 }}>
+                <CreatePost user={props.userInfo} />
+                {postslist.map((item, index) => {
+                    return (
+                        <PostItem key={index} item={item} user={props.userInfo} />
+                    )
+                })}
+            </View>
 
 
             {/* <View style={{ backgroundColor: colors.white, padding: 13, marginBottom: 15 }}>
@@ -260,7 +277,7 @@ const Home = (props) => {
 
 
         </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView >
 }
 
 

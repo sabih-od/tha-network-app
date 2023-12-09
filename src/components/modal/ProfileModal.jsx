@@ -29,7 +29,7 @@ const ProfileModal = ({ profile, visible, handleBlockUser, setVisible }) => {
                         <Image
                             source={profile?.profile_picture ? { uri: profile?.profile_picture } : require('./../../../assets/images/dummy-profile-image.png')}
                             style={styles.proficon}
-                            defaultSource={require('./../../../assets/images/speaker-placeholder.png')}
+                            defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
                         />
                         <Text style={styles.username}>John Martin</Text>
                         <Text style={{ fontFamily: fonts.latoRegular, fontSize: isIPad ? 17 : 14, textAlign: 'center', color: colors.grey, marginTop: 13 }}>Are you sure you want to block this user? This action will restrict all interactions and communications with them.</Text>
