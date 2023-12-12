@@ -64,7 +64,7 @@ const Register = (props) => {
         <Loader isLoading={loading} />
         <TermsAndConditionsModal visible={showTermsModal} setVisible={setShowTermsModal} />
         <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]} >
-            <KeyboardAvoidingView behavior={IOS ? 'padding' : 'height'} >
+            <KeyboardAvoidingView behavior={IOS ? 'padding' : 'padding'} >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <ScrollView style={isIPad && globalstyle.authscreencontainer}>
                         <View>

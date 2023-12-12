@@ -11,6 +11,9 @@ import {
   TextInput,
   Platform,
   ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
@@ -22,7 +25,7 @@ import CameraModal from '../../components/modal/CameraModal';
 
 import { useForm } from 'react-hook-form';
 import globalstyle from '../../theme/style';
-import { colors, fonts, height, isIPad } from '../../theme';
+import { IOS, colors, fonts, height, isIPad } from '../../theme';
 import { useRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -223,17 +226,17 @@ const PersonalInformation = props => {
   })
 
 
-  return (
-    <>
-      <CameraModal
-        handleCamera={handleCamera}
-        visible={showModal}
-        setVisible={setShowModal}
-      />
-      <Loader isLoading={loading} />
-      <SafeAreaView style={globalstyle.fullview}>
-        <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15, height: height - 130 }]}>
-          <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+  return <SafeAreaView style={{ flex: 1 }}>
+    <CameraModal
+      handleCamera={handleCamera}
+      visible={showModal}
+      setVisible={setShowModal}
+    />
+    <Loader isLoading={loading} />
+    <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]} >
+      <KeyboardAvoidingView behavior={IOS ? 'padding' : 'padding'} >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView style={isIPad && globalstyle.authscreencontainer}>
             <View style={[{ paddingVertical: 20 }, isIPad && globalstyle.authscreencontainer]}>
               <View style={{ width: 140, height: 140, borderRadius: 140, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
                 <Image
@@ -751,10 +754,10 @@ const PersonalInformation = props => {
               )}
             </View>
           </ScrollView>
-        </View>
-      </SafeAreaView>
-    </>
-  );
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </View>
+  </SafeAreaView>
 };
 
 const styles = StyleSheet.create({
