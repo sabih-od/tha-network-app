@@ -74,8 +74,8 @@ const Settings = props => {
   function _handleDeleteConfirmValue(value) {
     console.log('value => ', value);
     if (value) {
-      isLoading(true);
-      props.DeleteUserApiCall({ userid: props?.userInfo?.id })
+      // isLoading(true);
+      // props.DeleteUserApiCall({ userid: props?.userInfo?.id })
     }
     setShowConfirmationModal(false)
   }
@@ -94,12 +94,10 @@ const Settings = props => {
   return (
     <>
       <DeleteProfileConfirmationModal handleDeleteConfirmValue={_handleDeleteConfirmValue} visible={showConfirmationModal} setVisible={setShowConfirmationModal} />
-
       <Loader isLoading={loading} />
       <SafeAreaView style={[globalstyle.fullview]}>
         {/* {!isDarkMode && <Image style={[{ width: width, height: height, position: 'absolute', zIndex: 0 }]} resizeMode="cover" source={backgroungImage} />} */}
         <View style={styles.container}>
-
           {/* <BlockedUsers passReferenceToParent={handleChildReference} /> */}
           {/* <BlockedUsersListModal visible={showBlockedUsers} setVisible={setShowBlockedUsers} /> */}
           {/* <View style={{ backgroundColor: colors.black, height: 400, width: '100%', top: 0, position: 'absolute', }}></View> */}
@@ -107,20 +105,16 @@ const Settings = props => {
             <View style={{ width: PROFILE_SQUARE, height: PROFILE_SQUARE, borderRadius: PROFILE_SQUARE, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
               <Image
                 source={
-                  filePath?.uri
-                    ? { uri: filePath?.uri }
+                  typeof user?.profile_image === 'string'
+                    ? { uri: user?.profile_image }
                     : user?.profile_image
-                      ? { uri: user?.profile_image }
-                      : require('./../../../assets/images/dummy-profile-image.png')
-                  // { uri: user?.profilepic }
-                  // require('./../../assets/images/profile-image.jpg')
                 }
                 defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
                 style={{ width: '100%', height: '100%', borderRadius: 120, resizeMode: 'cover', }}
               />
             </View>
             <View style={{ alignItems: 'center' }}>
-              <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
+              <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24, marginBottom: -8 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 {/* <Icon name="mail" style={{ color: colors.orange, fontSize: 18, marginRight: 8 }} /> */}
                 <Text style={[styles.edititemstext, { fontFamily: fonts.primary }]}>{`${user?.email}`}</Text>
@@ -137,10 +131,10 @@ const Settings = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => props.navigation.navigate('EditProfile')}
+                onPress={() => props.navigation.navigate('PersonalInformation')}
                 style={styles.edititem}>
                 <Icon name="edit-3" style={styles.editicon} />
-                <Text style={styles.edititemstext}>Edit Profile</Text>
+                <Text style={styles.edititemstext}>Personal Information</Text>
               </TouchableOpacity>
               {/* <TouchableOpacity
                 activeOpacity={0.8}
@@ -161,14 +155,14 @@ const Settings = props => {
                 onPress={() => props.navigation.navigate('BlockList')}
                 style={styles.edititem}>
                 <Icon name="slash" style={styles.editicon} />
-                <Text style={styles.edititemstext}>Block List</Text>
+                <Text style={styles.edititemstext}>Blocked Users List</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => setShowConfirmationModal(true)}
                 style={[styles.edititem, { borderBottomColor: 'transparent' }]}>
                 <Icon name="trash" style={styles.editicon} />
-                <Text style={styles.edititemstext}>Delete Account</Text>
+                <Text style={styles.edititemstext}>Close My Account</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}
@@ -182,7 +176,7 @@ const Settings = props => {
                 }}
                 style={[styles.edititem, { borderBottomColor: 'transparent' }]}>
                 <Icon name="log-out" style={styles.editicon} />
-                <Text style={styles.edititemstext}>Logout</Text>
+                <Text style={styles.edititemstext}>Log Out</Text>
               </TouchableOpacity>
             </View>
 

@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
-import CameraModal from './../../components/modal/CameraModal';
+import CameraModal from '../../components/modal/CameraModal';
 
 // import auth from '@react-native-firebase/auth';
 // import analytics from '@react-native-firebase/analytics';
@@ -32,7 +32,7 @@ import { showToast } from '../../helpers/toastConfig';
 import Loader from "../../components/Loader";
 // import strings from '../../localization/translation';
 
-const EditProfile = props => {
+const PersonalInformation = props => {
   const [showModal, setShowModal] = useState(false);
   const [filePath, setFilePath] = useState(null);
 
@@ -112,11 +112,21 @@ const EditProfile = props => {
   const [showConfPassword, setShowConfPassword] = useState(false);
   // const [showConfPassword, setShowConfPassword] = useState(false);
 
+  const input00 = useRef();
   const input01 = useRef();
   const input02 = useRef();
   const input03 = useRef();
   const input04 = useRef();
   const input05 = useRef();
+  const input06 = useRef();
+  const input07 = useRef();
+  const input08 = useRef();
+  const input09 = useRef();
+  const input10 = useRef();
+  const input11 = useRef();
+  const input12 = useRef();
+  const input13 = useRef();
+  const input14 = useRef();
 
   const prevUpdateProfilePicResRef = useRef(props.updateProfilePicResponse);
   const prevEditProfileResRef = useRef(props.editProfileResponse);
@@ -191,8 +201,9 @@ const EditProfile = props => {
       delete data.password
     }
     console.log('data => ', data);
-    props.EditProfileApiCall(user.id, data);
-    isLoading(true);
+    showToast('success', 'Your profile updated successfully');
+    // props.EditProfileApiCall(user.id, data);
+    // isLoading(true);
   };
 
   // console.log('errors => ', errors);
@@ -200,13 +211,13 @@ const EditProfile = props => {
 
   const password = register('password', {
     value: '',
-    required: 'Password is required',
+    // required: 'Password is required',
     minLength: { value: 8, message: 'Min lenght 8' }
   })
 
   const confirmpass = register('confirmpass', {
     value: '',
-    required: 'Confirm Password is required',
+    // required: 'Confirm Password is required',
     minLength: { value: 8, message: 'Min lenght 8' },
     // validate: value => value === password.current || "Password does not match"
   })
@@ -223,15 +234,14 @@ const EditProfile = props => {
       <SafeAreaView style={globalstyle.fullview}>
         <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15, height: height - 130 }]}>
           <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            {/* <View style={{ backgroundColor: colors.black, height: 400, width: '100%', top: 0, position: 'absolute', }}></View> */}
             <View style={[{ paddingVertical: 20 }, isIPad && globalstyle.authscreencontainer]}>
               <View style={{ width: 140, height: 140, borderRadius: 140, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
                 <Image
                   source={
                     filePath?.uri
                       ? { uri: filePath?.uri }
-                      : user?.profile_picture
-                        ? { uri: user?.profile_picture }
+                      : user?.profile_image
+                        ? { uri: user?.profile_image }
                         : require('./../../../assets/images/dummy-profile-image.png')
                     // { uri: user?.profilepic }
                     // require('./../../assets/images/profile-image.jpg')
@@ -259,8 +269,19 @@ const EditProfile = props => {
               <Icon name={!isEditable ? 'edit-3' : 'x'} size={20} color={colors.white} />
             </TouchableOpacity> */}
 
-              <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 18, marginBottom: 5 }}>Referral Payment Options</Text>
+              <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 24, marginBottom: 0, color: colors.black }}>Referral Payment Options</Text>
               <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: colors.grey }}>In order to receive Referral Payments you must include your Stripe Account information. If you do not have a Stripe Account create one and provide the information below. If this information is not provided, you will not be able to receive your referral payments</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: colors.white, padding: 13, paddingHorizontal: 15, borderRadius: 15, marginTop: 10 }}>
+                <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: colors.black }}>Connect Stripe</Text>
+                <TouchableOpacity onPress={() => {
+                  setReferalModal(true)
+                }} activeOpacity={0.8} style={{ backgroundColor: colors.green, paddingVertical: 6, paddingHorizontal: 18, borderRadius: 7 }}>
+                  <Text style={{ color: colors.white, fontFamily: fonts.primary }}>Connect</Text>
+                </TouchableOpacity>
+              </View>
+
+
+              <Text style={{ color: colors.black, fontFamily: fonts.primarySemiBold, fontSize: 20, marginTop: 15 }}>Personal Information</Text>
 
               <View style={[globalstyle.inputbox, { justifyContent: 'space-between', borderRadius: 25 }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
@@ -270,19 +291,19 @@ const EditProfile = props => {
                     placeholder={'Enter Bio'}
                     placeholderTextColor={colors.placeholdercolor}
                     {...register('bio', {
-                      value: '',
-                      required: 'bio is required',
+                      value: user?.first_name,
+                      // required: 'bio is required',
                       // minLength: { value: 20, message: 'message length must be greater then 20 characters' }
                     })}
                     multiline={true}
                     numberOfLines={Platform.OS === 'ios' ? null : 8}
                     minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null}
-                    // defaultValue={'tabish@123'}
+                    defaultValue={user?.bio}
                     // inputRef={message.ref}
                     onChangeText={(value) => setValue('bio', value)}
-                    ref={input04}
-                  // returnKeyType="next"
-                  // onSubmitEditing={() => input05.current.focus()}
+                    ref={input00}
+                    returnKeyType="next"
+                    onSubmitEditing={() => input01.current.focus()}
                   />
                 </View>
               </View>
@@ -295,16 +316,14 @@ const EditProfile = props => {
                   placeholder="Maritial Status"
                   placeholderTextColor={colors.placeholdercolor}
                   {...register('maritial_status', {
-                    // value: 'John',
-                    value: '',
-                    required: 'First name is required',
-                    pattern: {
-                      value: /^[A-Za-z\s]+$/i,
-                      message: "Please provide a valid name"
-                    },
+                    value: user?.marital_status,
+                    // required: 'First name is required',
+                    // pattern: {
+                    //   value: /^[A-Za-z\s]+$/i,
+                    //   message: "Please provide a valid name"
+                    // },
                   })}
-                  defaultValue=''
-                  // defaultValue='John'
+                  defaultValue={user?.marital_status}
                   onChangeText={(value) => setValue('maritial_status', value)}
                   ref={input01}
                   returnKeyType="next"
@@ -320,72 +339,72 @@ const EditProfile = props => {
                   placeholder="Gender"
                   placeholderTextColor={colors.placeholdercolor}
                   {...register('gender', {
-                    // value: 'John',
-                    value: '',
-                    required: 'First name is required',
-                    pattern: {
-                      value: /^[A-Za-z\s]+$/i,
-                      message: "Please provide a valid name"
-                    },
+                    value: user?.gender,
+                    // required: 'First name is required',
+                    // pattern: {
+                    //   value: /^[A-Za-z\s]+$/i,
+                    //   message: "Please provide a valid name"
+                    // },
                   })}
-                  defaultValue=''
+                  defaultValue={user?.gender}
                   // defaultValue='John'
                   onChangeText={(value) => setValue('gender', value)}
-                  ref={input01}
+                  ref={input02}
                   returnKeyType="next"
-                  onSubmitEditing={() => input02.current.focus()}
+                  onSubmitEditing={() => input03.current.focus()}
                 />
               </View>
               {errors.gender && <Text style={globalstyle.errorField}>{errors.gender.message}</Text>}
 
-              <View style={globalstyle.inputbox}>
-                <Icon color={colors.blue} name={'user'} size={18} />
-                <TextInput
-                  style={globalstyle.inputfield}
-                  placeholder="First Name"
-                  defaultValue={user?.first_name}
-                  editable={isEditable}
-                  placeholderTextColor={colors.placeholdercolor}
-                  {...register('first_name', {
-                    value: user?.first_name,
-                    required: 'First name is required',
-                    pattern: {
-                      value: /^[A-Za-z\s]+$/i,
-                      message: 'Please provide a valid name',
-                    },
-                  })}
-                  onChangeText={value => setValue('first_name', value)}
-                  ref={input01}
-                  returnKeyType="next"
-                  onSubmitEditing={() => input02.current.focus()}
-                />
-              </View>
-              {errors.first_name && (<Text style={globalstyle.errorField}> {errors.first_name.message} </Text>)}
+              <Text style={{ color: colors.black, fontFamily: fonts.primarySemiBold, fontSize: 20, marginTop: 15 }}>Public Information</Text>
 
-
-              <View style={globalstyle.inputbox}>
-                <Icon color={colors.blue} name={'user'} size={18} />
-                <TextInput
-                  style={globalstyle.inputfield}
-                  placeholder="Last Name"
-                  defaultValue={user?.last_name}
-                  editable={isEditable}
-                  placeholderTextColor={colors.placeholdercolor}
-                  {...register('last_name', {
-                    value: user?.last_name,
-                    required: 'Last name is required',
-                    pattern: {
-                      value: /^[A-Za-z\s]+$/i,
-                      message: 'Please provide a valid name',
-                    },
-                  })}
-                  onChangeText={value => setValue('last_name', value)}
-                  ref={input01}
-                  returnKeyType="next"
-                  onSubmitEditing={() => input02.current.focus()}
-                />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={[globalstyle.inputbox, { width: '48.3%' }]}>
+                  <Icon color={colors.blue} name={'user'} size={18} />
+                  <TextInput
+                    style={globalstyle.inputfield}
+                    placeholder="First Name"
+                    defaultValue={user?.first_name}
+                    editable={isEditable}
+                    placeholderTextColor={colors.placeholdercolor}
+                    {...register('first_name', {
+                      value: user?.first_name,
+                      // required: 'First name is required',
+                      // pattern: {
+                      //   value: /^[A-Za-z\s]+$/i,
+                      //   message: 'Please provide a valid name',
+                      // },
+                    })}
+                    onChangeText={value => setValue('first_name', value)}
+                    ref={input03}
+                    returnKeyType="next"
+                    onSubmitEditing={() => input04.current.focus()}
+                  />
+                </View>
+                <View style={[globalstyle.inputbox, { width: '48.3%' }]}>
+                  <Icon color={colors.blue} name={'user'} size={18} />
+                  <TextInput
+                    style={globalstyle.inputfield}
+                    placeholder="Last Name"
+                    defaultValue={user?.last_name}
+                    editable={isEditable}
+                    placeholderTextColor={colors.placeholdercolor}
+                    {...register('last_name', {
+                      value: user?.last_name,
+                      // required: 'Last name is required',
+                      // pattern: {
+                      //   value: /^[A-Za-z\s]+$/i,
+                      //   message: 'Please provide a valid name',
+                      // },
+                    })}
+                    onChangeText={value => setValue('last_name', value)}
+                    ref={input04}
+                    returnKeyType="next"
+                    onSubmitEditing={() => input05.current.focus()}
+                  />
+                </View>
               </View>
-              {errors.last_name && (<Text style={globalstyle.errorField}> {errors.last_name.message} </Text>)}
+              {errors.first_name || errors.last_name && (<Text style={globalstyle.errorField}> {errors.first_name.message || errors.last_name.message} </Text>)}
 
               <View style={globalstyle.inputbox}>
                 <Icon color={colors.blue} name={'mail'} size={18} />
@@ -397,23 +416,49 @@ const EditProfile = props => {
                   placeholderTextColor={colors.placeholdercolor}
                   {...register('email', {
                     value: user?.email,
-                    required: 'Email Address is required',
-                    pattern: {
-                      value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                      message: 'Please provide valid email',
-                    },
+                    // required: 'Email Address is required',
+                    // pattern: {
+                    //   value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
+                    //   message: 'Please provide valid email',
+                    // },
                   })}
                   // defaultValue={''}
                   onChangeText={value => setValue('email', value)}
                   autoCapitalize="none"
-                  ref={input02}
+                  ref={input05}
                   returnKeyType="next"
-                  onSubmitEditing={() => input03.current.focus()}
+                  onSubmitEditing={() => input06.current.focus()}
                 />
               </View>
-              {errors.email && (
-                <Text style={globalstyle.errorField}>{errors.email.message}</Text>
-              )}
+              {errors.email && <Text style={globalstyle.errorField}>{errors.email.message}</Text>}
+
+              <View style={globalstyle.inputbox}>
+                <Icon color={colors.blue} name={'key'} size={18} />
+                <TextInput
+                  style={[globalstyle.inputfield, { opacity: 0.6 }]}
+                  defaultValue={user?.username}
+                  editable={false}
+                  placeholder="User Name"
+                  placeholderTextColor={colors.placeholdercolor}
+                  {...register('username', {
+                    value: user?.username,
+                    // required: 'username Address is required',
+                    // pattern: {
+                    //   value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
+                    //   message: 'Please provide valid username',
+                    // },
+                  })}
+                  // defaultValue={''}
+                  onChangeText={value => setValue('username', value)}
+                  autoCapitalize="none"
+                  ref={input06}
+                  returnKeyType="next"
+                  onSubmitEditing={() => input07.current.focus()}
+                />
+              </View>
+              {errors.username && <Text style={globalstyle.errorField}>{errors.username.message}</Text>}
+
+
               <View style={globalstyle.inputbox}>
                 <Icon color={colors.blue} name={'phone'} size={18} />
                 <TextInput
@@ -426,16 +471,16 @@ const EditProfile = props => {
                   keyboardType="phone-pad"
                   {...register('phone', {
                     value: user?.phone,
-                    required: 'Phone number is required',
-                    pattern: {
-                      value: /[0-9+]$/i,
-                      message: 'Please provide valid phone number',
-                    },
+                    // required: 'Phone number is required',
+                    // pattern: {
+                    //   value: /[0-9+]$/i,
+                    //   message: 'Please provide valid phone number',
+                    // },
                   })}
                   onChangeText={value => setValue('phone', value)}
-                  ref={input03}
+                  ref={input07}
                   returnKeyType="next"
-                  onSubmitEditing={() => input04.current.focus()}
+                  onSubmitEditing={() => input08.current.focus()}
                 />
               </View>
               {errors.phone && (<Text style={globalstyle.errorField}>{errors.phone.message}</Text>)}
@@ -449,30 +494,138 @@ const EditProfile = props => {
                     placeholder={'Enter Address...'}
                     placeholderTextColor={colors.placeholdercolor}
                     {...register('address', {
-                      value: '',
-                      required: 'Address is required',
+                      value: user?.address,
+                      // required: 'Address is required',
                       // minLength: { value: 20, message: 'address length must be greater then 20 characters' }
                     })}
                     multiline={true}
-                    numberOfLines={Platform.OS === 'ios' ? null : 8}
-                    minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null}
-                    // defaultValue={'tabish@123'}
+                    numberOfLines={Platform.OS === 'ios' ? null : 4}
+                    minHeight={(Platform.OS === 'ios' && 4) ? (20 * 4) : null}
+                    defaultValue={user?.address}
                     // inputRef={address.ref}
                     onChangeText={(value) => setValue('address', value)}
-                    ref={input04}
-                  // returnKeyType="next"
-                  // onSubmitEditing={() => input05.current.focus()}
+                    ref={input08}
+                    returnKeyType="next"
+                    onSubmitEditing={() => input09.current.focus()}
                   />
                 </View>
               </View>
               {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+
+              <View style={globalstyle.inputbox}>
+                <Icon color={colors.blue} name={'globe'} size={18} />
+                <TextInput
+                  style={globalstyle.inputfield}
+                  placeholder="Country"
+                  placeholderTextColor={colors.placeholdercolor}
+                  defaultValue={user?.country}
+                  // editable={isEditable}
+                  // keyboardType='phone-pad'
+                  keyboardType="numeric"
+                  {...register('country', {
+                    value: user?.country,
+                    // required: 'Phone number is required',
+                    // pattern: {
+                    //   value: /[0-9+]$/i,
+                    //   message: 'Please provide valid phone number',
+                    // },
+                  })}
+                  onChangeText={value => setValue('country', value)}
+                  ref={input09}
+                  returnKeyType="next"
+                  onSubmitEditing={() => input10.current.focus()}
+                />
+              </View>
+              {errors.country && (<Text style={globalstyle.errorField}>{errors.country.message}</Text>)}
+
+              <View style={globalstyle.inputbox}>
+                <Icon color={colors.blue} name={'map-pin'} size={18} />
+                <TextInput
+                  style={globalstyle.inputfield}
+                  placeholder="City"
+                  placeholderTextColor={colors.placeholdercolor}
+                  defaultValue={user?.city}
+                  // editable={isEditable}
+                  // keyboardType='phone-pad'
+                  keyboardType="numeric"
+                  {...register('city', {
+                    value: user?.city,
+                    // required: 'Phone number is required',
+                    // pattern: {
+                    //   value: /[0-9+]$/i,
+                    //   message: 'Please provide valid phone number',
+                    // },
+                  })}
+                  onChangeText={value => setValue('city', value)}
+                  ref={input10}
+                  returnKeyType="next"
+                  onSubmitEditing={() => input11.current.focus()}
+                />
+              </View>
+              {errors.city && (<Text style={globalstyle.errorField}>{errors.city.message}</Text>)}
+
+              <View style={globalstyle.inputbox}>
+                <Icon color={colors.blue} name={'credit-card'} size={18} />
+                <TextInput
+                  style={globalstyle.inputfield}
+                  placeholder="Postel/Zip Code"
+                  placeholderTextColor={colors.placeholdercolor}
+                  defaultValue={user?.postal_code}
+                  // editable={isEditable}
+                  // keyboardType='phone-pad'
+                  keyboardType="numeric"
+                  {...register('postal_code', {
+                    value: user?.postal_code,
+                    // required: 'Phone number is required',
+                    // pattern: {
+                    //   value: /[0-9+]$/i,
+                    //   message: 'Please provide valid phone number',
+                    // },
+                  })}
+                  onChangeText={value => setValue('postal_code', value)}
+                  ref={input11}
+                  returnKeyType="next"
+                  onSubmitEditing={() => input12.current.focus()}
+                />
+              </View>
+              {errors.postal_code && (<Text style={globalstyle.errorField}>{errors.postal_code.message}</Text>)}
+
+              <Text style={{ color: colors.black, fontFamily: fonts.primarySemiBold, fontSize: 20, marginTop: 15 }}>Change Password</Text>
 
               <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Icon color={colors.blue} name={'lock'} size={18} />
                   <TextInput
                     style={[globalstyle.inputfield, { flex: 0.8 }]}
-                    placeholder="Password"
+                    placeholder="Current Password"
+                    // name={password.name}
+                    // inputRef={password.ref}
+                    // value="password123"
+                    placeholderTextColor={colors.placeholdercolor}
+                    // {...register('password', {
+                    //     value: 'password123',
+                    //     required: 'Password is required',
+                    //     minLength: { value: 8, message: 'Password length must be greater then 8' }
+                    // })}
+                    // defaultValue={'tabish@123'}
+                    // inputRef={password.ref}
+                    onChangeText={(value) => setValue('current_password', value)}
+                    secureTextEntry={!showPassword ? true : false}
+                    autoCapitalize='none'
+                    ref={input12}
+                    returnKeyType="next"
+                    onSubmitEditing={() => input13.current.focus()}
+                  />
+                </View>
+              </View>
+              {errors.current_password && <Text style={globalstyle.errorField}>{errors.current_password.message}</Text>}
+
+              <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon color={colors.blue} name={'lock'} size={18} />
+                  <TextInput
+                    style={[globalstyle.inputfield, { flex: 0.8 }]}
+                    placeholder="New Password"
                     name={password.name}
                     inputRef={password.ref}
                     // value="password123"
@@ -487,9 +640,9 @@ const EditProfile = props => {
                     onChangeText={(value) => setValue('password', value)}
                     secureTextEntry={!showPassword ? true : false}
                     autoCapitalize='none'
-                    ref={input01}
+                    ref={input13}
                     returnKeyType="next"
-                    onSubmitEditing={() => input02.current.focus()}
+                    onSubmitEditing={() => input14.current.focus()}
                   />
                 </View>
               </View>
@@ -500,7 +653,7 @@ const EditProfile = props => {
                   <Icon color={colors.blue} name={'lock'} size={18} />
                   <TextInput
                     style={[globalstyle.inputfield, { flex: 0.8 }]}
-                    placeholder="Confirm Password"
+                    placeholder="Verify Password"
                     name={confirmpass.name}
                     inputRef={confirmpass.ref}
                     // value="password123"
@@ -515,7 +668,7 @@ const EditProfile = props => {
                     onChangeText={(value) => setValue('password', value)}
                     secureTextEntry={!showConfPassword ? true : false}
                     autoCapitalize='none'
-                    ref={input02}
+                    ref={input14}
                   // returnKeyType="next"
                   // onSubmitEditing={() => input05.current.focus()}
                   />
@@ -525,6 +678,7 @@ const EditProfile = props => {
                 </TouchableOpacity>
               </View>
               {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
+              <Text style={{ fontFamily: fonts.primary, color: colors.grey, fontSize: 13, marginTop: 10 }}>The password should be at least 8 characters long with (1 upper case letter, 1 number, 1 special character (!@#$%^&*)</Text>
 
 
 
@@ -625,4 +779,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(setStateToProps, mapDispatchToProps)(EditProfile);
+export default connect(setStateToProps, mapDispatchToProps)(PersonalInformation);

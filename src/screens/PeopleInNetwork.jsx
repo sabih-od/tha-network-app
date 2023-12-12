@@ -33,25 +33,30 @@ const PeopleInNetwork = props => {
                 </View>
 
                 <View style={{ marginTop: 15 }}>
-                    {people.length > 0 && < FlatList
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
                         data={people}
-                        style={{height: height}}
+                        style={{ height: height - 162 }}
                         keyExtractor={(item, index) => index.toString()}
+                        ListEmptyComponent={() => <View style={{ alignItems: 'center', justifyContent: 'center', height: height - 200 }}><IonIcon name="alert-circle-outline" style={{ color: colors.grey, fontSize: 50 }} /><Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#333', textAlign: 'center', marginTop: 5, marginBottom: 10 }}>People not found</Text></View>}
                         renderItem={({ item, index }) => {
                             return (
                                 <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 13, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
-                                    <View style={{ width: 40, height: 40, borderRadius: 40, overflow: 'hidden', marginRight: 12 }}>
-                                        <Image source={item?.image} style={{ resizeMode: 'cover', width: 40, height: 40 }} />
+                                    <View>
+                                        <View style={{ width: 10, height: 10, backgroundColor: item?.status == 'online' ? '#50C878' : colors.red, borderRadius: 8, position: 'absolute', left: 0, zIndex: 1 }} />
+                                        {/* <View style={{ borderRadius: 10, width: 10, height: 10, backgroundColor: '#50C878', position: 'absolute', left: 0, zIndex: 1 }} /> */}
+                                        <View style={{ width: 40, height: 40, borderRadius: 40, overflow: 'hidden', marginRight: 12 }}>
+                                            <Image source={item?.image} style={{ resizeMode: 'cover', width: 40, height: 40 }} />
+                                        </View>
                                     </View>
                                     <View style={{ width: '82%' }}>
-                                        <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>{item?.name}</Text>
-                                        <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: '#333', marginTop: -2 }}>{item?.username}</Text>
+                                        <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: '#555', marginBottom: -5 }}>{item?.level}</Text>
+                                        <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16, color: colors.black }}>{item?.name}</Text>
                                     </View>
                                 </View>
                             )
                         }}
-                    />}
-                    {people.length == 0 && <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#333', textAlign: 'center', marginTop: 20, marginBottom: 10 }}>No user in my network</Text>}
+                    />
                 </View>
             </View>
         </SafeAreaView>

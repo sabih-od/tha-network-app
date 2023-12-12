@@ -11,14 +11,15 @@ import { createDrawerNavigator, useDrawerProgress, useDrawerStatus } from "@reac
 
 /* Screens */
 import Home from "../screens/Home";
-// import Contact from "../screens/Contact";
+import Contact from "../screens/Contact";
 // import About from "../screens/About";
 import Notifications from "../screens/Notifications";
 // import PrayList from "../screens/PrayList";
 // import GoalList from "../screens/GoalsList";
 // import StartFreeWeek from "../screens/FreeWeek";
-import Profile from "../screens/Profile/Settings";
-import EditProfile from "../screens/Profile/EditProfile";
+import Profile from "../screens/Profile/Profile";
+import PersonalInformation from "../screens/Profile/PersonalInformation";
+import Settings from "../screens/Profile/Settings";
 
 import DrawerIcon from "../components/header/DrawerIcon";
 import NotificationIcon from "../components/header/NotificationIcon";
@@ -28,9 +29,10 @@ import globalstyle from "../theme/style";
 import PeopleInNetwork from "../screens/PeopleInNetwork";
 import WeeklyGoals from "../screens/WeeklyGoals";
 import Friends from "../screens/Friends";
-import Settings from "../screens/Profile/Settings";
 import ChatMessages from "../screens/ChatMessages/ChatMessages";
 import ChatChannels from "../screens/ChatMessages/ChatChannels";
+import BlockList from "../screens/BlockList";
+import NewMembersInNetwork from "../screens/NewMembersInNetwork";
 // import QuestionAnswer from "../screens/QuestionAnswer";
 // import Audio from "../screens/Audio";
 // import Social from "../screens/Lectures/Social";
@@ -85,8 +87,8 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 component={Home}
                 options={{
                     // headerTransparent: true,
-                    headerTitle: 'Home',
-                    headerTitleAlign: 'center',
+                    headerTitle: '',
+                    headerTitleAlign: 'left',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
                         backgroundColor: colors.orange,
@@ -94,7 +96,7 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                         shadowOpacity: 0,
                     },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerRight: () => <NotificationIcon navigation={navigation} />,
+                    // headerRight: () => <NotificationIcon navigation={navigation} />,
                     // headerRight: () => <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                     //     <NotificationIcon navigation={navigation} />
                     //     <View style={{ width: 30, height: 30, borderRadius: 30, marginRight: 12 }}>
@@ -126,7 +128,16 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     },
                     headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     // headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerRight: () => <NotificationIcon navigation={navigation} />
+                    // headerRight: () => <NotificationIcon navigation={navigation} />
+                    headerRight: () => <TouchableOpacity
+                        onPress={() => { props.navigation.navigate('Profile') }}
+                        style={{ width: 33, height: 33, borderRadius: 33, overflow: 'hidden', marginRight: 12 }}>
+                        <Image
+                            // source={typeof userInfo?.profile_image === 'string' ? { uri: userInfo?.profile_image } : userInfo?.profile_image}
+                            source={{ uri: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png' }}
+                            defaultSource={require('./../../assets/images/dummy-profile-image.png')}
+                            style={{ resizeMode: 'cover', width: 33, height: 33, borderRadius: 33, }} />
+                    </TouchableOpacity>
                 }}
             />
             <Stack.Screen
@@ -199,10 +210,10 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 }}
             />
             <Stack.Screen
-                name="EditProfile"
-                component={EditProfile}
+                name="PersonalInformation"
+                component={PersonalInformation}
                 options={{
-                    headerTitle: 'Update Profile',
+                    headerTitle: 'Personal Information',
                     // headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
@@ -220,17 +231,17 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 name="Profile"
                 component={Profile}
                 options={{
-                    headerTitle: 'Update Profile',
+                    headerTitle: '',
                     // headerTransparent: true,
-                    headerTitleAlign: 'center',
+                    headerTitleAlign: 'left',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
                         backgroundColor: colors.orange,
                         elevation: 0,
                         shadowOpacity: 0,
                     },
-                    // headerLeft: () => <DrawerIcon navigation={navigation} />,                    
-                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
+                    headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -256,9 +267,9 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 name="ChatMessages"
                 component={ChatMessages}
                 options={{
-                    headerTitle: 'Messages',
+                    headerTitle: '',
                     // headerTransparent: true,
-                    headerTitleAlign: 'center',
+                    headerTitleAlign: 'left',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
                         backgroundColor: colors.orange,
@@ -272,10 +283,51 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
             />
 
             {/* <Stack.Screen
-                name="VideoDetail"
-                component={VideoDetail}
+                name="About"
+                component={About}
                 options={{
+                    headerTitle: 'About',
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            /> */}
+            <Stack.Screen
+                name="Contact"
+                component={Contact}
+                // options={{
+                //     headerLeft: () => <GoBackIcon navigation={navigation} />,
+                //     headerTitle: '',
+                //     headerTransparent: true
+                // }}
+                options={{
+                    headerTransparent: true,
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.black} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerTitle: '',
+                    // // headerShown: false,
+                    // headerTitle: 'Contact Us',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            <Stack.Screen
+                name="BlockList"
+                component={BlockList}
+                options={{
+                    headerTitle: 'BLocked Users',
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {
@@ -289,6 +341,24 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 }}
             />
             <Stack.Screen
+                name="NewMembersInNetwork"
+                component={NewMembersInNetwork}
+                options={{
+                    headerTitle: 'New Members This Week',
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+
+            {/* <Stack.Screen
                 name="ImageDetail"
                 component={ImageDetail}
                 options={{
@@ -372,22 +442,6 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 }}
             />
             <Stack.Screen
-                name="About"
-                component={About}
-                options={{
-                    headerTitle: 'About',
-                    headerTitleAlign: 'center',
-                    headerTitleStyle: globalstyle.headerTitleStyle,
-                    headerStyle: {
-                        backgroundColor: colors.orange,
-                        elevation: 0,
-                        shadowOpacity: 0,
-                    },
-                    headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerRight: () => <NotificationIcon navigation={navigation} />
-                }}
-            />
-            <Stack.Screen
                 name="Audio"
                 component={Audio}
                 options={{
@@ -453,31 +507,6 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     },
                     headerLeft: () => <DrawerIcon navigation={navigation} />,
                     // headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} screen={'ChatChannels'} />,
-                    headerRight: () => <NotificationIcon navigation={navigation} />
-                }}
-            />
-            <Stack.Screen
-                name="Contact"
-                component={Contact}
-                // options={{
-                //     headerLeft: () => <GoBackIcon navigation={navigation} />,
-                //     headerTitle: '',
-                //     headerTransparent: true
-                // }}
-                options={{
-                    headerTransparent: true,
-                    // headerLeft: () => <GoBackIcon navigation={navigation} />,
-                    headerLeft: () => <DrawerIcon navigation={navigation} />,
-                    headerTitle: strings.contactus,
-                    // // headerShown: false,
-                    // headerTitle: 'Contact Us',
-                    headerTitleStyle: globalstyle.headerTitleStyle,
-                    headerStyle: {
-                        backgroundColor: colors.orange,
-                        elevation: 0,
-                        shadowOpacity: 0,
-                    },
-                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />

@@ -48,8 +48,8 @@ const ChatChannels = (props) => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: -14, marginTop: -3 }}>
                     <Image source={{ uri: props?.userInfo?.profile_image }} style={{ width: 35, height: 35, borderRadius: 30, marginRight: 10 }} />
                     <View>
-                        <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 16, marginBottom: -3 }}>{props?.userInfo?.name}</Text>
-                        <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 10, }}>{props?.userInfo?.username}</Text>
+                        <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 16, marginBottom: -7 }}>{props?.userInfo?.name}</Text>
+                        <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 11, }}>{props?.userInfo?.username}</Text>
                     </View>
                 </View>
             </View>

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native"
-import { Icon } from "react-native-vector-icons/Feather"
-import { backgroungImage, colors, fonts, height, width } from "../theme";
+import IonIcon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/Feather";
+import { backgroungImage, colors, fontSize, fonts, height, width } from "../theme";
 import NotificationItem from "../components/NotificationItem";
 import notificationslist from "../data/notifications-list";
 import { connect } from "react-redux";
@@ -47,6 +48,11 @@ const Notifications = (props) => {
         // props.GetNotificationsList({ pageno, limit });
         console.log('_handleRefresh ');
     }
+    const _deleteItem = (id) => {
+        console.log('_deleteItem ', id);
+        const newlist = notificationList.filter(x => x.id != id);
+        setNotificationList(newlist);
+    }
 
     // const _handleLoadMore = () => {
     //     setLoadmore(true)
@@ -63,10 +69,10 @@ const Notifications = (props) => {
 
     return <SafeAreaView style={globalstyle.fullview}>
 
-        <Image style={[{ width: width, height: height, position: 'absolute', zIndex: 0 }]} resizeMode="cover" source={backgroungImage} />
+        {/* <Image style={[{ width: width, height: height, position: 'absolute', zIndex: 0 }]} resizeMode="cover" source={backgroungImage} /> */}
         {/* <ScrollView style={{ padding: 15 }}> */}
         <FlatList
-            style={{ padding: 15 }}
+            style={{}}
             // horizontal
             // snapToInterval={width / 2}
             // scrollEnabled
@@ -75,12 +81,13 @@ const Notifications = (props) => {
             // onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }],
             //     { useNativeDriver: false }
             // )}
+            ListEmptyComponent={() => <View style={{ alignItems: 'center', justifyContent: 'center', height: height - 140 }}><IonIcon name="alert-circle-outline" style={{ color: colors.grey, fontSize: 50 }} /><Text style={{ fontFamily: fonts.primary, fontSize: 14, color: '#333', textAlign: 'center', marginTop: 5, marginBottom: 10 }}>Notifications not found</Text></View>}
             refreshing={refreshing}
             onRefresh={_handleRefresh}
             data={notificationList}
             keyExtractor={item => String(item.id)}
             renderItem={({ item, index }) => {
-                return (<NotificationItem key={index} item={item} navigation={props.navigation} />)
+                return (<NotificationItem key={index} item={item} navigation={props.navigation} deleteItem={_deleteItem} />)
             }}
         />
         {/* {notificationList.map(({ item, index }) => {

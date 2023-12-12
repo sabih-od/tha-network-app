@@ -30,15 +30,14 @@ const MessageItem = ({ item, userid, showDeleteModal, showProfileModal }) => {
                     showProfileModal(item?.user)
                 }}>
                 <Image
-                    source={item?.user?.profile_image}
-                    // source={item?.user?.profile_image ? { uri: item?.user?.profile_image } : item?.user.image} 
+                    source={item?.user?.profile_image == 'string' ? { uri: item?.user?.profile_image } : item?.user?.profile_image}
                     defaultSource={require('./../../assets/images/dummy-profile-image.png')} style={[styles.proficon, sender ? { marginLeft: 10, } : { marginRight: 10, }]} />
             </TouchableOpacity>
             <View>
                 <Text style={[styles.msgusername, sender ? { marginLeft: 'auto' } : { marginRight: 'auto' }]}>{!item?.user?.first_name ? 'User not found' : `${item?.user?.first_name} ${item?.user?.last_name}`}</Text>
                 <View style={[{
                     borderRadius: 12,
-                    backgroundColor: sender ? (item?.isdeleted ? '#fff3cd' : colors.blue) : '#eee',
+                    backgroundColor: sender ? (item?.isdeleted ? '#fff3cd' : colors.orange) : '#eee',
                     opacity: item?.isdeleted ? 0.6 : 1
                 }, sender ? { borderTopRightRadius: 0 } : {
                     borderTopLeftRadius: 0

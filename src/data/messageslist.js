@@ -18,9 +18,9 @@ const messageslist = [
         created_at: "1702073528941",
         user: {
             id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
-            first_name: "John",
-            last_name: "Smith",
-            profile_image: require('./../../assets/images/user-08.jpeg')
+            first_name: "Michelle",
+            last_name: "Francis",
+            profile_image: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png'
         }
     },
     {
@@ -42,9 +42,9 @@ const messageslist = [
         created_at: "1702073609224",
         user: {
             id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
-            first_name: "John",
-            last_name: "Smith",
-            profile_image: require('./../../assets/images/user-08.jpeg')
+            first_name: "Michelle",
+            last_name: "Francis",
+            profile_image: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png'
         }
     },
     {
@@ -66,9 +66,9 @@ const messageslist = [
         created_at: "1702073636113",
         user: {
             id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
-            first_name: "John",
-            last_name: "Smith",
-            profile_image: require('./../../assets/images/user-08.jpeg')
+            first_name: "Michelle",
+            last_name: "Francis",
+            profile_image: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png'
         }
     },
     {
@@ -78,9 +78,9 @@ const messageslist = [
         created_at: "1702073435612",
         user: {
             id: "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
-            first_name: "John",
-            last_name: "Smith",
-            profile_image: require('./../../assets/images/user-08.jpeg')
+            first_name: "Michelle",
+            last_name: "Francis",
+            profile_image: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png'
         }
     }
 

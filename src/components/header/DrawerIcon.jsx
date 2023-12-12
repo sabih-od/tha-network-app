@@ -10,7 +10,7 @@ const DrawerIcon = ({ navigation }) => {
             Keyboard.dismiss();
             navigation.openDrawer();
         }}
-        style={[{ padding: 10, paddingHorizontal: 15, borderRadius: 40, overflow: 'hidden', marginRight: 15 }]} >
+        style={[{ padding: 0, paddingLeft: 15, borderRadius: 40, overflow: 'hidden',  }]} >
         <Icon name={'align-right'} size={22} color={colors.white} />
     </TouchableOpacity >)
 }

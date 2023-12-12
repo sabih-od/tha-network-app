@@ -17,8 +17,8 @@ const WeeklyGoals = props => {
         <SafeAreaView style={[globalstyle.fullview, { backgroundColor: colors.white }]}>
             <View style={{ backgroundColor: colors.white, }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 15, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>Weekly Goals</Text>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16 }}>25</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16, color: colors.black }}>Weekly Goals</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 16, color: colors.black }}>25</Text>
                 </View>
                 <View style={styles.listrow}>
                     <Text style={styles.listkey}>Referrals Made</Text>
@@ -68,5 +68,5 @@ export default WeeklyGoals;
 
 const styles = StyleSheet.create({
     listkey: { fontFamily: fonts.primary, fontSize: 14, color: '#666', paddingHorizontal: 15 },
-    listrow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 13, borderBottomWidth: 1, borderBottomColor: '#eee' },
+    listrow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 11, borderBottomWidth: 1, borderBottomColor: '#eee' },
 })

@@ -23,6 +23,7 @@ import ReportUserOrMessageModal from "../../components/modal/ReportUserOrMessage
 import { BlockUserApiCall, ReportUserApiCall } from "../../redux/reducers/UserStateReducer";
 import Loader from "../../components/Loader";
 import ProfileModal from "../../components/modal/ProfileModal";
+import GoBackIcon from "../../components/header/GoBackIcon";
 
 // import { io } from 'socket.io-client';
 // // const websocketurl = 'ws://10.10.8.113:8029';
@@ -115,7 +116,28 @@ const ChatMessages = (props) => {
     useEffect(() => {
         console.log('group?.id => ', group);
         console.log('props.route.params?.groupitem => ', props.route.params?.groupitem)
-        props.navigation.setOptions({ headerTitle: group?.name });
+        props.navigation.setOptions({
+            headerLeft: () => <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <GoBackIcon navigation={props.navigation} color={colors.white} />
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: -14, marginTop: -3 }}>
+                    <View>
+                        <View style={{ width: 13, height: 13, backgroundColor: group?.status == 'online' ? colors.green : colors.red, borderWidth: 1, borderColor: '#ddd', borderRadius: 8, position: 'absolute', zIndex: 1, left: -2 }} />
+                        <Image source={typeof group?.image == 'string' ? { uri: group?.image } : group?.image} style={{ width: 35, height: 35, borderRadius: 30, marginRight: 10 }} />
+                    </View>
+                    <View>
+                        <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 16, marginBottom: -7 }}>{group?.name}</Text>
+                        <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 11, }}>{'Last seen 06:30 AM'}</Text>
+                    </View>
+                </View>
+            </View>
+            // headerTitle: () => <View>
+            //     <Image
+            //         source={typeof group?.image === 'string' ? { uri: group?.image } : group?.image}
+            //         defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
+            //         style={{ resizeMode: 'cover', width: 33, height: 33, borderRadius: 33, }} />
+            //     <Text>{group?.name}</Text>
+            // </View>
+        });
         // props.GetMessagesApiCall({ pageno, limit, group_id: group?.id })
         return () => {
             setMessages([])

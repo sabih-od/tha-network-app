@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 
 import { IOS, colors, fonts, isDarkMode, isIPad, isRTL, width } from '../theme';
-import { I18nManager, Image, Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Image, Keyboard, Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { DrawerContentScrollView, useDrawerProgress } from '@react-navigation/drawer';
 import { connect } from 'react-redux';
@@ -169,12 +169,16 @@ const DrawerContent = (props) => {
             width: isIPad ? 120 : 90, height: isIPad ? 120 : 90, borderRadius: isIPad ? 120 : 90, overflow: 'hidden', marginLeft: 'auto', marginRight: 'auto', marginBottom: 10,
             // borderColor: colors.white, borderWidth: 1, 
           }}>
-            <Image source={user?.profile_image ? { uri: user?.profile_image } : require('./../../assets/images/dummy-profile-image.png')} style={{ width: isIPad ? 120 : 90, height: isIPad ? 120 : 90, resizeMode: 'cover', }} />
+            <Image
+              source={typeof user?.profile_image === 'string' ? { uri: user?.profile_image } : user?.profile_image}
+              defaultSource={require('./../../assets/images/dummy-profile-image.png')}
+              style={{ width: isIPad ? 120 : 90, height: isIPad ? 120 : 90, resizeMode: 'cover', }}
+            />
           </TouchableOpacity>
-          <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, textAlign: 'center', fontSize: isIPad ? 26 : 20, marginBottom: 0 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
+          <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, textAlign: 'center', fontSize: isIPad ? 26 : 20, marginBottom: -7 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name={'mail'} style={{ color: colors.orange, fontSize: 16, marginRight: 8, marginBottom: 0 }} />
-            <Text style={{ fontFamily: fonts.primary, color: isDarkMode ? colors.white : colors.black, textAlign: 'center', fontSize: isIPad ? 18 : 13 }}>{user?.email}</Text>
+            <Icon name={'mail'} style={{ color: colors.orange, fontSize: 14, marginRight: 5, marginBottom: 0 }} />
+            <Text style={{ fontFamily: fonts.primary, color: colors.black, textAlign: 'center', fontSize: isIPad ? 18 : 12 }}>{user?.email}</Text>
           </View>
           {/* <Text style={{ fontFamily: fonts.primary, color: colors.white, textAlign: 'center', fontSize: 12 }}>{user?.phone}</Text> */}
         </View>
@@ -188,15 +192,17 @@ const DrawerContent = (props) => {
           style={{
             height: 40, fontFamily: isRTL ? fonts.arabicMedium : fonts.primary, // backgroundColor: '#f7f7f7',
             width: '80%',
+            // lineHeight: 10,
             // width: isIPad ? '60%' : (width * 0.80) - 100, 
-            color: colors.black, fontSize: 14, paddingHorizontal: 13, paddingVertical: 10, textAlign: isRTL ? 'right' : 'left'
+            color: colors.black, fontSize: 14, paddingHorizontal: 13, paddingVertical: 0, textAlign: isRTL ? 'right' : 'left'
           }}
         />
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => {
             console.log('textInput.current.value => ', textInput.current.value);
-            props.navigation.navigate('SearchPost', { title: textInput.current.value })
+            Keyboard.dismiss()
+            // props.navigation.navigate('SearchPost', { title: textInput.current.value })
             textInput.current.clear();
           }}
           style={{ width: 40, height: 40, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.orange }}
@@ -207,17 +213,21 @@ const DrawerContent = (props) => {
 
       <DrawerContentScrollView {...props} style={[styles.sidebar,]} contentContainerStyle={{ paddingTop: 0 }}>
         {/* {draweritems.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)} */}
-        <DrawerItem key={0} item={{ title: 'Home', nav: 'Home' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={0} item={{ title: 'People In My Network', nav: 'PeopleInNetwork' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={0} item={{ title: 'Friends', nav: 'Friends' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={0} item={{ title: 'Weekly Goals', nav: 'WeeklyGoals' }} navigation={props.navigation} activescreen={props.currentScreen} />
-        <DrawerItem key={0} item={{ title: 'Settings', nav: 'Settings' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem item={{ title: 'Home', nav: 'Home' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem item={{ title: 'People In My Network', nav: 'PeopleInNetwork' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem item={{ title: 'New Members This Week', nav: 'NewMembersInNetwork' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem item={{ title: 'Friends', nav: 'Friends' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem item={{ title: 'Weekly Goals', nav: 'WeeklyGoals' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem item={{ title: 'Make a Referal', nav: 'Profile' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        {/* <DrawerItem item={{ title: 'Personal Information', nav: 'PersonalInformation' }} navigation={props.navigation} activescreen={props.currentScreen} /> */}
+        <DrawerItem item={{ title: 'Settings', nav: 'Settings' }} navigation={props.navigation} activescreen={props.currentScreen} />
+        <DrawerItem item={{ title: 'Contact', nav: 'Contact' }} navigation={props.navigation} activescreen={props.currentScreen} />
         {/* {drawerMenu.length > 0 && drawerMenu.map((item, index) => <DrawerItem key={index} item={item} navigation={props.navigation} activescreen={props.currentScreen} />)}
         <DrawerItem key={100} item={{ title: strings.questionanswer, nav: 'QuestionAnswer' }} navigation={props.navigation} activescreen={props.currentScreen} />
         <DrawerItem key={101} item={{ title: strings.contactus, nav: 'Contact' }} navigation={props.navigation} activescreen={props.currentScreen} /> */}
         <View style={{ height: 10 }} />
       </DrawerContentScrollView>
-      {user && <View style={{ backgroundColor: isDarkMode ? colors.drawerbg : colors.headerbgcolor }}>
+      {user && <View style={{ backgroundColor: '#f1f1f1' }}>
         <TouchableOpacity activeOpacity={0.8} onPress={() => {
           // logout(props.navigation) 
           props.navigation.closeDrawer();

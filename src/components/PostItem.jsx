@@ -6,8 +6,11 @@ import Icon from "react-native-vector-icons/Feather";
 import CommentItem from "./CommentItem";
 import commentslist from "../data/comments";
 import moment from "moment";
+import AddComment from "./AddComment";
+import Video from "react-native-video";
 
-const PostItem = ({ item, user }) => {
+const PostItem = (props) => {
+    const { item, user } = props;
     // console.log('item => ', item)
     const [comments, setComments] = useState([]);
     const [like, setLike] = useState(false);
@@ -15,7 +18,6 @@ const PostItem = ({ item, user }) => {
         setComments(commentslist);
     }, []);
 
-    const commentRef = useRef(null);
 
     const _handleDelete = (id) => {
         console.log('id => ', id)
@@ -23,15 +25,24 @@ const PostItem = ({ item, user }) => {
         setComments(newlist);
     }
 
-    return <View style={{ backgroundColor: colors.white, marginBottom: 15, }}>
+    const _handleComment = (obj) => {
+        const newcomment = [...comments, obj];
+        setComments(prev => newcomment);
+    }
+
+
+    return <View style={{ backgroundColor: colors.white, marginBottom: 15, borderRadius: 10, }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
-            <View style={{ width: 50, height: 50, borderRadius: 40, marginRight: 12, overflow: 'hidden' }}>
-                <Image source={item?.user?.image} style={{ resizeMode: 'cover', width: 50, height: 50 }} />
+            <View style={{ width: 45, height: 45, borderRadius: 10, marginRight: 12, overflow: 'hidden' }}>
+                <Image
+                    source={typeof item?.user?.image == 'string' ? { uri: item?.user?.image } : item?.user?.image}
+                    defaultSource={require('./../../assets/images/dummy-profile-image.png')}
+                    style={{ resizeMode: 'cover', width: 45, height: 45 }} />
             </View>
             <View style={{ width: '82%' }}>
-                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 17 }}>{item?.user?.name}</Text>
+                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 17, color: colors.black, marginBottom: -5 }}>{item?.user?.name}</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: '#333' }}>{item?.user?.username}</Text>
+                    <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: colors.grey, marginTop: -2 }}>{item?.user?.username}</Text>
                     <Text style={{ fontFamily: fonts.primary, fontSize: 11, color: colors.grey, marginTop: 3 }}>12 Dec, 2023 04:38 AM</Text>
                 </View>
             </View>
@@ -40,12 +51,21 @@ const PostItem = ({ item, user }) => {
             <Text style={{ fontFamily: fonts.primary, color: '#333' }}>{item?.content}</Text>
         </View>
         {item?.image && <Image source={require('./../../assets/images/test-image.jpeg')} style={{ width: '100%', height: 250, resizeMode: 'cover' }} />}
+        {item?.video && <View>
+            <Video
+                source={typeof item?.video == 'string' ? { uri: item?.video } : item?.video}
+                style={{ height: width / 1.8, width: '100%' }}
+                resizeMode={"cover"}
+                controls={false}
+            />
+        </View>}
+
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 12, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
             <TouchableOpacity onPress={() => { }}>
-                <Text style={{ fontFamily: fonts.primary, color: colors.orange, fontSize: 13, }}>{like ? 'You and 23 others liked' : '23 people liked'}</Text>
+                <Text style={{ fontFamily: fonts.primary, color: colors.black, fontSize: 13, }}>{like ? 'You and 23 others liked' : '23 people liked'}</Text>
             </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 15, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 15, paddingVertical: 15, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <TouchableOpacity onPress={() => { setLike(prev => !prev) }} style={{ width: 40 }}>
                     <IonIcon name={like ? "heart" : "heart-outline"} style={{ fontSize: 25, color: like ? colors.blue : colors.black }} />
@@ -78,47 +98,7 @@ const PostItem = ({ item, user }) => {
             <Text style={{ fontFamily: fonts.primary, fontSize: 13, color: colors.orange, textAlign: 'center', marginTop: 13, marginBottom: 10 }}>Show More Comments</Text>
         </TouchableOpacity>
 
-        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
-            <View style={{ width: 40, height: 40, borderRadius: 40, marginRight: 12 }}>
-                <Image source={{ uri: user?.profile_image }} defaultSource={require('./../../assets/images/dummy-profile-image.png')} style={{ resizeMode: 'cover', width: 40, height: 40 }} />
-            </View>
-            <TextInput
-                placeholder="Write a comment"
-                placeholderTextColor={'#999'}
-                ref={commentRef}
-                onChangeText={(value) => {
-                    // console.log('value => ', value)
-                    commentRef.current.value = value;
-                }}
-                multiline={true}
-                // value={''}
-                style={{ fontFamily: fonts.primary, backgroundColor: '#f7f7f7', paddingHorizontal: 15, paddingBottom: 12, paddingTop: 12, width: '69%', borderRadius: 10 }}
-            />
-            <TouchableOpacity
-                onPress={() => {
-                    if (commentRef.current.value) {
-                        console.log('commentRef => ', commentRef.current.value)
-                        console.log('moment(); > ', moment().unix())
-                        const obj = {
-                            id: Math.floor(Math.random() * (9900) + 100),
-                            user: {
-                                id: '9dad4f7c-9165-44b8-9f55-0039a4c1f1e1',
-                                name: `${user?.first_name} ${user?.last_name}`,
-                                username: user?.username,
-                                image: user?.profile_image,
-                            },
-                            content: commentRef.current.value,
-                            created_at: Date.now()
-                        }
-                        const newcomment = [...comments, obj];
-                        setComments(prev => newcomment);
-                        commentRef.current.clear();
-                    }
-                }}
-                style={{ width: 45, height: 45, marginLeft: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.orange, borderRadius: 10 }}>
-                <Icon name="send" style={{ fontSize: 22, color: colors.white }} />
-            </TouchableOpacity>
-        </View>
+        <AddComment handleComment={_handleComment} user={user} />
     </View>
 }
 

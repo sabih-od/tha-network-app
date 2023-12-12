@@ -23,6 +23,7 @@ import ResetPassword from "../screens/Auth/ResetPassword";
 import ForgetPassword from "../screens/Auth/ForgetPassword";
 import GoBackIcon from "../components/header/GoBackIcon";
 import PaymentCard from "../screens/PaymentCard";
+import RequestInvitationCode from "../screens/Auth/RequestInvitationCode";
 
 const Stack = createStackNavigator();
 
@@ -88,6 +89,17 @@ const AuthStackNavigation = (props) => {
         <Stack.Screen
             name="InvitationCode"
             component={InvitationCode}
+            options={({ navigation }) => {
+                return {
+                    headerTransparent: true,
+                    headerTitle: '',
+                    headerLeft: (props) => <GoBackIcon navigation={navigation} color={colors.black} />,
+                }
+            }}
+        />
+        <Stack.Screen
+            name="RequestInvitationCode"
+            component={RequestInvitationCode}
             options={({ navigation }) => {
                 return {
                     headerTransparent: true,

@@ -14,6 +14,9 @@ import { LoginApiCall } from "../../redux/reducers/AuthReducer";
 import Loader from "../../components/Loader";
 import { showToast } from "../../helpers/toastConfig";
 import axios from "axios";
+// import Logo from './../../assets/images/logo.png';
+// import { Svg, Circle } from 'react-native-svg';
+import { SvgUri } from 'react-native-svg';
 
 // import strings, { changeLang } from "./../../localization/translation";
 import SplashScreen from "react-native-splash-screen";
@@ -80,27 +83,27 @@ const Login = (props) => {
         console.log('onSubmit data => ', data)
         props.SetIsLogin(true);
         props.SetUserInfo({
-            "name": 'John Smith',
-            "email": "johnsmith@mailinator.com",
+            "name": 'Michelle Francis',
+            "email": "michellefrancis@mailinator.com",
             "created_at": "2023-12-01T22:15:10.000000Z",
-            "pwh": "John@123123",
-            "username": "@johnsmith",
+            "pwh": "Michelle@123",
+            "username": "@michellefrancis",
             "role_id": 2,
             "id": "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
             "user_id": "13df6929-86bd-4c2f-9217-e8ae9a18197e",
-            "first_name": "John",
-            "last_name": "Smith",
-            "phone": "81236734762",
+            "first_name": "Michelle",
+            "last_name": "Francis",
+            "phone": "+14845101357",
             "social_security_number": null,
-            "bio": null,
-            "address": null,
-            "country": null,
-            "city": null,
-            "postal_code": null,
+            "bio": `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            "address": 'House No 01, Street No 45',
+            "country": 'United States',
+            "city": 'New York',
+            "postal_code": '54231',
             "updated_at": "2023-12-01T22:15:10.000000Z",
-            "marital_status": null,
-            "gender": "Male",
-            "profile_image": "https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png",
+            "marital_status": 'Single',
+            "gender": "Female",
+            "profile_image": "https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png", // require('./../../../assets/images/user-09.png'), //  
             "profile_cover": null,
             "has_made_monthly_payment": true,
             "stripe_account_id": "acct_1OIf1t4Dh1B210rz",
@@ -128,13 +131,15 @@ const Login = (props) => {
             backgroundColor={colors.white}
         />
         <Loader isLoading={loading} />
-        <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]} >
+        <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 25 }]} >
             <KeyboardAvoidingView behavior={IOS ? 'padding' : 'padding'} >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <>
                         <ScrollView style={isIPad && globalstyle.authscreencontainer}>
+                            {/* <Logo /> */}
+
                             <View style={{ alignItems: 'center', }}>
-                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 170, height: 150, resizeMode: 'contain' }} />
+                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 150, height: 120, resizeMode: 'contain' }} />
                             </View>
                             {/* <View>
                                 <Text style={globalstyle.authheading}>Login</Text>
@@ -148,15 +153,15 @@ const Login = (props) => {
                                         placeholder="Username or Email Address"
                                         {...register('email', {
                                             // value: '',
-                                            value: 'johnsmith@mailinator.com',
-                                            required: 'Email Address is required',
-                                            pattern: {
-                                                value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                                message: "Please provide valid email"
-                                            },
+                                            value: 'michellefrancis@mailinator.com',
+                                            // required: 'Email Address is required',
+                                            // pattern: {
+                                            //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
+                                            //     message: "Please provide valid email"
+                                            // },
                                         })}
                                         // defaultValue={''}
-                                        defaultValue={'johnsmith@mailinator.com'}
+                                        defaultValue={'michellefrancis@mailinator.com'}
                                         placeholderTextColor={colors.placeholdercolor}
                                         autoCapitalize='none'
                                         onChangeText={(value) => setValue('email', value)}
@@ -182,12 +187,12 @@ const Login = (props) => {
                                             placeholderTextColor={colors.placeholdercolor}
                                             {...register('password', {
                                                 // value: '',
-                                                value: 'John@123123',
-                                                required: 'Password is required',
-                                                minLength: { value: 8, message: 'Password length must be greater then 8' }
+                                                // value: 'michelle@123123',
+                                                // required: 'Password is required',
+                                                // minLength: { value: 8, message: 'Password length must be greater then 8' }
                                             })}
                                             // defaultValue={''}
-                                            defaultValue={'John@123123'}
+                                            defaultValue={'michelle@123123'}
                                             // inputRef={password.ref}
                                             onChangeText={(value) => setValue('password', value)}
                                             secureTextEntry={!showPassword ? true : false}
@@ -204,24 +209,25 @@ const Login = (props) => {
                                 {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
 
 
+                                <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit(onSubmit)} style={globalstyle.authSubmitButton}>
+                                    <Text style={globalstyle.authSubmitButtonText}>Login</Text>
+                                </TouchableOpacity>
+
                                 <View style={{ marginTop: 10 }}>
                                     <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
                                         {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
-                                        <Text style={styles.notes}>If you are not a member you will need an invitation code to enter the app.</Text>
+                                        <Text style={styles.notes}>1. If you are not a member you will need an invitation code to enter the app.</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
                                         {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
-                                        <Text style={styles.notes}>If you are visiting the app for the first time and interested in learning more about the app you will need to <TouchableOpacity style={{ marginBottom: -9 }}><Text style={[styles.notes, { color: colors.black, fontFamily: fonts.primaryMedium }]}>Click Here</Text></TouchableOpacity> to receive an invitation code.</Text>
+                                        <Text style={styles.notes}>2. If you are visiting the app for the first time and interested in learning more about the app you will need to <Text style={[styles.notes, { color: colors.black, marginTop: 10, fontFamily: fonts.primaryMedium }]} onPress={() => props.navigation.navigate('RequestInvitationCode')}>Click Here</Text> to receive an invitation code.</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
                                         {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
-                                        <Text style={styles.notes}>If a member referred you and gave you an invitation code, use that code to enter the app.</Text>
+                                        <Text style={styles.notes}>3. If a member referred you and gave you an invitation code, use that code to enter the app.</Text>
                                     </View>
                                 </View>
 
-                                <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit(onSubmit)} style={globalstyle.authSubmitButton}>
-                                    <Text style={globalstyle.authSubmitButtonText}>{'Login'}</Text>
-                                </TouchableOpacity>
                                 <TouchableOpacity activeOpacity={0.8} onPress={() => props.navigation.navigate('InvitationCode')} style={[globalstyle.authSubmitButton, { backgroundColor: colors.blue }]}>
                                     <Text style={globalstyle.authSubmitButtonText}>{'Invitation Code'}</Text>
                                 </TouchableOpacity>
@@ -232,13 +238,13 @@ const Login = (props) => {
                     <Text style={{ fontFamily: fonts.primary }}>Or Sign In With</Text>
                     <View style={{ width: '30%', height: 1, backgroundColor: '#000' }} />
                 </View> */}
-                            <View style={globalstyle.alreadysignin}>
+                            {/* <View style={globalstyle.alreadysignin}>
                                 <Text style={globalstyle.alreadyaccount}>Don't have account? </Text>
                                 <TouchableOpacity activeOpacity={0.8}
                                     onPress={() => { props.navigation.navigate('Register') }}>
                                     <Text style={globalstyle.actionauthtext}>Sign Up</Text>
                                 </TouchableOpacity>
-                            </View>
+                            </View> */}
                         </ScrollView>
                     </>
                 </TouchableWithoutFeedback>
@@ -267,7 +273,7 @@ export default connect(setStateToProps, mapDispatchToProps)(Login);
 
 
 const styles = StyleSheet.create({
-    forgetpasslink: { marginLeft: 'auto', marginTop: 10, marginBottom: 0, marginRight: 15 },
-    forgetpasstext: { color: isDarkMode ? colors.white : colors.black, fontFamily: fonts.primaryMedium, fontSize: fontSize - 1 },
-    notes: { fontSize: 13, fontFamily: fonts.primary, marginBottom: 6, color: colors.grey },
+    forgetpasslink: { marginLeft: 'auto', marginTop: 5, marginBottom: 0, marginRight: 15 },
+    forgetpasstext: { color: colors.black, fontFamily: fonts.primaryMedium, fontSize: fontSize - 1 },
+    notes: { fontSize: 13, fontFamily: fonts.primary, color: colors.grey },
 })

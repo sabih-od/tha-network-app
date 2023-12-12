@@ -15,12 +15,12 @@ export const toastConfig = {
             text1Style={{
                 fontSize: isIPad ? 17 : 14,
                 fontWeight: '700',
-                fontFamily: fonts.latoRegular
+                fontFamily: fonts.primary
             }}
             text2NumberOfLines={2}
             text2Style={{
                 fontSize: isIPad ? 17 : 14,
-                fontFamily: fonts.latoRegular,
+                fontFamily: fonts.primary,
                 color: colors.grey
             }}
         />
@@ -35,12 +35,12 @@ export const toastConfig = {
             text1Style={{
                 fontSize: isIPad ? 17 : 14,
                 fontWeight: '700',
-                fontFamily: fonts.latoRegular
+                fontFamily: fonts.primary
             }}
             text2NumberOfLines={2}
             text2Style={{
                 fontSize: isIPad ? 17 : 14,
-                fontFamily: fonts.latoRegular,
+                fontFamily: fonts.primary,
                 color: colors.grey
             }}
         />

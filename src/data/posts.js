@@ -20,6 +20,8 @@ const postslist = [
             username: '@flaviaanderson',
             image: require('./../../assets/images/user-07.jpeg'),
         },
+        // video: require('./../../assets/images/test-video.mp4'),
+        // video: 'https://service.demowebsitelinks.com/tha-network/public/storage/304/file_example_MP4_480_1_5MG.mp4',
         content: `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.`,
         likescount: 23,
         commentscount: 140,
@@ -45,7 +47,8 @@ const postslist = [
         id: 4,
         user: {
             name: 'Sarah Thompson',
-            username: 'sarahthompson',
+            username: '@sarahthompson',
+            image: require('./../../assets/images/user-06.jpg'),
         },
         content: `The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested`,
         likescount: 75,
@@ -59,6 +62,7 @@ const postslist = [
         user: {
             name: 'Michelle Morgan',
             username: '@michellemorgan',
+            image: require('./../../assets/images/user-05.png'),
         },
         content: `It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`,
         image: require('./../../assets/images/test-image.jpeg'),

@@ -22,16 +22,34 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import CreatePost from "../components/CreatePost";
 import ChatIcon from "../components/ChatIcon";
+import AlertForReferralPaymentOption from "../components/modal/AlertForReferralPaymentOption";
+import NotificationIcon from "../components/header/NotificationIcon";
 // import strings from "../localization/translation";
 // import LinearGradient from "react-native-linear-gradient";
 // import TryPlus from "../components/TryPlus";
 
 
 const Home = (props) => {
-    console.log('props.userinfo => ', props.userInfo);
+    const { userInfo } = props;
+    console.log('userInfo => ', userInfo);
 
     useEffect(() => {
         connectPusher();
+        props.navigation.setOptions({
+            headerTitle: 'Hello, Michelle', //`Hello, ${userInfo?.first_name}`,
+            headerRight: () => <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                <NotificationIcon navigation={props.navigation} />
+                <TouchableOpacity
+                    onPress={() => { props.navigation.navigate('Profile') }}
+                    style={{ width: 33, height: 33, borderRadius: 33, overflow: 'hidden', marginRight: 12 }}>
+                    <Image
+                        // source={typeof userInfo?.profile_image === 'string' ? { uri: userInfo?.profile_image } : userInfo?.profile_image}
+                        source={{ uri: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png' }}
+                        defaultSource={require('./../../assets/images/dummy-profile-image.png')}
+                        style={{ resizeMode: 'cover', width: 33, height: 33, borderRadius: 33, }} />
+                </TouchableOpacity>
+            </View>
+        });
         // const pusher = getPusher();
         // console.log('getPusher => ', pusher);
     }, [])
@@ -172,10 +190,15 @@ const Home = (props) => {
     const input04 = useRef();
     const input05 = useRef();
 
+    const _handleRefPaymentOpt = (data) => {
+        console.log('data => ', data)
+        setVisible(data);
+    }
 
+    const [visible, setVisible] = useState(false);
 
     return <SafeAreaView style={globalstyle.fullview}>
-
+        <AlertForReferralPaymentOption visible={visible} setVisible={setVisible} handleRefPaymentOpt={_handleRefPaymentOpt} />
         <ChatIcon navigation={props.navigation} />
         <ScrollView
             style={[styles.homescollview, { paddingTop: 0, }]}
@@ -185,32 +208,32 @@ const Home = (props) => {
         // }
         >
 
-            <View style={{ backgroundColor: colors.orange, padding: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={{ backgroundColor: colors.orange, padding: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <View>
-                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12 }}>My Balance</Text>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 20, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>160.00</Text>
+                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12, marginBottom: -8 }}>My Balance</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 22, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>160.00</Text>
                 </View>
                 <View style={{ width: 1, height: 14, backgroundColor: colors.white }} />
                 <View>
-                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12 }}>Total Income</Text>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 20, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>200.00</Text>
+                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12, marginBottom: -8 }}>Total Income</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 22, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>200.00</Text>
                 </View>
                 <View style={{ width: 1, height: 14, backgroundColor: colors.white }} />
                 <View>
-                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12 }}>Total Withdrawl</Text>
-                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 20, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>40.00</Text>
+                    <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12, marginBottom: -8 }}>Total Withdrawl</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 22, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>40.00</Text>
                 </View>
             </View>
 
             <View>
                 <View style={{ width: width, height: 100, backgroundColor: colors.orange, position: 'absolute', top: 0 }} />
-                <View style={{ backgroundColor: colors.white, flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 10, margin: 10, marginBottom: 0, }}>
+                <View style={{ backgroundColor: colors.white, flexDirection: 'row', alignItems: 'center', borderRadius: 15, justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 10, margin: 15, marginBottom: 0, }}>
                     <View style={{ justifyContent: 'center' }}>
                         <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, fontSize: 18, lineHeight: 22, marginBottom: -20 }}>{`Earn `}
                             <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.orange, fontSize: 18, lineHeight: 22 }}>{`$10 \n`}</Text>
                         </Text>
                         <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, fontSize: 18, lineHeight: 22 }}>{`For Every Friends \nYou Refer`}</Text>
-                        <TouchableOpacity onPress={() => { }} style={{ backgroundColor: colors.blue, width: 100, padding: 7, marginTop: 3 }}
+                        <TouchableOpacity onPress={() => { setVisible(true) }} style={{ backgroundColor: colors.blue, width: 100, borderRadius: 10, padding: 7, marginTop: 7 }}
                         >
                             <Text style={{ fontFamily: fonts.primaryMedium, color: colors.white, textTransform: 'uppercase', fontSize: 12, textAlign: 'center' }}>Refer Now</Text>
                         </TouchableOpacity>
@@ -218,13 +241,17 @@ const Home = (props) => {
                     <Image source={require('./../../assets/images/logo-without-text.png')} style={{ width: 120, height: 120 }} />
                 </View>
             </View>
+            {/* <View style={{ padding: 15, paddingVertical: 20 }}>
+                <Text style={{ fontFamily: fonts.primaryMedium, color: colors.black, fontSize: 18, lineHeight: 22, marginBottom: -20 }}>Earn
+                    <Text style={{ color: colors.orange, }}> $10 </Text>For Every Friends You Refer</Text>
+            </View> */}
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingVertical: 10, margin: 10, backgroundColor: colors.white, marginBottom: 0 }}>
+            {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingVertical: 10, margin: 15, backgroundColor: colors.white, marginBottom: 0 }}>
                 <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, fontSize: 18, }}>Total Referal</Text>
                 <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.orange, fontSize: 24, }}>50</Text>
-            </View>
+            </View> */}
 
-            <View style={{ padding: 10, marginBottom: 30 }}>
+            <View style={{ padding: 15, marginBottom: 30 }}>
                 <CreatePost user={props.userInfo} />
                 {postslist.map((item, index) => {
                     return (

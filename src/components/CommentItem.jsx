@@ -12,11 +12,15 @@ const CommentItem = (props) => {
 
     return <View style={{ padding: 15, borderRadius: 10, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-            <View style={{ width: 35, height: 35, borderRadius: 40, marginRight: 12, overflow: 'hidden' }}>
-                <Image source={typeof item?.user?.image == 'string' ? { uri: item?.user?.image } : item?.user?.image} defaultSource={require('./../../assets/images/dummy-profile-image.png')} style={{ resizeMode: 'cover', width: 35, height: 35 }} />
+            <View style={{ width: 38, height: 38, borderRadius: 10, marginRight: 12, overflow: 'hidden' }}>
+                <Image
+                    source={typeof item?.user?.image == 'string' ? { uri: item?.user?.image } : item?.user?.image}
+                    defaultSource={require('./../../assets/images/dummy-profile-image.png')}
+                    style={{ resizeMode: 'cover', width: 38, height: 38 }}
+                />
             </View>
             <View style={{ width: '86%' }}>
-                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 14, marginBottom: -2 }}>{item?.user?.name}</Text>
+                <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 15, marginBottom: -6, color: colors.black }}>{item?.user?.name}</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Text style={{ fontFamily: fonts.primary, fontSize: 11, color: '#333' }}>{item?.user?.username}</Text>
                     <Text style={{ fontFamily: fonts.primary, fontSize: 11, color: colors.grey, marginTop: 3 }}>{moment(parseInt(item?.created_at)).format("DD MMM, YYYY hh:mm")}</Text>

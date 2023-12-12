@@ -57,7 +57,6 @@ const PaymentCard = props => {
     const input02 = useRef();
     const input03 = useRef();
     const input04 = useRef();
-    const input05 = useRef();
 
     const prevUpdateProfilePicResRef = useRef(props.updateProfilePicResponse);
     const prevEditProfileResRef = useRef(props.editProfileResponse);
@@ -158,8 +157,12 @@ const PaymentCard = props => {
                                     <View style={[{ paddingVertical: 20 }, isIPad && globalstyle.authscreencontainer]}>
 
 
-                                        <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 18, marginBottom: 5 }}>Payment Method</Text>
-                                        <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: colors.grey }}>In order to receive Referral Payments you must include your Stripe Account</Text>
+                                    <View>
+                                <Text style={globalstyle.authheading}>Payment Method</Text>
+                                <Text style={globalstyle.authdescription}>In order to receive Referral Payments you must include your Stripe Account</Text>
+                            </View>
+                                        {/* <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 24, marginBottom: 0, color: colors.black }}>Payment Method</Text> */}
+                                        {/* <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: colors.grey }}>In order to receive Referral Payments you must include your Stripe Account</Text> */}
 
                                         <View style={globalstyle.inputbox}>
                                             <Icon style={globalstyle.authlefticon} name={'credit-card'} size={18} />
@@ -178,6 +181,7 @@ const PaymentCard = props => {
                                                 })}
                                                 defaultValue=''
                                                 // defaultValue='John'
+                                                keyboardType="numeric"
                                                 onChangeText={(value) => setValue('card_number', value)}
                                                 ref={input01}
                                                 returnKeyType="next"
@@ -204,10 +208,11 @@ const PaymentCard = props => {
                                                 })}
                                                 defaultValue=''
                                                 // defaultValue='John'
+                                                keyboardType="numeric"
                                                 onChangeText={(value) => setValue('expiration_month', value)}
-                                                ref={input01}
+                                                ref={input02}
                                                 returnKeyType="next"
-                                                onSubmitEditing={() => input02.current.focus()}
+                                                onSubmitEditing={() => input03.current.focus()}
                                             />
                                         </View>
                                         {errors.expiration_month && <Text style={globalstyle.errorField}>{errors.expiration_month.message}</Text>}
@@ -229,10 +234,11 @@ const PaymentCard = props => {
                                                 })}
                                                 defaultValue=''
                                                 // defaultValue='John'
+                                                keyboardType="numeric"
                                                 onChangeText={(value) => setValue('expiration_year', value)}
-                                                ref={input01}
+                                                ref={input03}
                                                 returnKeyType="next"
-                                                onSubmitEditing={() => input02.current.focus()}
+                                                onSubmitEditing={() => input04.current.focus()}
                                             />
                                         </View>
                                         {errors.expiration_year && <Text style={globalstyle.errorField}>{errors.expiration_year.message}</Text>}
@@ -254,10 +260,9 @@ const PaymentCard = props => {
                                                 })}
                                                 defaultValue=''
                                                 // defaultValue='John'
+                                                keyboardType="numeric"
                                                 onChangeText={(value) => setValue('cvv_code', value)}
-                                                ref={input01}
-                                                returnKeyType="next"
-                                                onSubmitEditing={() => input02.current.focus()}
+                                                ref={input04}
                                             />
                                         </View>
                                         {errors.cvv_code && <Text style={globalstyle.errorField}>{errors.cvv_code.message}</Text>}

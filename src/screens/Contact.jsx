@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableO
 
 import { useForm } from 'react-hook-form';
 import Icon from "react-native-vector-icons/Feather";
-import { backgroungImage, colors, fonts, isIPad } from "../theme";
+import { IOS, backgroungImage, colors, fonts, isIPad } from "../theme";
 import globalstyle from "../theme/style";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,7 +11,7 @@ import { ContactApiCall } from "../redux/reducers/ListingApiStateReducer";
 
 import { showToast } from "../helpers/toastConfig";
 import Loader from "../components/Loader";
-import strings from "../localization/translation";
+// import strings from "../localization/translation";
 
 const Contact = (props) => {
 
@@ -19,17 +19,14 @@ const Contact = (props) => {
     const [loading, isLoading] = useState(false);
     const { handleSubmit, formState: { errors }, register, setValue, reset, resetField } = useForm();
 
-    // const prevContactResRef = useRef(props.contactResponse);
-    const prevPropsRef = useRef({ contactResponse: null, contactErrorResponse: null });
-
-
-    useEffect(() => {
-        if (props.contactResponse !== prevPropsRef.current.contactResponse && props.contactResponse?.success && props.contactResponse?.data) {
-            prevPropsRef.current.contactResponse = props.contactResponse;
-            showToast('success', 'Your message sumitted successfully');
-        }
-        isLoading(false);
-    }, [props.contactResponse]);
+    // const prevPropsRef = useRef({ contactResponse: null, contactErrorResponse: null });
+    // useEffect(() => {
+    //     if (props.contactResponse !== prevPropsRef.current.contactResponse && props.contactResponse?.success && props.contactResponse?.data) {
+    //         prevPropsRef.current.contactResponse = props.contactResponse;
+    //         showToast('success', 'Your message sumitted successfully');
+    //     }
+    //     isLoading(false);
+    // }, [props.contactResponse]);
 
     useEffect(() => {
         console.log('props.contactErrorResponse => ', props.contactErrorResponse);
@@ -38,13 +35,14 @@ const Contact = (props) => {
 
     const onSubmit = data => {
         console.log('data => ', data);
+        showToast('success', 'Your message sumitted successfully');
         // reset({
         //     phone: '',
         //     company: '',
         //     message: '',
         // })
-        props.ContactApiCall(data);
-        isLoading(true);
+        // props.ContactApiCall(data);
+        // isLoading(true);
     };
 
     const input01 = useRef();
@@ -55,9 +53,8 @@ const Contact = (props) => {
 
     return <SafeAreaView style={globalstyle.fullview}>
         <Loader isLoading={loading} />
-        <ImageBackground style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]}
-            source={backgroungImage}>
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
+        <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 25 }]} >
+            <KeyboardAvoidingView behavior={IOS ? 'padding' : 'padding'} >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <ScrollView
                         contentContainerStyle={{ paddingTop: 60 }}
@@ -65,18 +62,18 @@ const Contact = (props) => {
                     // style={[globalstyle.authContainer, { paddingHorizontal: 15 }]}
                     // contentContainerStyle={{justifyContent: 'center',}}
                     >
-                        
+
                         {/* <ScrollView> */}
                         <View style={[globalstyle.authLogoContainer, { alignItems: 'flex-start', }]}>
-                            <Text style={[globalstyle.authheading, { fontSize: isIPad ? 35 : 28, marginTop: 10 }]}>{strings.contactTitle}</Text>
-                            <Text style={[globalstyle.authdescription, { fontSize: isIPad ? 20 : 15, marginBottom: 10, marginTop: isIPad ? 8 : 0 }]}>{strings.contactDesc}</Text>
+                            <Text style={[globalstyle.authheading, { fontSize: isIPad ? 35 : 28, marginTop: 10 }]}>Contact</Text>
+                            <Text style={[globalstyle.authdescription, { fontSize: isIPad ? 20 : 15, marginBottom: 10, marginTop: isIPad ? 8 : 0 }]}>Contact us for any question and query</Text>
                         </View>
                         <View>
                             <View style={globalstyle.inputbox}>
-                                <Icon color={colors.darkblue} name={'user'} size={18} />
+                                <Icon color={colors.blue} name={'user'} size={18} />
                                 <TextInput
                                     style={globalstyle.inputfield}
-                                    placeholder={strings.contactFullName}
+                                    placeholder={'Full Name'}
                                     placeholderTextColor={colors.placeholdercolor}
                                     {...register('name', {
                                         value: user.first_name + ' ' + user.last_name,
@@ -96,10 +93,10 @@ const Contact = (props) => {
                             {errors.name && <Text style={globalstyle.errorField}>{errors.name.message}</Text>}
 
                             <View style={globalstyle.inputbox}>
-                                <Icon color={colors.darkblue} name={'mail'} size={18} />
+                                <Icon color={colors.blue} name={'mail'} size={18} />
                                 <TextInput
                                     style={globalstyle.inputfield}
-                                    placeholder={strings.contactEmailAddress}
+                                    placeholder={'Email Address'}
                                     placeholderTextColor={colors.placeholdercolor}
                                     {...register('email', {
                                         value: user.email,
@@ -122,10 +119,10 @@ const Contact = (props) => {
                             {errors.email && <Text style={globalstyle.errorField}>{errors.email.message}</Text>}
 
                             <View style={globalstyle.inputbox}>
-                                <Icon color={colors.darkblue} name={'phone'} size={18} />
+                                <Icon color={colors.blue} name={'phone'} size={18} />
                                 <TextInput
                                     style={globalstyle.inputfield}
-                                    placeholder={strings.contactPhoneNumber}
+                                    placeholder={'Phone (Optional)'}
                                     placeholderTextColor={colors.placeholdercolor}
                                     // keyboardType='phone-pad'
                                     keyboardType='numeric'
@@ -146,32 +143,12 @@ const Contact = (props) => {
                             </View>
                             {errors.phone && <Text style={globalstyle.errorField}>{errors.phone.message}</Text>}
 
-                            {/* <View style={globalstyle.inputbox}>
-                                <Icon color={colors.darkblue} name={'globe'} size={18} />
-                                <TextInput
-                                    style={globalstyle.inputfield}
-                                    placeholder="Your Company (Optional)"
-                                    placeholderTextColor={colors.placeholdercolor}
-                                    // keyboardType='phone-pad'
-                                    // keyboardType='numeric'
-                                    {...register('company', {
-                                        // value: '',
-                                        // required: 'Company is required',
-                                    })}
-                                    onChangeText={(value) => setValue('company', value)}
-                                    ref={input03}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => input04.current.focus()}
-                                />
-                            </View>
-                            {errors.company && <Text style={globalstyle.errorField}>{errors.company.message}</Text>} */}
-
                             <View style={[globalstyle.inputbox, { justifyContent: 'space-between', borderRadius: 25 }]}>
                                 <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-                                    <Icon color={colors.darkblue} name={'message-square'} size={18} style={{ marginTop: 15 }} />
+                                    <Icon color={colors.blue} name={'message-square'} size={18} style={{ marginTop: 15 }} />
                                     <TextInput
                                         style={[globalstyle.inputfield, { flex: 1, textAlignVertical: 'top', paddingTop: 17 }]}
-                                        placeholder={strings.contactEnterMessage}
+                                        placeholder={'Message'}
                                         placeholderTextColor={colors.placeholdercolor}
                                         {...register('message', {
                                             value: '',
@@ -180,7 +157,7 @@ const Contact = (props) => {
                                         })}
                                         multiline={true}
                                         numberOfLines={Platform.OS === 'ios' ? null : 8}
-                                        minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null} numberOf
+                                        minHeight={(Platform.OS === 'ios' && 8) ? (20 * 8) : null}
                                         // defaultValue={'tabish@123'}
                                         // inputRef={message.ref}
                                         onChangeText={(value) => setValue('message', value)}
@@ -196,7 +173,7 @@ const Contact = (props) => {
                                 onPress={handleSubmit(onSubmit)}
                                 style={globalstyle.authSubmitButton}
                             >
-                                <Text style={globalstyle.authSubmitButtonText}>{strings.Submit}</Text>
+                                <Text style={globalstyle.authSubmitButtonText}>{'Submit'}</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -204,19 +181,19 @@ const Contact = (props) => {
                     </ScrollView>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
-        </ImageBackground>
+        </View>
         {/* </ScrollView> */}
     </SafeAreaView>
 }
 
 const setStateToProps = (state) => ({
     userInfo: state.appstate.userInfo,
-    contactResponse: state.listingstate.contactResponse,
-    contactErrorResponse: state.listingstate.contactErrorResponse
+    // contactResponse: state.listingstate.contactResponse,
+    // contactErrorResponse: state.listingstate.contactErrorResponse
 })
 const mapDispatchToProps = (dispatch) => {
     return {
-        ContactApiCall: bindActionCreators(ContactApiCall, dispatch)
+        // ContactApiCall: bindActionCreators(ContactApiCall, dispatch)
     }
 }
 export default connect(setStateToProps, mapDispatchToProps)(Contact);

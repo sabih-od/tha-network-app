@@ -99,7 +99,7 @@ const InvitationCode = (props) => {
                     <>
                         <ScrollView style={isIPad && globalstyle.authscreencontainer}>
                             {/* <View style={{ alignItems: 'center', }}>
-                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 150, height: 150, resizeMode: 'contain' }} />
+                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 170, height: 150, resizeMode: 'contain' }} />
                             </View> */}
                             <View>
                                 <Text style={globalstyle.authheading}>Invitation Code</Text>
@@ -111,23 +111,24 @@ const InvitationCode = (props) => {
                                     <TextInput
                                         style={globalstyle.inputfield}
                                         placeholder="Enter Your Invitation Code..."
-                                        {...register('invitation_code', {
-                                            value: '',
-                                            // value: 'johnmartin@mailinator.com',
-                                            required: 'Invitation code is required',
-                                            // pattern: {
-                                            //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                            //     message: "Please provide valid email"
-                                            // },
-                                        })}
+                                        // {...register('invitation_code', {
+                                        //     value: '',
+                                        //     // value: 'johnmartin@mailinator.com',
+                                        //     required: 'Invitation code is required',
+                                        //     pattern: {
+                                        //         value: /[0-9+]$/i,
+                                        //         message: "Please provide valid number"
+                                        //     },
+                                        // })}
                                         defaultValue={''}
                                         // defaultValue={'johnmartin@mailinator.com'}
                                         placeholderTextColor={colors.placeholdercolor}
                                         autoCapitalize='none'
+                                        keyboardType="numeric"
                                         onChangeText={(value) => setValue('invitation_code', value)}
-                                        ref={input01}
-                                        returnKeyType="next"
-                                        onSubmitEditing={() => input02.current.focus()}
+                                        // ref={input01}
+                                        // returnKeyType="next"
+                                        // onSubmitEditing={() => input02.current.focus()}
                                     />
                                 </View>
                                 {errors.invitation_code && <Text style={globalstyle.errorField}>{errors.invitation_code.message}</Text>}

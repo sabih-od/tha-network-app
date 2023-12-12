@@ -38,8 +38,9 @@ const Register = (props) => {
     const onSubmit = (data) => {
         if (isChecked) {
             console.log('data => ', data)
-            props.RegisterApiCall(data)
-            isLoading(true);
+            // props.RegisterApiCall(data)
+            // isLoading(true);
+            props.navigation.navigate('Login')
         } else {
             showToast('success', 'Please read and agree with terms and conditions')
         }
@@ -50,6 +51,8 @@ const Register = (props) => {
     const input03 = useRef();
     const input04 = useRef();
     const input05 = useRef();
+    const input06 = useRef();
+    const input07 = useRef();
 
     const [showTermsModal, setShowTermsModal] = useState(false);
 
@@ -60,65 +63,64 @@ const Register = (props) => {
         />
         <Loader isLoading={loading} />
         <TermsAndConditionsModal visible={showTermsModal} setVisible={setShowTermsModal} />
-        <View
-            style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]}
-        >
+        <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]} >
             <KeyboardAvoidingView behavior={IOS ? 'padding' : 'height'} >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <ScrollView style={isIPad && globalstyle.authscreencontainer}>
                         <View>
-                            <Text style={globalstyle.authheading}>Sign Up</Text>
+                            <Text style={globalstyle.authheading}>Registration</Text>
                             <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
                         </View>
                         <View>
-                            <View style={globalstyle.inputbox}>
-                                <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
-                                <TextInput
-                                    style={globalstyle.inputfield}
-                                    placeholder="First Name"
-                                    placeholderTextColor={colors.placeholdercolor}
-                                    {...register('first_name', {
-                                        // value: 'John',
-                                        value: '',
-                                        required: 'First name is required',
-                                        pattern: {
-                                            value: /^[A-Za-z\s]+$/i,
-                                            message: "Please provide a valid name"
-                                        },
-                                    })}
-                                    defaultValue=''
-                                    // defaultValue='John'
-                                    onChangeText={(value) => setValue('first_name', value)}
-                                    ref={input01}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => input02.current.focus()}
-                                />
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={[globalstyle.inputbox, { width: '48.3%' }]}>
+                                    <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
+                                    <TextInput
+                                        style={globalstyle.inputfield}
+                                        placeholder="First Name"
+                                        placeholderTextColor={colors.placeholdercolor}
+                                        // {...register('first_name', {
+                                        //     // value: 'John',
+                                        //     value: '',
+                                        //     required: 'First name is required',
+                                        //     pattern: {
+                                        //         value: /^[A-Za-z\s]+$/i,
+                                        //         message: "Please provide a valid name"
+                                        //     },
+                                        // })}
+                                        defaultValue=''
+                                        // defaultValue='John'
+                                        onChangeText={(value) => setValue('first_name', value)}
+                                        ref={input01}
+                                        returnKeyType="next"
+                                        onSubmitEditing={() => input02.current.focus()}
+                                    />
+                                </View>
+                                <View style={[globalstyle.inputbox, { width: '48.3%' }]}>
+                                    <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
+                                    <TextInput
+                                        style={globalstyle.inputfield}
+                                        placeholder="Last Name"
+                                        placeholderTextColor={colors.placeholdercolor}
+                                        // {...register('last_name', {
+                                        //     // value: 'Martin',
+                                        //     value: '',
+                                        //     required: 'Last name is required',
+                                        //     pattern: {
+                                        //         value: /^[A-Za-z\s]+$/i,
+                                        //         message: "Please provide a valid name"
+                                        //     },
+                                        // })}
+                                        defaultValue=''
+                                        // defaultValue='Martin'
+                                        onChangeText={(value) => setValue('last_name', value)}
+                                        ref={input02}
+                                        returnKeyType="next"
+                                        onSubmitEditing={() => input03.current.focus()}
+                                    />
+                                </View>
                             </View>
-                            {errors.first_name && <Text style={globalstyle.errorField}>{errors.first_name.message}</Text>}
-                            <View style={globalstyle.inputbox}>
-                                <Icon style={globalstyle.authlefticon} name={'user'} size={18} />
-                                <TextInput
-                                    style={globalstyle.inputfield}
-                                    placeholder="Last Name"
-                                    placeholderTextColor={colors.placeholdercolor}
-                                    {...register('last_name', {
-                                        // value: 'Martin',
-                                        value: '',
-                                        required: 'Last name is required',
-                                        pattern: {
-                                            value: /^[A-Za-z\s]+$/i,
-                                            message: "Please provide a valid name"
-                                        },
-                                    })}
-                                    defaultValue=''
-                                    // defaultValue='Martin'
-                                    onChangeText={(value) => setValue('last_name', value)}
-                                    ref={input01}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => input02.current.focus()}
-                                />
-                            </View>
-                            {errors.last_name && <Text style={globalstyle.errorField}>{errors.last_name.message}</Text>}
+                            {(errors.first_name || errors.last_name) && <Text style={globalstyle.errorField}>{errors.first_name.message || errors.last_name.message}</Text>}
 
                             <View style={globalstyle.inputbox}>
                                 <Icon style={globalstyle.authlefticon} name={'mail'} size={18} />
@@ -126,22 +128,23 @@ const Register = (props) => {
                                     style={globalstyle.inputfield}
                                     placeholder="Email Address"
                                     placeholderTextColor={colors.placeholdercolor}
-                                    {...register('email', {
-                                        // value: 'johnmartin@mailinator.com',
-                                        value: '',
-                                        required: 'Email Address is required',
-                                        pattern: {
-                                            value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                            message: "Please provide valid email"
-                                        },
-                                    })}
+                                    // {...register('email', {
+                                    //     // value: 'johnmartin@mailinator.com',
+                                    //     value: '',
+                                    //     required: 'Email Address is required',
+                                    //     pattern: {
+                                    //         value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
+                                    //         message: "Please provide valid email"
+                                    //     },
+                                    // })}
                                     defaultValue={''}
+                                    keyboardType='email-address'
                                     // defaultValue={'johnmartin@mailinator.com'}
                                     onChangeText={(value) => setValue('email', value)}
                                     autoCapitalize='none'
-                                    ref={input02}
+                                    ref={input03}
                                     returnKeyType="next"
-                                    onSubmitEditing={() => input03.current.focus()}
+                                    onSubmitEditing={() => input04.current.focus()}
                                 />
                             </View>
                             {errors.email && <Text style={globalstyle.errorField}>{errors.email.message}</Text>}
@@ -153,22 +156,22 @@ const Register = (props) => {
                                     placeholder="Phone Number (Optional)"
                                     placeholderTextColor={colors.placeholdercolor}
                                     // keyboardType='phone-pad'
-                                    keyboardType='numeric'
-                                    {...register('phone', {
-                                        // value: '+8134234123123',
-                                        value: '',
-                                        // required: 'Phone number is required',
-                                        pattern: {
-                                            value: /[0-9+]$/i,
-                                            message: "Please provide valid phone number"
-                                        },
-                                    })}
+                                    keyboardType='number-pad'
+                                    // {...register('phone', {
+                                    //     // value: '+8134234123123',
+                                    //     value: '',
+                                    //     // required: 'Phone number is required',
+                                    //     pattern: {
+                                    //         value: /[0-9+]$/i,
+                                    //         message: "Please provide valid phone number"
+                                    //     },
+                                    // })}
                                     defaultValue=''
                                     // defaultValue='+8134234123123'
                                     onChangeText={(value) => setValue('phone', value)}
-                                    ref={input03}
+                                    ref={input04}
                                     returnKeyType="next"
-                                    onSubmitEditing={() => input04.current.focus()}
+                                    onSubmitEditing={() => input05.current.focus()}
                                 />
                             </View>
                             {errors.phone && <Text style={globalstyle.errorField}>{errors.phone.message}</Text>}
@@ -182,21 +185,21 @@ const Register = (props) => {
                                     placeholderTextColor={colors.placeholdercolor}
                                     // keyboardType='phone-pad'
                                     keyboardType='numeric'
-                                    {...register('social_security', {
-                                        // value: '+8134234123123',
-                                        value: '',
-                                        // required: 'Phone number is required',
-                                        pattern: {
-                                            value: /[0-9+]$/i,
-                                            message: "Please provide valid phone number"
-                                        },
-                                    })}
+                                    // {...register('social_security', {
+                                    //     // value: '+8134234123123',
+                                    //     value: '',
+                                    //     // required: 'Phone number is required',
+                                    //     pattern: {
+                                    //         value: /[0-9+]$/i,
+                                    //         message: "Please provide valid phone number"
+                                    //     },
+                                    // })}
                                     defaultValue=''
                                     // defaultValue='+8134234123123'
                                     onChangeText={(value) => setValue('social_security', value)}
-                                    ref={input03}
+                                    ref={input05}
                                     returnKeyType="next"
-                                    onSubmitEditing={() => input04.current.focus()}
+                                    onSubmitEditing={() => input06.current.focus()}
                                 />
                             </View>
                             {errors.social_security && <Text style={globalstyle.errorField}>{errors.social_security.message}</Text>}
@@ -209,21 +212,21 @@ const Register = (props) => {
                                     placeholderTextColor={colors.placeholdercolor}
                                     // keyboardType='phone-pad'
                                     keyboardType='numeric'
-                                    {...register('weekly_goal', {
-                                        // value: '+8134234123123',
-                                        value: '',
-                                        // required: 'Phone number is required',
-                                        pattern: {
-                                            value: /[0-9+]$/i,
-                                            message: "Please provide valid phone number"
-                                        },
-                                    })}
+                                    // {...register('weekly_goal', {
+                                    //     // value: '+8134234123123',
+                                    //     value: '',
+                                    //     // required: 'Phone number is required',
+                                    //     pattern: {
+                                    //         value: /[0-9+]$/i,
+                                    //         message: "Please provide valid phone number"
+                                    //     },
+                                    // })}
                                     defaultValue=''
                                     // defaultValue='+8134234123123'
                                     onChangeText={(value) => setValue('weekly_goal', value)}
-                                    ref={input03}
+                                    ref={input06}
                                     returnKeyType="next"
-                                    onSubmitEditing={() => input04.current.focus()}
+                                    onSubmitEditing={() => input07.current.focus()}
                                 />
                             </View>
                             {errors.weekly_goal && <Text style={globalstyle.errorField}>{errors.weekly_goal.message}</Text>}
@@ -235,19 +238,19 @@ const Register = (props) => {
                                         style={[globalstyle.inputfield, { flex: 0.8 }]}
                                         placeholder="Password"
                                         placeholderTextColor={colors.placeholdercolor}
-                                        {...register('password', {
-                                            value: '',
-                                            // value: '12345678',
-                                            required: 'Password is required',
-                                            minLength: { value: 8, message: 'Password length must be greater then 8' }
-                                        })}
+                                        // {...register('password', {
+                                        //     value: '',
+                                        //     // value: '12345678',
+                                        //     required: 'Password is required',
+                                        //     minLength: { value: 8, message: 'Password length must be greater then 8' }
+                                        // })}
                                         defaultValue={''}
                                         // defaultValue={'12345678'}
                                         // inputRef={password.ref}
                                         onChangeText={(value) => setValue('password', value)}
                                         secureTextEntry={!showPassword ? true : false}
                                         autoCapitalize='none'
-                                        ref={input04}
+                                        ref={input07}
                                     // returnKeyType="next"
                                     // onSubmitEditing={() => input05.current.focus()}
                                     />

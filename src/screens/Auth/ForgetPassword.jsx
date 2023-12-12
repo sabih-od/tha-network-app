@@ -41,9 +41,11 @@ const ForgetPassword = (props) => {
 
     const onSubmit = (data) => {
         console.log('data => ', data)
-        props.ForgetPasswordApiCall(data)
-        setEmailAddress(data.email)
-        isLoading(true);
+        props.navigation.navigate('Login')
+        showToast('success', 'Updated password sent to your email')
+        // props.ForgetPasswordApiCall(data)
+        // setEmailAddress(data.email)
+        // isLoading(true);
         // props.navigation.navigate('SubmitOTP', { email: data.email })
     }
 
@@ -69,14 +71,14 @@ const ForgetPassword = (props) => {
                                     style={globalstyle.inputfield}
                                     placeholder="Email Address"
                                     placeholderTextColor={colors.placeholdercolor}
-                                    {...register('email', {
-                                        // value: 'johncanady@mailinator.com',
-                                        required: 'Email Address is required',
-                                        pattern: {
-                                            value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                            message: "Please provide valid email"
-                                        },
-                                    })}
+                                    // {...register('email', {
+                                    //     // value: 'johncanady@mailinator.com',
+                                    //     required: 'Email Address is required',
+                                    //     pattern: {
+                                    //         value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
+                                    //         message: "Please provide valid email"
+                                    //     },
+                                    // })}
                                     // defaultValue={'johncanady@mailinator.com'}
                                     onChangeText={(value) => setValue('email', value)}
                                     autoCapitalize='none'
