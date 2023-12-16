@@ -1,7 +1,9 @@
-export const LoginAPI = '/auth/login';
-export const RegisterAPI = '/auth/signup';
-export const ForgetPassAPI = '/auth/forgot-password';
-export const UpdateProfilePictureAPI = '/auth/upload-profile-picture';
+export const LoginAPI = '/login';
+export const GetInvitationCodeAPI = '/get-invitaion-code';
+export const RegisterAPI = '/register';
+export const ForgetPassAPI = '/forgot-password';
+export const UpdateProfilePictureAPI = '/upload-profile-picture';
+export const LogoutAPI = '/login';
 
 export const SubmitOTPAPI = '/auth/submit-otp';
 export const ResendOTPAPI = '/auth/resend-otp';
@@ -11,7 +13,7 @@ export const BlockedUsersListAPI = '/auth/blocked-users';
 export const BlockUserAPI = '/auth/block-user';
 
 // export const EditProfileAPI = '/users';
-export const EditProfileAPI = '/auth/update-profile';
+export const EditProfileAPI = '/update-profile';
 export const GetUserByIdAPI = '/getuser';
 export const DeleteUserAPI = '/users';
 
@@ -33,6 +35,7 @@ export const GetFavouriteIdsAPI = '/posts/favourites/post-ids';
 
 
 export const GetPostsAPI = '/posts';
+
 export const GetEventsAPI = '/events';
 export const GetUpcomingEventsAPI = '/events';
 export const GetOurStaffAPI = '/staff-members';
@@ -45,7 +48,7 @@ export const GetHomeBannerAPI = '/pages/home-banner/get';
 
 export const ReportUserAPI = '/reports/report-user';
 export const ReportMessageAPI = '/reports/report-message';
-export const SendGroupRequestAPI = '/group-requests';
+// export const SendGroupRequestAPI = '/group-requests';
 
 // export const GetSermonsDetailAPI = '';
 // export const GetPostsDetailAPI = '';
@@ -61,6 +64,8 @@ export const GetMessagesAPI = '/groups/get-messages';
 export const SendMessageAPI = '/messages';
 export const DeleteMessageAPI = '/messages'
 
-export const RequestPrayerAPI = '/prayer-requests';
+// export const RequestPrayerAPI = '/prayer-requests';
 export const ContactAPI = '/contacts';
 export const AboutAPI = '/pages/get-by-name/about';
+
+export const GetWeeklyGoalsAPI = 'get-weekly-goals';

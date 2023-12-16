@@ -17,6 +17,7 @@ import axios from "axios";
 
 // import strings, { changeLang } from "./../../localization/translation";
 import SplashScreen from "react-native-splash-screen";
+import AuthLogo from "../../components/AuthLogo";
 // import RNRestart from 'react-native-restart';
 
 const InvitationCode = (props) => {
@@ -86,10 +87,6 @@ const InvitationCode = (props) => {
     const input01 = useRef();
     const input02 = useRef();
 
-    useEffect(() => {
-        console.log('isRTL 123 => ', isRTL)
-        // changeLang(isRTL ? 'ar' : 'en')
-    }, [])
 
     return <SafeAreaView style={globalstyle.fullview}>
         <Loader isLoading={loading} />
@@ -98,9 +95,7 @@ const InvitationCode = (props) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <>
                         <ScrollView style={isIPad && globalstyle.authscreencontainer}>
-                            {/* <View style={{ alignItems: 'center', }}>
-                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 170, height: 150, resizeMode: 'contain' }} />
-                            </View> */}
+                            <AuthLogo />
                             <View>
                                 <Text style={globalstyle.authheading}>Invitation Code</Text>
                                 <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
@@ -126,9 +121,9 @@ const InvitationCode = (props) => {
                                         autoCapitalize='none'
                                         keyboardType="numeric"
                                         onChangeText={(value) => setValue('invitation_code', value)}
-                                        // ref={input01}
-                                        // returnKeyType="next"
-                                        // onSubmitEditing={() => input02.current.focus()}
+                                    // ref={input01}
+                                    // returnKeyType="next"
+                                    // onSubmitEditing={() => input02.current.focus()}
                                     />
                                 </View>
                                 {errors.invitation_code && <Text style={globalstyle.errorField}>{errors.invitation_code.message}</Text>}

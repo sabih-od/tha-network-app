@@ -215,13 +215,13 @@ const PersonalInformation = props => {
   const password = register('password', {
     value: '',
     // required: 'Password is required',
-    minLength: { value: 8, message: 'Min lenght 8' }
+    // minLength: { value: 8, message: 'Min lenght 8' }
   })
 
-  const confirmpass = register('confirmpass', {
+  const confirmpass = register('password_confirmation', {
     value: '',
     // required: 'Confirm Password is required',
-    minLength: { value: 8, message: 'Min lenght 8' },
+    // minLength: { value: 8, message: 'Min lenght 8' },
     // validate: value => value === password.current || "Password does not match"
   })
 
@@ -236,8 +236,8 @@ const PersonalInformation = props => {
     <View style={[globalstyle.authContainer, { justifyContent: 'center', paddingHorizontal: 15 }]} >
       <KeyboardAvoidingView behavior={IOS ? 'padding' : 'padding'} >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView style={isIPad && globalstyle.authscreencontainer}>
-            <View style={[{ paddingVertical: 20 }, isIPad && globalstyle.authscreencontainer]}>
+          <ScrollView style={isIPad && globalstyle.authscreencontainer} showsVerticalScrollIndicator={false}>
+            <View style={[{ paddingVertical: 20, paddingBottom: 150 }, isIPad && globalstyle.authscreencontainer]}>
               <View style={{ width: 140, height: 140, borderRadius: 140, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
                 <Image
                   source={
@@ -265,12 +265,12 @@ const PersonalInformation = props => {
               </View>
 
               {/* <TouchableOpacity
-              onPress={() => {
-                setIsEditable(!isEditable);
-              }}
-              style={{ marginLeft: 'auto', marginTop: -60, marginBottom: 15, width: 40, height: 40, borderRadius: 40, backgroundColor: colors.black, alignItems: 'center', justifyContent: 'center', }}>
-              <Icon name={!isEditable ? 'edit-3' : 'x'} size={20} color={colors.white} />
-            </TouchableOpacity> */}
+                onPress={() => {
+                  setIsEditable(!isEditable);
+                }}
+                style={{ marginLeft: 'auto', marginTop: -60, marginBottom: 15, width: 40, height: 40, borderRadius: 40, backgroundColor: colors.black, alignItems: 'center', justifyContent: 'center', }}>
+                <Icon name={!isEditable ? 'edit-3' : 'x'} size={20} color={colors.white} />
+              </TouchableOpacity> */}
 
               <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 24, marginBottom: 0, color: colors.black }}>Referral Payment Options</Text>
               <Text style={{ fontFamily: fonts.primary, fontSize: 14, color: colors.grey }}>In order to receive Referral Payments you must include your Stripe Account information. If you do not have a Stripe Account create one and provide the information below. If this information is not provided, you will not be able to receive your referral payments</Text>
@@ -294,7 +294,7 @@ const PersonalInformation = props => {
                     placeholder={'Enter Bio'}
                     placeholderTextColor={colors.placeholdercolor}
                     {...register('bio', {
-                      value: user?.first_name,
+                      value: user?.bio,
                       // required: 'bio is required',
                       // minLength: { value: 20, message: 'message length must be greater then 20 characters' }
                     })}
@@ -502,8 +502,8 @@ const PersonalInformation = props => {
                       // minLength: { value: 20, message: 'address length must be greater then 20 characters' }
                     })}
                     multiline={true}
-                    numberOfLines={Platform.OS === 'ios' ? null : 4}
-                    minHeight={(Platform.OS === 'ios' && 4) ? (20 * 4) : null}
+                    numberOfLines={Platform.OS === 'ios' ? null : 7}
+                    minHeight={(Platform.OS === 'ios' && 7) ? (20 * 7) : null}
                     defaultValue={user?.address}
                     // inputRef={address.ref}
                     onChangeText={(value) => setValue('address', value)}
@@ -593,7 +593,7 @@ const PersonalInformation = props => {
               </View>
               {errors.postal_code && (<Text style={globalstyle.errorField}>{errors.postal_code.message}</Text>)}
 
-              <Text style={{ color: colors.black, fontFamily: fonts.primarySemiBold, fontSize: 20, marginTop: 15 }}>Change Password</Text>
+              {/* <Text style={{ color: colors.black, fontFamily: fonts.primarySemiBold, fontSize: 20, marginTop: 15 }}>Change Password</Text>
 
               <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -606,12 +606,13 @@ const PersonalInformation = props => {
                     // value="password123"
                     placeholderTextColor={colors.placeholdercolor}
                     // {...register('password', {
-                    //     value: 'password123',
-                    //     required: 'Password is required',
-                    //     minLength: { value: 8, message: 'Password length must be greater then 8' }
+                    //   value: 'John@123123',
+                    //   // value: 'password123',
+                    //   required: 'Password is required',
+                    //   minLength: { value: 8, message: 'Password length must be greater then 8' }
                     // })}
-                    // defaultValue={'tabish@123'}
-                    // inputRef={password.ref}
+                    defaultValue={'tabish@123'}
+                    inputRef={password.ref}
                     onChangeText={(value) => setValue('current_password', value)}
                     secureTextEntry={!showPassword ? true : false}
                     autoCapitalize='none'
@@ -661,10 +662,10 @@ const PersonalInformation = props => {
                     inputRef={confirmpass.ref}
                     // value="password123"
                     placeholderTextColor={colors.placeholdercolor}
-                    // {...register('password', {
-                    //     value: 'password123',
-                    //     required: 'Password is required',
-                    //     minLength: { value: 8, message: 'Password length must be greater then 8' }
+                    // {...register('password_confirmation', {
+                    //   value: 'password123',
+                    //   required: 'Confirm Password is required',
+                    //   minLength: { value: 8, message: 'Password length must be greater then 8' }
                     // })}
                     // defaultValue={'tabish@123'}
                     // inputRef={password.ref}
@@ -681,7 +682,8 @@ const PersonalInformation = props => {
                 </TouchableOpacity>
               </View>
               {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
-              <Text style={{ fontFamily: fonts.primary, color: colors.grey, fontSize: 13, marginTop: 10 }}>The password should be at least 8 characters long with (1 upper case letter, 1 number, 1 special character (!@#$%^&*)</Text>
+
+              <Text style={{ fontFamily: fonts.primary, color: colors.grey, fontSize: 13, marginTop: 10 }}>The password should be at least 8 characters long with (1 upper case letter, 1 number, 1 special character (!@#$%^&*)</Text> */}
 
 
 

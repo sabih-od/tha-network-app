@@ -36,15 +36,15 @@ const Home = (props) => {
     useEffect(() => {
         connectPusher();
         props.navigation.setOptions({
-            headerTitle: 'Hello, Michelle', //`Hello, ${userInfo?.first_name}`,
+            headerTitle: `Hello, ${userInfo?.first_name}`,
             headerRight: () => <View style={{ alignItems: 'center', flexDirection: 'row' }}>
                 <NotificationIcon navigation={props.navigation} />
                 <TouchableOpacity
                     onPress={() => { props.navigation.navigate('Profile') }}
                     style={{ width: 33, height: 33, borderRadius: 33, overflow: 'hidden', marginRight: 12 }}>
                     <Image
-                        // source={typeof userInfo?.profile_image === 'string' ? { uri: userInfo?.profile_image } : userInfo?.profile_image}
-                        source={{ uri: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png' }}
+                        source={typeof userInfo?.profile_image === 'string' ? { uri: userInfo?.profile_image } : userInfo?.profile_image}
+                        // source={{ uri: 'https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png' }}
                         defaultSource={require('./../../assets/images/dummy-profile-image.png')}
                         style={{ resizeMode: 'cover', width: 33, height: 33, borderRadius: 33, }} />
                 </TouchableOpacity>
@@ -208,7 +208,14 @@ const Home = (props) => {
         // }
         >
 
-            <View style={{ backgroundColor: colors.orange, padding: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={{ backgroundColor: colors.orange }}>
+                <View style={{ backgroundColor: colors.orange, paddingHorizontal: 15, paddingVertical: 10, borderRadius: 10, marginTop: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: colors.white, marginHorizontal: 15 }}>
+                    <Text style={{ fontFamily: fonts.primaryMedium, color: colors.black, fontSize: 15, }}>Total Reffereal Income</Text>
+                    <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.black, fontSize: 22, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>200.00</Text>
+                </View>
+            </View>
+
+            {/* <View style={{ backgroundColor: colors.orange, padding: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <View>
                     <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12, marginBottom: -8 }}>My Balance</Text>
                     <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 22, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>160.00</Text>
@@ -223,7 +230,7 @@ const Home = (props) => {
                     <Text style={{ fontFamily: fonts.primary, color: colors.white, fontSize: 12, marginBottom: -8 }}>Total Withdrawl</Text>
                     <Text style={{ fontFamily: fonts.primarySemiBold, color: colors.white, fontSize: 22, textAlign: 'left' }}><Text style={{ fontFamily: fonts.primaryMedium, fontSize: 14, marginRight: 5 }}>$ </Text>40.00</Text>
                 </View>
-            </View>
+            </View> */}
 
             <View>
                 <View style={{ width: width, height: 100, backgroundColor: colors.orange, position: 'absolute', top: 0 }} />
@@ -252,10 +259,10 @@ const Home = (props) => {
             </View> */}
 
             <View style={{ padding: 15, marginBottom: 30 }}>
-                <CreatePost user={props.userInfo} />
+                <CreatePost user={userInfo} />
                 {postslist.map((item, index) => {
                     return (
-                        <PostItem key={index} item={item} user={props.userInfo} />
+                        <PostItem key={index} item={item} user={userInfo} />
                     )
                 })}
             </View>

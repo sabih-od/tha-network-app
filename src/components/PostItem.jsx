@@ -42,7 +42,7 @@ const PostItem = (props) => {
             <View style={{ width: '82%' }}>
                 <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 17, color: colors.black, marginBottom: -5 }}>{item?.user?.name}</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: colors.grey, marginTop: -2 }}>{item?.user?.username}</Text>
+                    <Text style={{ fontFamily: fonts.primary, fontSize: 12, color: colors.grey, marginTop: IOS ? 4 : -2 }}>{item?.user?.username}</Text>
                     <Text style={{ fontFamily: fonts.primary, fontSize: 11, color: colors.grey, marginTop: 3 }}>12 Dec, 2023 04:38 AM</Text>
                 </View>
             </View>

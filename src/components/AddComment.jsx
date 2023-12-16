@@ -9,12 +9,16 @@ const AddComment = (props) => {
     const commentRef = useRef(null);
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
-            <View style={{ width: 40, height: 40, borderRadius: 10, overflow: 'hidden', marginRight: 12 }}>
+            {!props?.reply && <View style={{ width: 40, height: 40, borderRadius: 10, overflow: 'hidden', marginRight: 12 }}>
                 <Image source={user?.profile_image && typeof user?.profile_image === 'string' ? { uri: user?.profile_image } : user?.profile_image}
                     defaultSource={require('./../../assets/images/dummy-profile-image.png')}
                     style={{ resizeMode: 'cover', width: 40, height: 40 }}
                 />
-            </View>
+            </View>}
+            {props?.reply && <TouchableOpacity onPress={() => { props.handleClose(false) }}
+                style={{ width: 30, height: 30, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.red, borderRadius: 10, marginRight: 5 }}>
+                <Icon name="x" color={colors.white} />
+            </TouchableOpacity>}
             <TextInput
                 placeholder="Write a comment"
                 placeholderTextColor={'#999'}

@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 // import { useForm } from 'react-hook-form';
 import globalstyle from '../../theme/style';
-import { backgroungImage, colors, fonts, height, isDarkMode, isIPad, isRTL, width } from '../../theme';
+import { IOS, backgroungImage, colors, fonts, height, isDarkMode, isIPad, isRTL, width } from '../../theme';
 import { useRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -101,8 +101,8 @@ const Settings = props => {
           {/* <BlockedUsers passReferenceToParent={handleChildReference} /> */}
           {/* <BlockedUsersListModal visible={showBlockedUsers} setVisible={setShowBlockedUsers} /> */}
           {/* <View style={{ backgroundColor: colors.black, height: 400, width: '100%', top: 0, position: 'absolute', }}></View> */}
-          <View style={[{ paddingVertical: 20, }, isIPad && globalstyle.authscreencontainer, { marginTop: 'auto', marginBottom: 'auto' }]}>
-            <View style={{ width: PROFILE_SQUARE, height: PROFILE_SQUARE, borderRadius: PROFILE_SQUARE, marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
+          <View style={[{ paddingBottom: 20, }, isIPad && globalstyle.authscreencontainer, { marginTop: 'auto', marginBottom: 'auto' }]}>
+            <View style={{ width: PROFILE_SQUARE, height: PROFILE_SQUARE, borderRadius: PROFILE_SQUARE, marginLeft: 'auto', marginRight: 'auto', marginBottom: 20, position: 'relative', backgroundColor: '#ddd', borderColor: colors.white, borderWidth: 2 }}>
               <Image
                 source={
                   typeof user?.profile_image === 'string'
@@ -114,7 +114,7 @@ const Settings = props => {
               />
             </View>
             <View style={{ alignItems: 'center' }}>
-              <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24, marginBottom: -8 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
+              <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24, marginBottom: IOS ? 0 : -8 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 {/* <Icon name="mail" style={{ color: colors.orange, fontSize: 18, marginRight: 8 }} /> */}
                 <Text style={[styles.edititemstext, { fontFamily: fonts.primary }]}>{`${user?.email}`}</Text>
@@ -156,6 +156,13 @@ const Settings = props => {
                 style={styles.edititem}>
                 <Icon name="slash" style={styles.editicon} />
                 <Text style={styles.edititemstext}>Blocked Users List</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => props.navigation.navigate('ChangePassword')}
+                style={styles.edititem}>
+                <Icon name="lock" style={styles.editicon} />
+                <Text style={styles.edititemstext}>Change Password</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}

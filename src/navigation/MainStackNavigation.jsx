@@ -33,6 +33,7 @@ import ChatMessages from "../screens/ChatMessages/ChatMessages";
 import ChatChannels from "../screens/ChatMessages/ChatChannels";
 import BlockList from "../screens/BlockList";
 import NewMembersInNetwork from "../screens/NewMembersInNetwork";
+import ChangePassword from "../screens/Profile/ChangePassword";
 // import QuestionAnswer from "../screens/QuestionAnswer";
 // import Audio from "../screens/Audio";
 // import Social from "../screens/Lectures/Social";
@@ -145,6 +146,23 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                 component={PeopleInNetwork}
                 options={{
                     headerTitle: 'People In My Network',
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: globalstyle.headerTitleStyle,
+                    headerStyle: {
+                        backgroundColor: colors.orange,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerLeft: () => <GoBackIcon navigation={navigation} color={colors.white} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerRight: () => <NotificationIcon navigation={navigation} />
+                }}
+            />
+            <Stack.Screen
+                name="ChangePassword"
+                component={ChangePassword}
+                options={{
+                    headerTitle: 'Change Password',
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerStyle: {

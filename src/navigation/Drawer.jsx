@@ -110,7 +110,7 @@ const DrawerContent = (props) => {
   // }, []);
 
   const [user, setUser] = useState(props.userInfo);
-  const [drawerMenu, setDrawerMenu] = useState([]);
+  // const [drawerMenu, setDrawerMenu] = useState([]);
   const textInput = useRef();
 
   useEffect(() => {
@@ -124,13 +124,13 @@ const DrawerContent = (props) => {
     }
   }, [])
 
-  const menuRef = useRef(props.drawerMenu)
-  useEffect(() => {
-    if (props.drawerMenu != menuRef.current && props.drawerMenu?.success && props.drawerMenu?.data && props.drawerMenu?.data.length > 0) {
-      // console.log('props.drawerMenu?.data => ', props.drawerMenu?.data)
-      setDrawerMenu(props.drawerMenu?.data) //.reverse()
-    }
-  }, [props.drawerMenu])
+  // const menuRef = useRef(props.drawerMenu)
+  // useEffect(() => {
+  //   if (props.drawerMenu != menuRef.current && props.drawerMenu?.success && props.drawerMenu?.data && props.drawerMenu?.data.length > 0) {
+  //     // console.log('props.drawerMenu?.data => ', props.drawerMenu?.data)
+  //     setDrawerMenu(props.drawerMenu?.data) //.reverse()
+  //   }
+  // }, [props.drawerMenu])
 
   // const prevUserProfileResRef = useRef(props.getUserProfileResponse?.data);
 
@@ -171,7 +171,7 @@ const DrawerContent = (props) => {
           }}>
             <Image
               source={typeof user?.profile_image === 'string' ? { uri: user?.profile_image } : user?.profile_image}
-              defaultSource={require('./../../assets/images/dummy-profile-image.png')}
+              // defaultSource={require('./../../assets/images/dummy-profile-image.png')}
               style={{ width: isIPad ? 120 : 90, height: isIPad ? 120 : 90, resizeMode: 'cover', }}
             />
           </TouchableOpacity>

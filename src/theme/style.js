@@ -17,7 +17,7 @@ const globalstyle = StyleSheet.create({
   authLogo: { width: 150, height: 130, resizeMode: 'contain', marginBottom: 25, },
   // authheading: { fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 44 : 34, color: colors.black, },
   // authdescription: { fontFamily: fonts.primary, fontSize: isIPad ? 22 : 17, color: colors.grey, marginBottom: 15 },
-  authSubmitButton: { backgroundColor: colors.orange, padding: 12, borderRadius: 10, marginTop: 13 },
+  authSubmitButton: { backgroundColor: colors.orange, padding: IOS ? 18 : 12, borderRadius: 10, marginTop: 13 },
   authSubmitButtonText: { color: colors.white, fontFamily: fonts.primarySemiBold, fontSize: isIPad ? 17 : 16, marginBottom: -3, textAlign: 'center', textTransform: 'uppercase', },
 
   authscreencontainer: { maxWidth: 500, marginLeft: 'auto', marginRight: 'auto' },
@@ -77,7 +77,7 @@ const globalstyle = StyleSheet.create({
   authbgimage: { paddingHorizontal: 15, flex: 1, justifyContent: 'space-between', },
   authbutton: { backgroundColor: colors.orange, borderRadius: 30, paddingVertical: 11, marginTop: 20 },
   authbuttontext: { textTransform: 'uppercase', fontSize: 18, fontFamily: fonts.primarySemiBold, textAlign: 'center', color: '#fff' },
-  authheading: { fontFamily: fonts.primarySemiBold, fontSize: 30, marginBottom: 0, textAlign: 'center', color: colors.black, marginTop: 20, marginBottom: -10 },
+  authheading: { fontFamily: fonts.primarySemiBold, fontSize: 30, marginBottom: 0, textAlign: 'center', color: colors.black, marginTop: 20, marginBottom: IOS ? 0 : -10 },
   authdescription: { fontFamily: fonts.primary, marginBottom: 10, textAlign: 'center', color: colors.grey },
   // inputbox: { backgroundColor: '#fff', marginBottom: 5, borderRadius: 50, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, marginTop: 15 },
   // inputfield: { paddingHorizontal: 15, paddingVertical: 13, fontFamily: fonts.primary, width: '100%', color: colors.black },

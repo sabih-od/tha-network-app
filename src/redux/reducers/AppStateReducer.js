@@ -9,7 +9,7 @@ export const initialState = {
     messageBadge: 0,
     accessToken: '',
     isLoading: false,
-    language: 'en',
+    // language: 'en',
     downloads: []
 }
 

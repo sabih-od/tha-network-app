@@ -20,6 +20,7 @@ import { SvgUri } from 'react-native-svg';
 
 // import strings, { changeLang } from "./../../localization/translation";
 import SplashScreen from "react-native-splash-screen";
+import AuthLogo from "../../components/AuthLogo";
 // import RNRestart from 'react-native-restart';
 
 const Login = (props) => {
@@ -30,17 +31,8 @@ const Login = (props) => {
     const prevLoginResponseRef = useRef(props.loginResponse);
     const prevLoginErrorRef = useRef(props.loginError);
 
-    // useEffect(() => {
-    //     if (!IOS) {
-    //         // axios.defaults.headers.common['Authorization'] = `Bearer 1656|35uwDzTjVDwexmX0Om94BtA9VPUKPHo2etdpGSUV`
-    //         axios.request({ url: 'https://hunterssocial.com/api/settings', method: 'GET' })
-    //             .then(function (response) { console.log('response hunter => ', response); })
-    //             .catch(function (error) { console.log(error); });
-    //     }
-    // }, [])
-
     useEffect(() => {
-        // console.log('props.loginResponse => ', props.loginResponse);
+        console.log('props.loginResponse => ', props.loginResponse);
         if (props.loginResponse !== prevLoginResponseRef.current && props.loginResponse?.success && props.loginResponse?.data) {
             prevLoginResponseRef.current = props.loginResponse;
             props.SetUserInfo(props.loginResponse?.data);
@@ -51,9 +43,9 @@ const Login = (props) => {
             // props.navigation.reset({ index: 0, routes: [{ name: 'Screens' }] })
         }
 
-        if (props.loginResponse !== prevLoginResponseRef.current && !props.loginResponse?.success) {
-            props.loginResponse?.message && showToast('error', props.loginResponse?.message?.replaceAll(' ', '-').toLowerCase() == 'user-not-found' ? 'Email or Password incorrect' : props.loginResponse?.message)
-        }
+        // if (props.loginResponse !== prevLoginResponseRef.current && !props.loginResponse?.success) {
+        //     props.loginResponse?.message && showToast('error', props.loginResponse?.message?.replaceAll(' ', '-').toLowerCase() == 'user-not-found' ? 'Email or Password incorrect' : props.loginResponse?.message)
+        // }
         isLoading(false);
     }, [props.loginResponse])
 
@@ -81,40 +73,40 @@ const Login = (props) => {
 
     const onSubmit = (data) => {
         console.log('onSubmit data => ', data)
-        props.SetIsLogin(true);
-        props.SetUserInfo({
-            "name": 'Michelle Francis',
-            "email": "michellefrancis@mailinator.com",
-            "created_at": "2023-12-01T22:15:10.000000Z",
-            "pwh": "Michelle@123",
-            "username": "@michellefrancis",
-            "role_id": 2,
-            "id": "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
-            "user_id": "13df6929-86bd-4c2f-9217-e8ae9a18197e",
-            "first_name": "Michelle",
-            "last_name": "Francis",
-            "phone": "+14845101357",
-            "social_security_number": null,
-            "bio": `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-            "address": 'House No 01, Street No 45',
-            "country": 'United States',
-            "city": 'New York',
-            "postal_code": '54231',
-            "updated_at": "2023-12-01T22:15:10.000000Z",
-            "marital_status": 'Single',
-            "gender": "Female",
-            "profile_image": "https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png", // require('./../../../assets/images/user-09.png'), //  
-            "profile_cover": null,
-            "has_made_monthly_payment": true,
-            "stripe_account_id": "acct_1OIf1t4Dh1B210rz",
-            "paypal_account_details": null,
-            "stripe_checkout_session_id": "sub_1OIevyKWX6MBBv9PI25Psvyu",
-            "has_provided_stripe_payout_information": false,
-            "preferred_payout_method": "stripe",
-            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9zZXJ2aWNlLmRlbW93ZWJzaXRlbGlua3MuY29tOjMwNDVcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE3MDE5NzgzODcsImV4cCI6MTcwMTk4MTk4NywibmJmIjoxNzAxOTc4Mzg3LCJqdGkiOiJPenBwZDRCT21IT0sxSlh4Iiwic3ViIjoiMTNkZjY5MjktODZiZC00YzJmLTkyMTctZThhZTlhMTgxOTdlIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.SeYCOSWKiEMhHx7vr7KQJzifn5o97XwkWS4lvIU8Dlo"
-        });
-        // props.LoginApiCall(data);
-        // isLoading(true);
+        // props.SetIsLogin(true);
+        // props.SetUserInfo({
+        //     "name": 'Michelle Francis',
+        //     "email": "michellefrancis@mailinator.com",
+        //     "created_at": "2023-12-01T22:15:10.000000Z",
+        //     "pwh": "Michelle@123",
+        //     "username": "@michellefrancis",
+        //     "role_id": 2,
+        //     "id": "9dad4f7c-9165-44b8-9f55-0039a4c1f1e1",
+        //     "user_id": "13df6929-86bd-4c2f-9217-e8ae9a18197e",
+        //     "first_name": "Michelle",
+        //     "last_name": "Francis",
+        //     "phone": "+14845101357",
+        //     "social_security_number": null,
+        //     "bio": `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        //     "address": 'House No 01, Street No 45',
+        //     "country": 'United States',
+        //     "city": 'New York',
+        //     "postal_code": '54231',
+        //     "updated_at": "2023-12-01T22:15:10.000000Z",
+        //     "marital_status": 'Single',
+        //     "gender": "Female",
+        //     "profile_image": "https://service.demowebsitelinks.com/tha-network/public/storage/303/male-avatar.png", // require('./../../../assets/images/user-09.png'), //  
+        //     "profile_cover": null,
+        //     "has_made_monthly_payment": true,
+        //     "stripe_account_id": "acct_1OIf1t4Dh1B210rz",
+        //     "paypal_account_details": null,
+        //     "stripe_checkout_session_id": "sub_1OIevyKWX6MBBv9PI25Psvyu",
+        //     "has_provided_stripe_payout_information": false,
+        //     "preferred_payout_method": "stripe",
+        //     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9zZXJ2aWNlLmRlbW93ZWJzaXRlbGlua3MuY29tOjMwNDVcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE3MDE5NzgzODcsImV4cCI6MTcwMTk4MTk4NywibmJmIjoxNzAxOTc4Mzg3LCJqdGkiOiJPenBwZDRCT21IT0sxSlh4Iiwic3ViIjoiMTNkZjY5MjktODZiZC00YzJmLTkyMTctZThhZTlhMTgxOTdlIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.SeYCOSWKiEMhHx7vr7KQJzifn5o97XwkWS4lvIU8Dlo"
+        // });
+        props.LoginApiCall(data);
+        isLoading(true);
     }
 
     const input01 = useRef();
@@ -138,13 +130,11 @@ const Login = (props) => {
                         <ScrollView style={isIPad && globalstyle.authscreencontainer}>
                             {/* <Logo /> */}
 
-                            <View style={{ alignItems: 'center', }}>
-                                <Image source={require('./../../../assets/images/logo.png')} style={{ width: 150, height: 120, resizeMode: 'contain' }} />
-                            </View>
-                            {/* <View>
+                            <AuthLogo />
+                            <View>
                                 <Text style={globalstyle.authheading}>Login</Text>
                                 <Text style={globalstyle.authdescription}>Have fun and build your network</Text>
-                            </View> */}
+                            </View>
                             <View>
                                 <View style={globalstyle.inputbox}>
                                     <Icon color={colors.blue} name={'mail'} size={18} />
@@ -153,7 +143,8 @@ const Login = (props) => {
                                         placeholder="Username or Email Address"
                                         {...register('email', {
                                             // value: '',
-                                            value: 'michellefrancis@mailinator.com',
+                                            value: 'johnsmith@mailinator.com',
+                                            // value: 'michellefrancis@mailinator.com',
                                             // required: 'Email Address is required',
                                             // pattern: {
                                             //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
@@ -161,7 +152,8 @@ const Login = (props) => {
                                             // },
                                         })}
                                         // defaultValue={''}
-                                        defaultValue={'michellefrancis@mailinator.com'}
+                                        defaultValue={'johnsmith@mailinator.com'}
+                                        // defaultValue={'michellefrancis@mailinator.com'}
                                         placeholderTextColor={colors.placeholdercolor}
                                         autoCapitalize='none'
                                         onChangeText={(value) => setValue('email', value)}
@@ -187,12 +179,14 @@ const Login = (props) => {
                                             placeholderTextColor={colors.placeholdercolor}
                                             {...register('password', {
                                                 // value: '',
+                                                value: 'John@123123',
                                                 // value: 'michelle@123123',
                                                 // required: 'Password is required',
                                                 // minLength: { value: 8, message: 'Password length must be greater then 8' }
                                             })}
                                             // defaultValue={''}
-                                            defaultValue={'michelle@123123'}
+                                            defaultValue={'John@123123'}
+                                            // defaultValue={'michelle@123123'}
                                             // inputRef={password.ref}
                                             onChangeText={(value) => setValue('password', value)}
                                             secureTextEntry={!showPassword ? true : false}
@@ -213,16 +207,16 @@ const Login = (props) => {
                                     <Text style={globalstyle.authSubmitButtonText}>Login</Text>
                                 </TouchableOpacity>
 
-                                <View style={{ marginTop: 10 }}>
-                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
+                                <View style={{ marginTop: 20 }}>
+                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', marginBottom: IOS ? 8 : 0 }}>
                                         {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
                                         <Text style={styles.notes}>1. If you are not a member you will need an invitation code to enter the app.</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
+                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', marginBottom: IOS ? 8 : 0 }}>
                                         {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
                                         <Text style={styles.notes}>2. If you are visiting the app for the first time and interested in learning more about the app you will need to <Text style={[styles.notes, { color: colors.black, marginTop: 10, fontFamily: fonts.primaryMedium }]} onPress={() => props.navigation.navigate('RequestInvitationCode')}>Click Here</Text> to receive an invitation code.</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', }}>
+                                    <View style={{ flexDirection: 'row', width: width - 60, alignItems: 'flex-start', marginBottom: IOS ? 8 : 0 }}>
                                         {/* <View style={{ width: 7, height: 7, marginTop: 5, marginRight: 13, backgroundColor: colors.grey, borderRadius: 10 }} /> */}
                                         <Text style={styles.notes}>3. If a member referred you and gave you an invitation code, use that code to enter the app.</Text>
                                     </View>

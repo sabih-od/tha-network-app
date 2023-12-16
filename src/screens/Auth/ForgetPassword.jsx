@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Loader from "../../components/Loader";
 import { showToast } from "../../helpers/toastConfig";
+import AuthLogo from "../../components/AuthLogo";
 
 
 const ForgetPassword = (props) => {
@@ -58,6 +59,7 @@ const ForgetPassword = (props) => {
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={isIPad && globalstyle.authscreencontainer}>
+                        <AuthLogo />
                         <View style={globalstyle.authLogoContainer}>
                             {/* <Image source={require('./../../../assets/images/logo.png')} style={globalstyle.authLogo} /> */}
                             <Text style={globalstyle.authheading}>Forgot Password</Text>
@@ -66,7 +68,7 @@ const ForgetPassword = (props) => {
                         <View>
 
                             <View style={globalstyle.inputbox}>
-                                <Icon color={colors.black} name={'mail'} size={18} />
+                                <Icon color={colors.blue} name={'mail'} size={18} />
                                 <TextInput
                                     style={globalstyle.inputfield}
                                     placeholder="Email Address"

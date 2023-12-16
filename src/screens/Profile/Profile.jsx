@@ -11,7 +11,7 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 
 // import { useForm } from 'react-hook-form';
 import globalstyle from '../../theme/style';
-import { backgroungImage, colors, fontSize, fonts, height, isDarkMode, isIPad, isRTL, width } from '../../theme';
+import { IOS, backgroungImage, colors, fontSize, fonts, height, isDarkMode, isIPad, isRTL, width } from '../../theme';
 import { useRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -107,7 +107,7 @@ const Profile = props => {
         let shareOptions = {
             title: `Share Your Profile`,
             url: user?.email,
-            message: `Excited to connect! Join my professional network and let's explore opportunities for collaboration and growth together. https://www.thanetowrk.com/user/michellefrancis`,
+            message: `Excited to connect! Join my professional network and let's explore opportunities for collaboration and growth together. https://www.thanetwork.com/user/michellefrancis`,
             //subject: 'Subject'
         };
 
@@ -167,10 +167,10 @@ const Profile = props => {
                             />
                         </View>
                         <View style={{ alignItems: 'center' }}>
-                            <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24, marginBottom: -8 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
+                            <Text style={{ fontFamily: fonts.primarySemiBold, color: isDarkMode ? colors.white : colors.black, fontSize: 24, marginBottom: IOS ? 0 : -8 }}>{`${user?.first_name} ${user?.last_name}`}</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 {/* <Icon name="mail" style={{ color: colors.orange, fontSize: 18, marginRight: 8 }} /> */}
-                                <Text style={[styles.edititemstext, { fontFamily: fonts.primary }]}>{`${user?.username}`}</Text>
+                                <Text style={[styles.edititemstext, { fontFamily: fonts.primary }]}>{user?.username ? user?.username : user?.email}</Text>
                             </View>
                         </View>
 
@@ -236,27 +236,31 @@ const Profile = props => {
                                 <Icon name="award" style={{ marginRight: 13, color: colors.blue, fontSize: 16 }} />
                                 <Text style={{ fontFamily: fonts.primary }}>Bronze</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+                            {userInfo?.city && userInfo?.city && <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
                                 <Icon name="map-pin" style={{ marginRight: 13, color: colors.blue, fontSize: 16 }} />
-                                <Text style={{ fontFamily: fonts.primary }}>Lives in New York, United States</Text>
-                            </View>
+                                <Text style={{ fontFamily: fonts.primary }}>Lives in {userInfo?.city}, {userInfo?.country}</Text>
+                            </View>}
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
                                 <Icon name="phone" style={{ marginRight: 13, color: colors.blue, fontSize: 16 }} />
-                                <Text style={{ fontFamily: fonts.primary }}>{userInfo.phone}</Text>
+                                <Text style={{ fontFamily: fonts.primary }}>{userInfo?.phone}</Text>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
                                 <Icon name="mail" style={{ marginRight: 13, color: colors.blue, fontSize: 16 }} />
-                                <Text style={{ fontFamily: fonts.primary }}>{userInfo.email}</Text>
+                                <Text style={{ fontFamily: fonts.primary }}>{userInfo?.email}</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+                            {userInfo?.gender && <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
                                 <Icon name="user" style={{ marginRight: 13, color: colors.blue, fontSize: 16 }} />
-                                <Text style={{ fontFamily: fonts.primary }}>{userInfo.gender}</Text>
-                            </View>
+                                <Text style={{ fontFamily: fonts.primary }}>{userInfo?.gender}</Text>
+                            </View>}
+                            {userInfo?.marital_status && <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+                                <Icon name="user" style={{ marginRight: 13, color: colors.blue, fontSize: 16 }} />
+                                <Text style={{ fontFamily: fonts.primary }}>{userInfo?.marital_status}</Text>
+                            </View>}
                         </View>
 
-                        <View style={{ padding: 15 }}>
+                        {userInfo?.bio && <View style={{ padding: 15 }}>
                             <Text style={{ fontFamily: fonts.primary }}>{userInfo.bio}</Text>
-                        </View>
+                        </View>}
 
                     </View>
                 </ScrollView>

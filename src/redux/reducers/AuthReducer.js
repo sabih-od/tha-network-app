@@ -1,9 +1,10 @@
 import apiAction from "../../api/apiAction";
-import { ForgetPassAPI, GetProfileAPI, LoginAPI, RegisterAPI, ResendOTPAPI, ResetPasswordAPI, SubmitOTPAPI } from "../../api/routes";
-import { FORGET_PASSWORD_API_SUCCESS, GET_PROFILE_API_SUCCESS, GET_USER_INFO_SUCCESS, LOGIN_API_SUCCESS, LOGOUT_USER, REGISTER_API_SUCCESS, RESEND_OTP_API_SUCCESS, RESET_PASSWORD_API_SUCCESS, SET_ERROR, SUBMIT_OTP_API_SUCCESS } from "../actiontypes";
+import { ForgetPassAPI, GetInvitationCodeAPI, GetProfileAPI, LoginAPI, RegisterAPI, ResendOTPAPI, ResetPasswordAPI, SubmitOTPAPI } from "../../api/routes";
+import { FORGET_PASSWORD_API_SUCCESS, GET_INVITAION_CODE_API_SUCCESS, GET_PROFILE_API_SUCCESS, GET_USER_INFO_SUCCESS, LOGIN_API_SUCCESS, LOGOUT_USER, REGISTER_API_SUCCESS, RESEND_OTP_API_SUCCESS, RESET_PASSWORD_API_SUCCESS, SET_ERROR, SUBMIT_OTP_API_SUCCESS } from "../actiontypes";
 
 const initialState = {
     loginResponse: {},
+    getInvitationCodeResponse: {},
     loginError: {},
     registerResponse: {},
     registerError: {},
@@ -28,6 +29,23 @@ export function LoginApiCall(params) {
         },
         onFailure: (response) => {
             return { type: SET_ERROR, payload: response };
+        },
+    });
+}
+
+// GetInvitationCode Api Call
+export function GetInvitationCodeApiCall(params) {
+    console.log('params => ', params);
+    return apiAction({
+        url: GetInvitationCodeAPI,
+        method: 'POST',
+        data: params,
+        onSuccess: (response) => {
+            return { type: GET_INVITAION_CODE_API_SUCCESS, payload: response };
+        },
+        onFailure: (response) => {
+            console.log('SET_ERROR response => ', response)
+            // return { type: SET_ERROR, payload: response };
         },
     });
 }
@@ -129,6 +147,10 @@ const AuthStateReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 loginResponse: action.payload,
             });
+        case GET_INVITAION_CODE_API_SUCCESS:
+            return Object.assign({}, state, {
+                getInvitationCodeResponse: action.payload,
+            });
         case REGISTER_API_SUCCESS:
             return Object.assign({}, state, {
                 registerResponse: action.payload,
@@ -148,6 +170,10 @@ const AuthStateReducer = (state = initialState, action) => {
         case RESET_PASSWORD_API_SUCCESS:
             return Object.assign({}, state, {
                 resetPasswordResponse: action.payload,
+            });
+        case GET_PROFILE_API_SUCCESS:
+            return Object.assign({}, state, {
+                getUserProfileResponse: action.payload,
             });
         case GET_PROFILE_API_SUCCESS:
             return Object.assign({}, state, {
