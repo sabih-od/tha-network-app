@@ -5,9 +5,24 @@ import { IOS, colorScheme, colors, fonts, height, isIPad, width } from "../theme
 import globalstyle from "../theme/style";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import Icon from "react-native-vector-icons/Feather";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { CreatePostHit } from "../redux/reducers/ListingApiStateReducer";
 
 const CreatePost = (props) => {
     const { user } = props;
+
+    const SubmitPost = () => {
+        props.CreatePost({
+            content: "This is post content.",
+            // "files": [
+            //     "Example binary file.jpg",
+            //     "Example binary file.mp4"
+            // ],
+            // "post_id": "49209ef9-13b7-483f-9253-6f910d3cd4b4"
+        })
+    }
+
     return (<View style={{ marginBottom: 15 }}>
         {/* <Text style={{ fontFamily: fonts.primarySemiBold, fontSize: 20, marginLeft: 10, marginBottom: 10 }}>Create Post</Text> */}
         <View style={{ backgroundColor: '#fff', borderRadius: 10, overflow: 'hidden', }}>
@@ -47,7 +62,7 @@ const CreatePost = (props) => {
             </View>
         </View>
         <View>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => { }} style={[globalstyle.authSubmitButton, { marginTop: -10, paddingVertical: 14 }]}>
+            <TouchableOpacity activeOpacity={0.8} onPress={SubmitPost} style={[globalstyle.authSubmitButton, { marginTop: -10, paddingVertical: 14 }]}>
                 <Text style={globalstyle.authSubmitButtonText}>{'Post Now'}</Text>
             </TouchableOpacity>
             {/* <TouchableOpacity style={{ backgroundColor: colors.orange, padding: 12, width: '100%', }}>
@@ -57,4 +72,15 @@ const CreatePost = (props) => {
     </View>)
 }
 
-export default CreatePost;
+const setStateToProps = state => ({
+    createPostResponse: state.listingstate.createPostResponse,
+    userInfo: state.appstate.userInfo
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        CreatePost: bindActionCreators(CreatePostHit, dispatch),
+    }
+}
+
+export default connect(setStateToProps, mapDispatchToProps)(CreatePost);

@@ -8,38 +8,38 @@ import notificationslist from "../data/notifications-list";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { UpdateNotificationBadge } from "../redux/reducers/AppStateReducer";
-// import { GetNotificationsList } from "../redux/reducers/ListingApiStateReducer";
+import { GetNotificationsList } from "../redux/reducers/ListingApiStateReducer";
 import globalstyle from "../theme/style";
 
 const itemslimit = 50;
 const Notifications = (props) => {
-    const [notificationList, setNotificationList] = useState(notificationslist) // = useState([]);
+    const [notificationList, setNotificationList] = useState([]); //useState(notificationslist)
     const [refreshing, setRefreshing] = useState(false);
     const [pageno, setPageno] = useState(1);
     const [limit, setLimit] = useState(itemslimit);
     const [loadmore, setLoadmore] = useState(false);
-    // const prevGetNotificationsListResponseRef = useRef(props.getNotificationsListResponse);
+    const prevGetNotificationsListResponseRef = useRef(props.getNotificationsListResponse);
 
-    // useEffect(() => {
-    //     props.UpdateNotificationBadge(0);
-    //     props.GetNotificationsList({ pageno, limit });
-    //     return () => {
-    //         console.log('NotificationList Unmount');
-    //         setNotificationList([])
-    //     }
-    // }, []);
+    useEffect(() => {
+        // props.UpdateNotificationBadge(0);
+        props.GetNotificationsList({ pageno, limit });
+        return () => {
+            console.log('NotificationList Unmount');
+            setNotificationList([])
+        }
+    }, []);
 
-    // useEffect(() => {
-    //     // console.log('props.getNotificationsListResponse => ', props.getNotificationsListResponse);
-    //     if (props.getNotificationsListResponse !== prevGetNotificationsListResponseRef.current && props.getNotificationsListResponse?.success && props.getNotificationsListResponse?.data) {
-    //         prevGetNotificationsListResponseRef.current = props.getNotificationsListResponse;
-    //         console.log('props.getNotificationsListResponse => ', props.getNotificationsListResponse);
-    //         if (refreshing) setNotificationList(props.getNotificationsListResponse?.data)
-    //         else setNotificationList(prevState => [...prevState, ...props.getNotificationsListResponse?.data])
-    //     }
-    //     setRefreshing(false)
-    //     // setLoadmore(false)
-    // }, [props.getNotificationsListResponse])
+    useEffect(() => {
+        // console.log('props.getNotificationsListResponse => ', props.getNotificationsListResponse);
+        if (props.getNotificationsListResponse !== prevGetNotificationsListResponseRef.current && props.getNotificationsListResponse?.success && props.getNotificationsListResponse?.data) {
+            prevGetNotificationsListResponseRef.current = props.getNotificationsListResponse;
+            console.log('props.getNotificationsListResponse => ', props.getNotificationsListResponse);
+            if (refreshing) setNotificationList(props.getNotificationsListResponse?.data)
+            else setNotificationList(prevState => [...prevState, ...props.getNotificationsListResponse?.data])
+        }
+        setRefreshing(false)
+        // setLoadmore(false)
+    }, [props.getNotificationsListResponse])
 
     const _handleRefresh = () => {
         setRefreshing(true)
@@ -99,12 +99,12 @@ const Notifications = (props) => {
 
 const setStateToProps = (state) => ({
     userInfo: state.appstate.userInfo,
-    // getNotificationsListResponse: state.listingstate.getNotificationsListResponse,
+    getNotificationsListResponse: state.listingstate.getNotificationsListResponse,
 })
 const mapDispatchToProps = (dispatch) => {
     return {
         UpdateNotificationBadge: bindActionCreators(UpdateNotificationBadge, dispatch),
-        // GetNotificationsList: bindActionCreators(GetNotificationsList, dispatch)
+        GetNotificationsList: bindActionCreators(GetNotificationsList, dispatch)
     }
 }
 

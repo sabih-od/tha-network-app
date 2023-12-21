@@ -13,7 +13,7 @@ const GroupItem = ({ item, width, navigation }) => {
             }}>
             {/* {item?.badge && <View style={{position:'absolute', top: -5, right: -5, width: 12, height: 12, backgroundColor: colors.green, borderRadius: 20}} />} */}
             <View>
-                <View style={{ width: 12, height: 12, backgroundColor: item?.status == 'online' ? colors.green : colors.red, borderWidth: 1, borderColor: '#fff', borderRadius: 13, position: 'absolute', zIndex: 1, left: -2 }} />
+                {item?.status == 'online' && <View style={{ width: 12, height: 12, backgroundColor: item?.status == 'online' ? colors.green : colors.red, borderWidth: 1, borderColor: '#fff', borderRadius: 13, position: 'absolute', zIndex: 1, left: -2 }} />}
                 <Image source={
                     // { uri: item.default_icon}
                     // item.image ? { uri: item.image } : require('./../../assets/images/dummy-profile-image.png')

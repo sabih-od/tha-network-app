@@ -34,7 +34,6 @@ export const GetDailiesListAPI = '/quotations?page=1&limit=1';
 export const GetFavouriteIdsAPI = '/posts/favourites/post-ids';
 
 
-export const GetPostsAPI = '/posts';
 
 export const GetEventsAPI = '/events';
 export const GetUpcomingEventsAPI = '/events';
@@ -68,4 +67,6 @@ export const DeleteMessageAPI = '/messages'
 export const ContactAPI = '/contacts';
 export const AboutAPI = '/pages/get-by-name/about';
 
-export const GetWeeklyGoalsAPI = 'get-weekly-goals';
+export const GetPostsAPI = '/posts';
+export const CreatePostAPI = '/posts/create';
+export const GetWeeklyGoalsAPI = '/get-weekly-goals';

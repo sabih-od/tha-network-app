@@ -78,7 +78,7 @@ const PostItem = (props) => {
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                <TouchableOpacity onPress={() => { }}>
+                <TouchableOpacity onPress={props.showAllComments}>
                     <Text style={{ fontFamily: fonts.primary, color: colors.grey, fontSize: 12, }}>{item?.commentscount} Comments</Text>
                 </TouchableOpacity>
                 <View style={{ width: 1, height: 10, backgroundColor: colors.grey, marginHorizontal: 10 }} />
@@ -94,7 +94,7 @@ const PostItem = (props) => {
             )
         })}
         <TouchableOpacity activeOpacity={0.8}
-            onPress={() => { }}>
+            onPress={props.showAllComments}>
             <Text style={{ fontFamily: fonts.primary, fontSize: 13, color: colors.orange, textAlign: 'center', marginTop: 13, marginBottom: 10 }}>Show More Comments</Text>
         </TouchableOpacity>
 

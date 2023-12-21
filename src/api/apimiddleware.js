@@ -58,13 +58,13 @@ const apiMiddleware = ({ dispatch }) => next => action => {
   // console.log('state => ', state);
 
   // console.log('process.env.API_BASE_URL => ', process.env.API_BASE_URL);
-  // console.log(`Bearer ${state?.appstate?.userInfo?.access_token}`);
+  console.log(`Bearer ${state?.appstate?.userInfo?.token}`);
 
   // axios default configs
   axios.defaults.baseURL = process.env.API_BASE_URL ? process.env.API_BASE_URL : 'http://service.demowebsitelinks.com:3045/api';
   // axios.defaults.baseURL = 'https://texaschristianashram.org:3023';
   // axios.defaults.httpsAgent = agent;
-  // axios.defaults.headers.common['Authorization'] = `Bearer ${state?.appstate?.userInfo?.access_token}`;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${state?.appstate?.userInfo?.token}`;
   // axios.defaults.headers.common['lang'] = state?.appstate?.language == 'en' ? 1 : 2;
 
   if (headersOverride) axios.defaults.headers.common["Content-Type"] = 'multipart/form-data';
