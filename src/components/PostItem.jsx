@@ -90,7 +90,7 @@ const PostItem = (props) => {
 
         {comments.map((item, index) => {
             return (
-                <CommentItem key={index} item={item} onDelete={_handleDelete} />
+                <CommentItem key={index} userInfo={user} item={item} onDelete={_handleDelete} />
             )
         })}
         <TouchableOpacity activeOpacity={0.8}

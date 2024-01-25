@@ -252,16 +252,14 @@ const PersonalInformation = props => {
                   defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
                   style={{ width: '100%', height: '100%', borderRadius: 120, resizeMode: 'cover', }}
                 />
-                {isEditable && (
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={{ borderWidth: 1, borderColor: colors.white, position: 'absolute', right: 5, bottom: 2, zIndex: 1, alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 40, backgroundColor: colors.white, }}
-                    onPress={() => {
-                      setShowModal(true);
-                    }}>
-                    <Icon name="camera" size={isIPad ? 20 : 18} color={colors.blue} />
-                  </TouchableOpacity>
-                )}
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={{ borderWidth: 0, borderColor: 'rgb(242, 242, 242)', position: 'absolute', right: 5, bottom: 2, zIndex: 1, alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 40, backgroundColor: colors.orange, }}
+                  onPress={() => {
+                    setShowModal(true);
+                  }}>
+                  <Icon name="camera" size={isIPad ? 20 : 18} color={colors.white} />
+                </TouchableOpacity>
               </View>
 
               {/* <TouchableOpacity
@@ -440,7 +438,7 @@ const PersonalInformation = props => {
                 <TextInput
                   style={[globalstyle.inputfield, { opacity: 0.6 }]}
                   defaultValue={user?.username}
-                  editable={false}
+                  // editable={false}
                   placeholder="User Name"
                   placeholderTextColor={colors.placeholdercolor}
                   {...register('username', {

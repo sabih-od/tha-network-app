@@ -24,7 +24,14 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-
+	<key>NSCameraUsageDescription</key>
+	<string>Please grant permission for ThaNetwork to access your camera in order to capture a profile picture.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please grant permission for ThaNetwork to access your photo library, allowing the selection and upload of a desired image as your profile picture.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+  	<string>Please grant permission for ThaNetwork to access your photo library</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

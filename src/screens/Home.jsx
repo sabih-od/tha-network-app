@@ -28,6 +28,13 @@ import NotificationIcon from "../components/header/NotificationIcon";
 // import LinearGradient from "react-native-linear-gradient";
 // import TryPlus from "../components/TryPlus";
 
+import RNFS from 'react-native-fs';
+import ReactNativeBlobUtil from "react-native-blob-util";
+import { CameraRoll } from "@react-native-camera-roll/camera-roll";
+// import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, { launchImageLibrary } from 'react-native-image-picker';
+
+
 import {
     BottomSheetModal,
     BottomSheetModalProvider, BottomSheetFlatList, BottomSheetBackdrop
@@ -132,6 +139,162 @@ const Home = (props) => {
         []
     );
 
+    const handleImagePicker = () => {
+        var options = {
+            title: 'Select Profile Picture',
+            customButtons: [
+                { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
+            ],
+            storageOptions: { skipBackup: true, path: 'images' },
+        };
+        console.log('handleImagePicker => ');
+        launchImageLibrary(options)
+        // ImagePicker.openPicker({
+        //     multiple: true
+        // }).then(images => {
+        //     console.log(images);
+        // });
+    }
+
+    // const filename = Math.round(Math.random() * 10000000)
+    // const path = `${RNFS.DocumentDirectoryPath}/${filename}`;
+    const imageUrl = 'https://socialmediaappserver.vercel.app/public/uploads/2667338-1646912007767-118364782-1661701002232-367452069.jpg';
+    // const videoUrl = 'https://www.w3schools.com/html/mov_bbb.mp4';
+    const videoUrl = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4';
+    // const url = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
+    useEffect(() => {
+
+
+    }, []);
+
+    function downloadimage() {
+        ReactNativeBlobUtil.config({
+            fileCache: true,
+            indicator: true,
+            IOSBackgroundTask: true,
+            addAndroidDownloads: {
+                useDownloadManager: true,
+                notification: true
+            },
+        })
+            .fetch('GET', imageUrl, {
+                // Additional headers if needed
+            }).progress({ interval: 250 }, (received, total) => {
+                // console.log('progress', received / total);
+                console.log({
+                    downloadProgress: (received / total) * 100
+                })
+            })
+            .then((res) => {
+                // Get the path of the downloaded image
+                const imagePath = res.path();
+                console.log('Image downloaded to:', imagePath);
+
+                CameraRoll.save(
+                    // 'https://static.scientificamerican.com/sciam/cache/file/EAF12335-B807-4021-9AC95BBA8BEE7C8D_source.jpg', 
+                    // 'https://static.scientificamerican.com/sciam/cache/file/62DFCAA9-29A5-4147-847032A7957C7E52_source.gif',
+                    imagePath,
+                    {
+                        // type: 'video', 
+                        album: 'Tha Network'
+                    })
+                    .then(() => {
+                        console.log('Image saved to camera roll');
+                    })
+                    .catch((error) => {
+                        console.error('Error saving image to camera roll:', error);
+                        Alert.alert('Error', 'Failed to save image to camera roll');
+                    });
+
+            })
+            .catch((error) => {
+                console.error('Error downloading image:', error);
+            });
+    }
+    function downloadVideo() {
+        // const { status } = await CameraRoll.requestAuthorization();
+        // console.log('status => ', status)
+        //     ReactNativeBlobUtil.config({
+        //         fileCache: true,
+        //         path: path,
+        //     }).fetch('GET', url, {})
+        //         .then((res) => {
+        //             console.log('response => ', res);
+        //             console.log('res => ', res.info());
+        //             console.log('path => ', path)
+        //             setImagePath(path)
+        //         }).catch((errorMessage, statusCode) => {
+        //             // error handling
+        //             console.log('errorMessage => ', errorMessage)
+        //             console.log('statusCode => ', statusCode)
+        //         })
+
+        ReactNativeBlobUtil.config({
+            fileCache: true,
+            indicator: true,
+            IOSBackgroundTask: true,
+            appendExt: 'mp4',
+            addAndroidDownloads: {
+                useDownloadManager: true,
+                notification: true
+            },
+        })
+            .fetch('GET', videoUrl, {
+                // Additional headers if needed
+            }).progress({ interval: 250 }, (received, total) => {
+                // console.log('progress', received / total);
+                console.log({
+                    downloadProgress: (received / total) * 100
+                })
+            })
+            .then((res) => {
+                // Get the path of the downloaded image
+                const imagePath = res.path();
+                console.log('Image downloaded to:', imagePath);
+
+                // CameraRoll.saveToCameraRoll(imagePath, 'photo')
+                CameraRoll.save(
+                    // 'https://static.scientificamerican.com/sciam/cache/file/EAF12335-B807-4021-9AC95BBA8BEE7C8D_source.jpg', 
+                    // 'https://static.scientificamerican.com/sciam/cache/file/62DFCAA9-29A5-4147-847032A7957C7E52_source.gif',
+                    imagePath,
+                    {
+                        // type: 'video', 
+                        album: 'Tha Network'
+                    })
+                    .then(() => {
+                        console.log('Image saved to camera roll');
+                    })
+                    .catch((error) => {
+                        console.error('Error saving image to camera roll:', error);
+                        Alert.alert('Error', 'Failed to save image to camera roll');
+                    });
+
+
+                // Save the image to the photo library
+                // ReactNativeBlobUtil.fs.readFile(imagePath, 'base64').then((data) => {
+                //     // console.log('data => ', data)
+                //     saveToPhotoLibrary(data);
+                // });
+            })
+            .catch((error) => {
+                console.error('Error downloading image:', error);
+            });
+    }
+
+    // const saveToPhotoLibrary = (base64Data) => {
+    //     ImagePicker.saveToCameraRoll(
+    //         `data:image/jpeg;base64,${base64Data}`,
+    //         'photo',
+    //     )
+    //         .then(() => {
+    //             console.log('Image saved to photo library');
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error saving image to photo library:', error);
+    //             Alert.alert('Error', 'Failed to save image to photo library');
+    //         });
+    // };
+
     return <SafeAreaView style={globalstyle.fullview}>
 
         <AlertForReferralPaymentOption visible={visible} setVisible={setVisible} handleRefPaymentOpt={_handleRefPaymentOpt} />
@@ -145,8 +308,18 @@ const Home = (props) => {
             // }
             >
                 {/* <Button
-                    onPress={handlePresentModalPress}
-                    title="Present Modal"
+                    onPress={() => handleImagePicker()}
+                    title="Image Picker"
+                    color="black"
+                />
+                <Button
+                    onPress={() => downloadimage()}
+                    title="Download Image"
+                    color="black"
+                />
+                <Button
+                    onPress={() => downloadVideo()}
+                    title="Download Video"
                     color="black"
                 /> */}
 
@@ -192,9 +365,9 @@ const Home = (props) => {
                 >
                     <BottomSheetFlatList
                         data={commentslist}
-                        keyExtractor={(index) => String(index)}
+                        keyExtractor={item => String(item.id)}
                         // renderItem={renderItem}
-                        renderItem={({ item, index }) => <CommentItem key={index} item={item} onDelete={_handleDelete} />}
+                        renderItem={({ item, index }) => <CommentItem item={item} userInfo={props.userInfo} onDelete={_handleDelete} />}
                         contentContainerStyle={styles.contentContainer}
                     />
                 </BottomSheetModal>

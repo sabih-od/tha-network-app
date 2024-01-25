@@ -25,6 +25,7 @@
 		5E0240302B1FCA1F00E91EA6 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E02402E2B1FCA1F00E91EA6 /* EvilIcons.ttf */; };
 		5E0240312B1FCA1F00E91EA6 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E02402F2B1FCA1F00E91EA6 /* Feather.ttf */; };
 		5E0240332B1FCAD200E91EA6 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0240322B1FCAD200E91EA6 /* Ionicons.ttf */; };
+		5EB2A9202B34CE6D00B37E4E /* libreact-native-cameraroll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB2A91F2B34CE6D00B37E4E /* libreact-native-cameraroll.a */; };
 		7699B88040F8A987B510C191 /* libPods-thanetwork-thanetworkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-thanetwork-thanetworkTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		5E02402E2B1FCA1F00E91EA6 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5E02402F2B1FCA1F00E91EA6 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		5E0240322B1FCAD200E91EA6 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		5EB2A91F2B34CE6D00B37E4E /* libreact-native-cameraroll.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-cameraroll.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = thanetwork/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-thanetwork-thanetworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thanetwork-thanetworkTests.release.xcconfig"; path = "Target Support Files/Pods-thanetwork-thanetworkTests/Pods-thanetwork-thanetworkTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EB2A9202B34CE6D00B37E4E /* libreact-native-cameraroll.a in Frameworks */,
 				0C80B921A6F3F58F76C31292 /* libPods-thanetwork.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +129,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5EB2A91F2B34CE6D00B37E4E /* libreact-native-cameraroll.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-thanetwork.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-thanetwork-thanetworkTests.a */,

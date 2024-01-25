@@ -7,7 +7,7 @@ import moment from "moment";
 import AddComment from "./AddComment";
 
 const CommentItem = (props) => {
-    const { item, onDelete } = props;
+    const { item, onDelete, userInfo } = props;
 
     const [like, setLike] = useState(false);
     const [showAddComment, setShowAddComment] = useState(false)
@@ -47,7 +47,7 @@ const CommentItem = (props) => {
             <TouchableOpacity style={{}} onPress={() => setShowAddComment(true)}>
                 <Text style={{ color: '#333', fontFamily: fonts.primary, fontSize: 12 }}>Reply</Text>
             </TouchableOpacity>
-            {item?.user?.id == '9dad4f7c-9165-44b8-9f55-0039a4c1f1e1' && <>
+            {item?.user?.id == userInfo.id && <>
                 <View style={{ width: 1, height: 10, backgroundColor: colors.grey, marginHorizontal: 10 }} />
                 <TouchableOpacity style={{}} onPress={() => onDelete(item?.id)}>
                     <Text style={{ color: '#f00', fontFamily: fonts.primary, fontSize: 12 }}>Delete</Text>
